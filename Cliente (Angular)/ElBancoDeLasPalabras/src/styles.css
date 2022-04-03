@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+.bgPrimario {
+    background-color: rgba(255, 240, 223, 1);
+}
+
+.bgSecundario {
+    background-color: rgba(211, 149, 75, 1);
+}
+
+.bgTerciario {
+    background-color: rgba(99, 61, 16, 1);
+}

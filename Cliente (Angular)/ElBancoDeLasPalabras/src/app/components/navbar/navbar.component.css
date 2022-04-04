@@ -5,3 +5,7 @@ a {
 a:hover, a:focus {
     color: grey;
 }
+
+.logo {
+    width: 50px;
+}

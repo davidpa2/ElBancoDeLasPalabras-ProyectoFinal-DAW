@@ -1,18 +1,34 @@
-<nav class="navbar navbar-expand-lg navbar-white bgTerciario">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/index">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg navbar-white bgSecundario">
+  <div class="container-fluid">
+    <a class="navbar-brand ms-2" routerLink="/index">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item ms-4">
+          <a class="nav-link" routerLink="/auth/login">Login</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link" routerLink="/auth/register">Register</a>
+        </li>
+      </ul>
+    </div> 
+
+    <div class="dropdown">
+      <button class="btn dropdown-toggle text-white bgTerciario" type="button" id="dropdownMenuLink" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Mi perfil
+        <i class="bi bi-person-fill"></i>
+        <span class="badge bg-danger">5</span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/auth/login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/auth/register">Register</a>
-          </li>
-        </ul>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
       </div>
     </div>
-  </nav>
+
+  </div>
+</nav>

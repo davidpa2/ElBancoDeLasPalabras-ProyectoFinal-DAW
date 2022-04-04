@@ -1,4 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
 .bgPrimario {
     background-color: rgba(255, 240, 223, 1);
 }
@@ -9,4 +10,8 @@
 
 .bgTerciario {
     background-color: rgba(99, 61, 16, 1);
+}
+
+body {
+    background: linear-gradient(to bottom, rgba(211, 149, 75, 1), white) no-repeat;
 }

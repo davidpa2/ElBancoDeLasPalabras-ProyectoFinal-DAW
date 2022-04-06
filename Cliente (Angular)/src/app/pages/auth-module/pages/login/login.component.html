@@ -1,2 +1,42 @@
-<p>login works!</p>
-<button routerLink="/register" class="btn btn-dark">Registrarse</button>
+<div class="container-fluid login py-4 px-5">
+    <div class="row">
+        <h2 class="text-center mb-3">Iniciar sesión</h2>      
+    </div>
+    <hr>
+    <div class="row mt-4">
+        <div class="col-3">
+            <label for="user">Nombre de usuario:</label>
+        </div>
+        <div class="col-9">
+            <input class="input" type="text" name="user" placeholder="Nombre">
+        </div>
+    </div>
+    <div class="row my-4">
+        <div class="col-3">
+            <label for="password">Contraseña:</label>
+        </div>
+        <div class="col-9">
+            <input class="input" type="password" name="password" placeholder="Contraseña">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <input class="me-2" type="checkbox" name="rememberPass" id="rememberPass">
+            <label for="rememberPass">Recordar contraseña</label>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-6">
+            <a href="/auth/register" routerLink="/register">¿Has olvidado la contraseña?</a>
+        </div>
+        <div class="col-6 d-flex justify-content-end">
+            <button class="btn bgSecundario">Iniciar sesión</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col d-flex justify-content-center mt-2">
+            <a href="">¿No tienes cuenta? ¡Regístrate!</a>
+        </div>
+    </div>
+</div>

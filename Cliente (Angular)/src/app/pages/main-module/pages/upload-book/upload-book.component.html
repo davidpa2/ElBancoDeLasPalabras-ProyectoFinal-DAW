@@ -1,22 +1,32 @@
-<div class="container bg-white">
+<div class="container bg-white my-3">
     <div class="row">
-        <div class="col">
+        <div class="col my-3">
             <h2 class="text-center">Subir libro</h2>
         </div>
     </div>
+
     <div class="row d-flex justify-content-center">
-        <div class="col-4 bgPrimario m-1">
-            <div class="row">
-                <div class="col d-flex justify-content-center">
+        <div class="col-4 m-1">
+            <div class="row bgPrimario">
+                <div class="col py-2 d-flex justify-content-center">
                     <img src="/assets/images/ElImperioFinal.jpg" alt="">
                 </div>
             </div>
-            <div class="row my-3">
+            <div class="row bgPrimario my-3">
                 <div class="col">
                     <input type="file" name="book" id="book">
                 </div>
             </div>
+            <div class="row bgPrimario my-3">
+                <div class="col-12 my-2">
+                    <label for="titulo">Precio:</label>
+                </div>
+                <div class="col-12 mb-2">
+                    <input type="text" name="precio" id="precio">
+                </div>
+            </div>
         </div>
+
         <div class="col-6">
             <div class="row bgPrimario m-1">
                 <div class="col-12 my-2">
@@ -42,6 +52,32 @@
                     <textarea name="desc" id="desc"></textarea>
                 </div>
             </div>
+
+            <div class="row bgPrimario mt-3 m-1">
+                <div class="col-12 my-2">
+                    <label for="autor">Estado:</label>
+                </div>
+                <div class="col-12 mb-2 d-flex justify-content-center">
+                    <div class="valorador row bg-white">
+                        <div class="col-6 d-flex justify-content-end">
+                            <p *ngIf="!stars">Valorar el libro</p>
+                            <p *ngIf="stars == 1">Muy mal estado</p>
+                            <p *ngIf="stars == 2">Mal estado</p>
+                            <p *ngIf="stars == 3">Buen estado</p>
+                            <p *ngIf="stars == 4">Muy buen estado</p>
+                            <p *ngIf="stars == 5">Como nuevo</p>
+                        </div>
+                        <div class="col-6">
+                            <i (click)="stars = 1" [class]="stars >= 1? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+                            <i (click)="stars = 2" [class]="stars >= 2? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+                            <i (click)="stars = 3" [class]="stars >= 3? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+                            <i (click)="stars = 4" [class]="stars >= 4? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+                            <i (click)="stars = 5" [class]="stars >= 5? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>

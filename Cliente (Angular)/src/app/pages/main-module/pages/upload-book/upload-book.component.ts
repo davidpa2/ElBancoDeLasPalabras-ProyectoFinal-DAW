@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UploadBookComponent implements OnInit {
 
+  stars: any;
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

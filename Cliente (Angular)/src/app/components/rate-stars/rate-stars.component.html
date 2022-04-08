@@ -1,0 +1,17 @@
+<div class="valorador row bg-white">
+    <div *ngIf="!isUser" class="col d-flex justify-content-end">
+        <p *ngIf="!stars">Valorar el libro</p>
+        <p *ngIf="stars == 1">Muy mal estado</p>
+        <p *ngIf="stars == 2">Mal estado</p>
+        <p *ngIf="stars == 3">Buen estado</p>
+        <p *ngIf="stars == 4">Muy buen estado</p>
+        <p *ngIf="stars == 5">Como nuevo</p>
+    </div>
+    <div class="col">
+        <i [class]="stars >= 1? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+        <i [class]="stars >= 2? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+        <i [class]="stars >= 3? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+        <i [class]="stars >= 4? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+        <i [class]="stars >= 5? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+    </div>
+</div>

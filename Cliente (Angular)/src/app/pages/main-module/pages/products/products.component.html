@@ -1,0 +1,48 @@
+<div class="container bgPrimario search my-4">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="text-center my-3">Encuentra tu libro favorito</h3>
+        </div>
+        <div class="col-12 mb-4">
+            <div class="row">
+                <div class="col-10 d-flex justify-content-end">
+                    <input type="text" name="search" id="search" class="input"
+                        placeholder="Busca por título, por autor...">
+                </div>
+                <div class="col-2 d-flex justify-content-start">
+                    <button class="btn bgSecundario">Buscar <i class="bi bi-search"></i> </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container products">
+    <div class="row">
+        <h3 class="text-center my-4">Todos nuestros libros</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-4" *ngFor="let i of [1,2,3,4,5,6]">
+            <img src="/assets/images/ElImperioFinal.jpg" class="cover" alt="">
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <h4 class="text-center">El Imperio Final</h4>
+                </div>
+                <div class="col-12 mb-4">
+                    <div class="row">
+                        <div class="col-8 d-flex align-items-center justify-content-center">
+                            <p class="text-center">Jorge Montes Colorín</p>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                            <img src="https://images.unsplash.com/photo-1504593811423-6dd665756598?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                                class="imgProfile" alt="">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

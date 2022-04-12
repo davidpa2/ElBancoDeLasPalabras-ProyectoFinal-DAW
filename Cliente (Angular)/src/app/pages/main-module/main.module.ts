@@ -5,13 +5,15 @@ import { IndexComponent } from './pages/index/index.component';
 import { UploadBookComponent } from './pages/upload-book/upload-book.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RateStarsComponent } from 'src/app/components/rate-stars/rate-stars.component';
+import { ProductsComponent } from './pages/products/products.component';
 
 @NgModule({
   declarations: [
     IndexComponent,
     UploadBookComponent,
     ProfileComponent,
-    RateStarsComponent
+    RateStarsComponent,
+    ProductsComponent
   ],
   imports: [
     MainRoutingModule, CommonModule

@@ -1,0 +1,89 @@
+<div class="container mt-4">
+    <div class="row book">
+        <div class="col-4 bgPrimario colImg">
+            <img src="/assets/images/ElImperioFinal.jpg" class="mt-3 cover" alt="">
+            <p class="text-center mt-3">Comparte el libro con tus amigos</p>
+            <div class="d-flex justify-content-around mb-3">
+                <i class="bi bi-twitter"></i>
+                <i class="bi bi-facebook"></i>
+                <i class="bi bi-whatsapp"></i>
+            </div>
+        </div>
+        <div class="col-8 pt-5 px-5">
+            <div class="row">
+                <h3 class="bold">Brandon Sanderson: El Imperio Final</h3>
+
+                <p class="mt-4 bold">Descripción:</p>
+                <p>Se trata de una novela de fantasía escrita por el famoso escritor estadounidense Brandon Sanderson.
+                    Se vende por falta de espacio en la estantería. Tan sólo se ha leído una vez por lo tanto se
+                    encuentra en muy buen estado.
+                </p>
+            </div>
+            <div class="row mt-4">
+                <div class="col-8">
+                    <h6 class="bold">Estado:</h6>
+                    <app-rate-stars [stars]="2"></app-rate-stars>
+                </div>
+                <div class="col-4 price">12€</div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col d-flex justify-content-center">
+                    <button class="btn bgSecundario">Intercambiar <i class="bi bi-arrow-left-right"></i></button>
+                </div>
+                <div class="col d-flex justify-content-center">
+                    <button class="btn bgSecundario">COMPRAR <i class="bi bi-cart-check-fill"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row user mt-4">
+        <div class="col-5">
+            <div class="row">
+                <p class="bold text-center my-3">Otros libros del usuario:</p>
+                <div *ngFor="let i of [1,2]" class="col-12 mb-3">
+                    <div class="row">
+                        <div class="col-8 d-flex justify-content-center flex-column">
+                            <h5>Brandon Sanderson: El Imperio Final</h5>
+                            <app-rate-stars [stars]="4"></app-rate-stars>
+                            <button class="btn bgSecundario">Ver <i class="bi bi-book-half"></i></button>
+                        </div>
+                        <div class="col-4">
+                            <img class="imgMini" src="/assets/images/ElImperioFinal.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-7 bg-white">
+            <div class="row">
+                <div class="col-7 mt-4">
+                    <h3 class="text-center bold">Jorge Montes Colorín</h3>
+                    <p class="d-flex justify-content-end mt-3">8 productos</p>
+                    <p class="d-flex justify-content-end mt-3"><span class="bold">Ubicación: &nbsp;</span> Albendín
+                        (Córdoba)</p>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d666.2203779737522!2d-4.478393117679868!3d37.4112044661761!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6d70ce974c2423%3A0x440c7613e1515361!2s14900%20Lucena%2C%20C%C3%B3rdoba!5e0!3m2!1ses!2ses!4v1649783284300!5m2!1ses!2ses"
+                        class="map" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <!-- <google-map width="750px" height="450px" [center]="center" [zoom]="zoom">
+                    </google-map> -->
+                </div>
+
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-12 d-flex align-items-center">
+                            <img class="imgProfile"
+                                src="https://images.unsplash.com/photo-1504593811423-6dd665756598?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                                alt="">
+                        </div>
+                        <div class="col-12">
+                            <button class="btn bgSecundario mt-5">Visitar perfil</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

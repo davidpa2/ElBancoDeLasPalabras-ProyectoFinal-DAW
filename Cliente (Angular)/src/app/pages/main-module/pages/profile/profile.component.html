@@ -33,20 +33,20 @@
 
     <div class="row mt-4">
         <div (click)="tabSelected = 1"
-            [class]="(tabSelected == 1) ? 'tabSelect col-4 d-flex justify-content-center' : 'tab col-4 d-flex justify-content-center'">
+            [class]="(tabSelected == 1) ? 'tabSelect col-4' : 'tab col-4'">
             Mis libros subidos
         </div>
         <div (click)="tabSelected = 2"
-            [class]="(tabSelected == 2) ? 'tabSelect col-4 d-flex justify-content-center' : 'tab col-4 d-flex justify-content-center'">
+            [class]="(tabSelected == 2) ? 'tabSelect col-4' : 'tab col-4'">
             Mis intercambios
         </div>
         <div (click)="tabSelected = 3"
-            [class]="(tabSelected == 3) ? 'tabSelect col-4 d-flex justify-content-center' : 'tab col-4 d-flex justify-content-center'">
+            [class]="(tabSelected == 3) ? 'tabSelect col-4' : 'tab col-4'">
             Mis ventas
         </div>
     </div>
 
-    <div *ngIf="tabSelected == 1" class="row bgTerciario px-5 pt-3">
+    <div *ngIf="tabSelected == 1" class="row board">
         <div class="col-4" *ngFor="let i of [1,2,3,4,5,6,7,8,9]">
             <div class="row bg-white">
                 <div class="col-12">
@@ -61,10 +61,12 @@
             </div>
         </div>
     </div>
-    <div *ngIf="tabSelected == 2" class="row bgTerciario">
+    <div *ngIf="tabSelected == 2" class="row board">
         pues hola2
     </div>
-    <div *ngIf="tabSelected == 3" class="row bgTerciario">
+    <div *ngIf="tabSelected == 3" class="row board">
         hola 3 sin más
     </div>
+
+    <div class="upload">Subir un libro!</div>
 </div>

@@ -14,15 +14,29 @@
     font-size: 13px;
 }
 
-.tabSelect {
+.tabSelect, .tab {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    display: flex;
+    justify-content: center;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.tabSelect {
     background-color: rgba(99, 61, 16, 1);
     color: white;
+
 }
 
 .tab {
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
     background-color: rgba(255, 240, 223, 1);
+}
+
+.board {
+    background-color: rgba(99, 61, 16, 1);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
 }

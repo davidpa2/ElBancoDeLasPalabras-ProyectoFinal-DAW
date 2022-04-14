@@ -1,0 +1,51 @@
+<h3 class="text-center my-4">Intercambios pendientes</h3>
+
+<div class="container">
+    <div class="row board">
+        <h4 class="text-center my-4">Jorge ha solicitado intercambio de tu libro:</h4>
+
+        <div class="col-3 d-flex flex-column align-items-center">
+            <img src="https://images.unsplash.com/photo-1504593811423-6dd665756598?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                alt="" class="imgProfile">
+            <h5 class="bold my-4">Jorge Montes Colorín</h5>
+        </div>
+        <div class="col-3">
+            <h5 class="bold">Sus datos de contacto:</h5>
+            <p>Correo electrónico: <br>
+                jorgemontes@gmail.com
+            </p>
+
+            <p class="mt-2">Número de teléfono: <br>
+                +34 672 965 463
+            </p>
+
+            <p class="mt-2">Telegram: <br>
+                No especificado
+            </p>
+
+            <button class="btn bgSecundario my-2">Confirmar intercambio</button>
+        </div>
+        <div class="col-3">
+            <h5 class="bold text-end">Sobre el libro:</h5>
+            <p class="text-end">Autor: <br>
+                Brandon Sanderson
+            </p>
+
+            <p class="text-end">Estado:
+                <app-rate-stars [stars]="3" [isUser]="true"></app-rate-stars>
+            </p>
+
+            <p class="text-end">Precio:
+                <app-price class="d-flex justify-content-end" [price]="13"></app-price>
+            </p>
+
+            <div class="d-flex justify-content-end">
+                <button class="btn outlineSecondary my-2">Rechazar intercambio</button>
+            </div>
+        </div>
+        <div class="col-3 d-flex flex-column align-items-center">
+            <img src="/assets/images/ElImperioFinal.jpg" alt="" class="imgProfile">
+            <h5 class="bold my-4">El Imperio Final</h5>
+        </div>
+    </div>
+</div>

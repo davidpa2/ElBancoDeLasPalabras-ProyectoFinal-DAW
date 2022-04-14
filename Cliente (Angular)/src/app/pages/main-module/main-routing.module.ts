@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ConfirmExchangesComponent } from './pages/confirm-exchanges/confirm-exchanges.component';
 import { ExchangeComponent } from './pages/exchange/exchange.component';
 import { IndexComponent } from './pages/index/index.component';
 import { ProductViewComponent } from './pages/product-view/product-view.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'productView', component: ProductViewComponent },
   { path: 'purchase/:idBook', component: PurchaseComponent },
   { path: 'exchange/:idS/:idP', component: ExchangeComponent },
+  { path: 'confirmExchanges', component: ConfirmExchangesComponent },
   { path: '', redirectTo: 'index', pathMatch: 'full' }
 ];
 

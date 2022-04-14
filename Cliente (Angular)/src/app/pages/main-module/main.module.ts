@@ -11,6 +11,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ProductViewComponent } from './pages/product-view/product-view.component';
 import { PurchaseComponent } from './pages/purchase/purchase.component';
 import { PriceComponent } from 'src/app/components/price/price.component';
+import { ExchangeComponent } from './pages/exchange/exchange.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PriceComponent } from 'src/app/components/price/price.component';
     ProductsComponent,
     ProductViewComponent,
     PurchaseComponent,
-    PriceComponent
+    PriceComponent,
+    ExchangeComponent
   ],
   imports: [
     MainRoutingModule, CommonModule, GoogleMapsModule,

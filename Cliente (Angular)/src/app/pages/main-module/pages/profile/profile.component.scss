@@ -26,11 +26,17 @@
 .tabSelect {
     background-color: rgba(99, 61, 16, 1);
     color: white;
+    user-select: none;
 
 }
 
 .tab {
     background-color: rgba(255, 240, 223, 1);
+    user-select: none;
+}
+
+.tabSelect:hover, .tab:hover {
+    cursor: pointer;
 }
 
 .board {

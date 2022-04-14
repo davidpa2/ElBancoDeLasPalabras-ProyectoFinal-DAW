@@ -9,6 +9,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { RateStarsComponent } from 'src/app/components/rate-stars/rate-stars.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductViewComponent } from './pages/product-view/product-view.component';
+import { PurchaseComponent } from './pages/purchase/purchase.component';
+import { PriceComponent } from 'src/app/components/price/price.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ProductViewComponent } from './pages/product-view/product-view.componen
     ProfileComponent,
     RateStarsComponent,
     ProductsComponent,
-    ProductViewComponent
+    ProductViewComponent,
+    PurchaseComponent,
+    PriceComponent
   ],
   imports: [
     MainRoutingModule, CommonModule, GoogleMapsModule,

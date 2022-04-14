@@ -16,19 +16,21 @@
           <a class="nav-link" routerLink="/auth/register">Register</a>
         </li>
       </ul>
-    </div> 
+    </div>
 
     <div class="dropdown">
-      <button class="btn dropdown-toggle text-white bgTerciario" type="button" id="dropdownMenuLink" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
+      <button class="btn dropdown-toggle text-white bgTerciario me-5" type="button" id="dropdownMenuLink"
+        data-bs-toggle="dropdown" aria-expanded="false">
         Mi perfil
         <i class="bi bi-person-fill"></i>
         <span class="badge bg-danger">5</span>
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+        <a class="dropdown-item" routerLink="/profile">Mi perfil</a>
+        <a class="dropdown-item" href="#"><span class="badge bg-danger">5</span>Intercambios<br>pendientes</a>
+        <div class="d-flex justify-content-center mt-2">
+          <button class="btn bgSecundario" href="#">Cerrar sesión <i class="bi bi-power"></i></button>
+        </div>
       </div>
     </div>
 

@@ -2,10 +2,25 @@ a {
     color: white;
 }
 
-a:hover, a:focus {
+a:hover,
+a:focus {
     color: grey;
 }
 
 .logo {
     width: 50px;
+}
+
+.dropdown-menu {
+    width: 100%;
+    background-color: rgba(255, 240, 223, 1);
+}
+
+.dropdown-item {
+    color: black;
+}
+
+.dropdown-item:hover {
+    background-color: white;
+    color: black;
 }

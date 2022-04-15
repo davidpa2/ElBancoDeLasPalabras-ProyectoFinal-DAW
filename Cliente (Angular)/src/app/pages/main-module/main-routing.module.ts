@@ -12,6 +12,7 @@ import { UploadBookComponent } from './pages/upload-book/upload-book.component';
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
   { path: 'uploadBook', component: UploadBookComponent },
+  { path: 'modifyBook/:id', component: UploadBookComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'productView', component: ProductViewComponent },

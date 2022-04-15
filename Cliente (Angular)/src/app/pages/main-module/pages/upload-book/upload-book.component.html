@@ -80,4 +80,18 @@
         </div>
     </div>
 
+    <div *ngIf="!idBook" class="row">
+        <div class="col d-flex justify-content-center">
+            <button class="btn bgSecundario mb-4">Subir libro <i class="bi bi-arrow-up-circle"></i></button>
+        </div>
+    </div>
+    <div *ngIf="idBook" class="row d-flex justify-content-around">
+        <div class="col-5 d-flex justify-content-end mb-4">
+            <button class="btn bgSecundario">Actualizar libro <i class="bi bi-arrow-repeat"></i></button>
+        </div>
+        <div class="col-5 d-flex justify-content-start mb-4">
+            <button class="btn outlineSecondary">Eliminar libro <i class="bi bi-trash"></i></button>
+        </div>
+    </div>
+
 </div>

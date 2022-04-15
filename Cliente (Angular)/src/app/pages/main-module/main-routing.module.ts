@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ConfirmExchangesComponent } from './pages/confirm-exchanges/confirm-exchanges.component';
+import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 import { ExchangeComponent } from './pages/exchange/exchange.component';
 import { IndexComponent } from './pages/index/index.component';
 import { ProductViewComponent } from './pages/product-view/product-view.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'uploadBook', component: UploadBookComponent },
   { path: 'modifyBook/:id', component: UploadBookComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'editProfile', component: EditProfileComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'productView/:id', component: ProductViewComponent },
   { path: 'purchase/:idBook', component: PurchaseComponent },

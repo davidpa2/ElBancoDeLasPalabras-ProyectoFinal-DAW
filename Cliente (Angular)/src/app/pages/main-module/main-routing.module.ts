@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'modifyBook/:id', component: UploadBookComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'products', component: ProductsComponent },
-  { path: 'productView', component: ProductViewComponent },
+  { path: 'productView/:id', component: ProductViewComponent },
   { path: 'purchase/:idBook', component: PurchaseComponent },
   { path: 'exchange/:idS/:idP', component: ExchangeComponent },
   { path: 'confirmExchanges', component: ConfirmExchangesComponent },

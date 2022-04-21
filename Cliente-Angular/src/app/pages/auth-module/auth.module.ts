@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing.module';
 import { MainRoutingModule } from '../main-module/main-routing.module';
 import { LoginComponent } from './pages/login/login.component';
@@ -14,7 +15,7 @@ import { ForgottenPasswordComponent } from './pages/forgotten-password/forgotten
     ForgottenPasswordComponent
   ],
   imports: [
-    AuthRoutingModule, MainRoutingModule
+    AuthRoutingModule, MainRoutingModule, ReactiveFormsModule
   ],
   exports: [AuthRoutingModule, MainRoutingModule]
 })

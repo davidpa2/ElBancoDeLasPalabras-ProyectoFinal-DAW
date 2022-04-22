@@ -10,6 +10,14 @@
         <div class="col-md-9 mt-2 mt-md-0">
             <input formControlName="email" class="input" type="text" placeholder="Email">
         </div>
+        <div class="errorForm" *ngIf="submitted && myForm['email'].errors">
+            <div *ngIf="myForm['email'].errors['required']">
+                *Debes escribir un email
+            </div>
+            <div *ngIf="myForm['email'].errors['pattern']">
+                *Escriba un email correcto
+            </div>
+        </div>
     </div>
     <div class="row my-4">
         <div class="col-md-3">
@@ -17,6 +25,11 @@
         </div>
         <div class="col-md-9 mt-2 mt-md-0">
             <input formControlName="pass" class="input" type="password" placeholder="Contraseña">
+        </div>
+        <div class="errorForm" *ngIf="submitted && myForm['pass'].errors">
+            <div *ngIf="myForm['pass'].errors['required']">
+                *Debes escribir una contraseña
+            </div>
         </div>
     </div>
     <div class="row">

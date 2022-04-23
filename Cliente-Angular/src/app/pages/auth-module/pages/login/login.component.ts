@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   loginForm!: FormGroup;
 
-  constructor() { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -24,11 +26,23 @@ export class LoginComponent implements OnInit {
   authUser() {
     console.log(this.myForm['email'].errors);
     this.submitted = true;
+    
     if (this.loginForm.valid) {
       var jsonUser = {
         email: (this.loginForm.controls['email'].value),
         pass: (this.loginForm.controls['pass'].value),
       }
+
+      this.userService.autenticaUsuario(this.loginForm.controls['email'].value, this.loginForm.controls['pass'].value).subscribe(data => {
+        console.log(data);
+        if (data.jwt) {
+          this.userService.JWT = data.jwt;
+          this.userService.emitirNuevoCambioEnUsuarioAutenticado();
+          this.router.navigate(['/index']);
+        } else {
+          alert("Error: Usuario y/o contraseña incorrectos");
+        }
+      })
 
       console.log("Datos obtenidos: "+ JSON.stringify(jsonUser));
     }

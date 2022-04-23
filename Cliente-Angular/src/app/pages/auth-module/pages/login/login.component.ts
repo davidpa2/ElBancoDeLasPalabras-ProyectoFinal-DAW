@@ -8,6 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
+  showPass = false;
   submitted = false;
   loginForm!: FormGroup;
 

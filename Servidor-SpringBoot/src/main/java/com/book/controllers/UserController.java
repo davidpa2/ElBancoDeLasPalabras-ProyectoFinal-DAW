@@ -1,6 +1,9 @@
 package com.book.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +13,7 @@ import com.book.model.entities.User;
 import com.book.repository.UserRepository;
 import com.book.security.AutenticadorJWT;
 
+@CrossOrigin
 @RestController
 public class UserController {
 
@@ -53,5 +57,24 @@ public class UserController {
 			this.email = email;
 			this.password = password;
 		}
+	}
+	
+	@GetMapping("/authenticatedUserData")
+	public DTO listarAutenticado(HttpServletRequest request) {
+		DTO dtoUser = new DTO();
+		System.out.println("El request => " + request);
+		int idUsuarioAutenticado = AutenticadorJWT.getIdUsuarioDesdeJwtIncrustadoEnRequest(request);
+		System.out.println("Id de autenticado => " + idUsuarioAutenticado);
+		User user = userRepo.getById(idUsuarioAutenticado);
+		dtoUser.put("id", user.getId());
+		dtoUser.put("email", user.getEmail());
+		dtoUser.put("name", user.getName());
+		dtoUser.put("surnames", user.getSurnames());
+		dtoUser.put("description", user.getDescription());
+		dtoUser.put("birthday", user.getBirthday());
+		dtoUser.put("tlf", user.getTlf());
+		dtoUser.put("telegram", user.getTelegram());
+		dtoUser.put("img", user.getImg());
+		return dtoUser;
 	}
 }

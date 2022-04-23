@@ -36,10 +36,10 @@ export class NavbarComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem("authenticatedUser") || '{}')
   }
 
-  cerrarSesion() {
+  logOut() {
     localStorage.clear();
-    //this.router.navigate(['/inicio']);
-    window.location.href = "/inicio";
+    this.router.navigate(['/auth/login']);
+    //window.location.href = "/login";
   }
 
 }

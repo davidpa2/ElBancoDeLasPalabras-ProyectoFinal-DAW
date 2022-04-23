@@ -33,7 +33,7 @@
     </button>
 </div>
 
-<div class="container bg-white gestion mt-5">
+<div *ngIf="user.name" class="container bg-white gestion mt-5">
     <div class="row">
         <div class="col text-center my-3">
             <h2>Gestiona tu librería</h2>
@@ -88,7 +88,7 @@
     </div>
 </div>
 
-<div class="container bg-white gestion mt-5">
+<div *ngIf="!user.name" class="container bg-white gestion mt-5">
     <div class="row">
         <div class="col-12 text-center my-3">
             <h2>Inicia sesión</h2>

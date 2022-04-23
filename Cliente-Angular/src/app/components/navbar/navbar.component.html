@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-white bgSecundario">
+<nav class="navbar navbar-expand-sm navbar-white bgSecundario">
   <div class="container-fluid">
     <a class="navbar-brand ms-2" routerLink="/index">
       <img src="/assets/Logo.png" class="logo" alt="">
@@ -9,16 +9,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item ms-4">
+        <li *ngIf="user" class="nav-item ms-4">
           <a class="nav-link" routerLink="/profile">Mis libros</a>
         </li>
-        <li class="nav-item mx-3">
+        <li *ngIf="user" class="nav-item mx-3">
           <a class="nav-link" routerLink="/uploadBook">Subir libro</a>
         </li>
       </ul>
     </div>
 
-    <div class="dropdown">
+    <div *ngIf="user" class="dropdown">
       <button class="btn dropdown-toggle text-white bgTerciario" type="button" id="dropdownMenuLink"
         data-bs-toggle="dropdown" aria-expanded="false">
         Mi perfil
@@ -29,10 +29,12 @@
         <a class="dropdown-item" routerLink="/profile">Mi perfil</a>
         <a class="dropdown-item" routerLink="/confirmExchanges"><span class="badge bg-danger">5</span>Intercambios<br>pendientes</a>
         <div class="d-flex justify-content-center mt-2">
-          <button class="btn bgSecundario" href="#">Cerrar sesión <i class="bi bi-power"></i></button>
+          <button class="btn bgSecundario" (click)="logOut()">Cerrar sesión <i class="bi bi-power"></i></button>
         </div>
       </div>
     </div>
+
+    <button *ngIf="!user" class="btn bgTerciario" routerLink="/auth/login">Iniciar sesión</button>
 
   </div>
 </nav>

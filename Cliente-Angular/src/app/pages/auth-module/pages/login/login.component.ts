@@ -24,9 +24,8 @@ export class LoginComponent implements OnInit {
   }
 
   authUser() {
-    console.log(this.myForm['email'].errors);
     this.submitted = true;
-    
+
     if (this.loginForm.valid) {
       var jsonUser = {
         email: (this.loginForm.controls['email'].value),
@@ -39,8 +38,6 @@ export class LoginComponent implements OnInit {
           this.userService.JWT = data.jwt;
           this.userService.emitirNuevoCambioEnUsuarioAutenticado();
           this.router.navigate(['/index']);
-        } else {
-          alert("Error: Usuario y/o contraseña incorrectos");
         }
       })
 

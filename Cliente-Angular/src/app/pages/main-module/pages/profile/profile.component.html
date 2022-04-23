@@ -1,18 +1,15 @@
 <div class="profile container bg-white mt-4">
     <div class="row">
         <div class="col-5 d-flex justify-content-center my-5">
-            <img src="https://images.unsplash.com/photo-1504593811423-6dd665756598?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            <img src="data:image/jpg;base64,{{user.img}}"
                 alt="" class="imgProfile">
         </div>
         <div class="col-7">
-            <h2 class="text-center my-4">Jorge Montes Colorín</h2>
-            <p>Hola, mi nombre es Jorge y mis géneros de libro favoritos son la comedia, novela trágica y novela
-                trágica. En mi tiempo libre me voy a leer y tomar café en el Starbucks.
-                Tengo una Mercedes AMG que aparco en mi garaje privado y siempre doy aseleroneh. Un saludo y espero que
-                mis libros te agraden.
+            <h2 class="text-center my-4">{{user.name}} {{user.surnames}}</h2>
+            <p>{{user.description}}
             </p>
-            <p>Correo electrónico: jorgetemontes@gmail.com</p>
-            <p>Fecha de nacimiento: 12/04/1989</p>
+            <p>Correo electrónico: {{user.email}}</p>
+            <p>Fecha de nacimiento: {{user.birthday}}</p>
             <div class="row">
                 <div class="col-3">
                     <button routerLink="/editProfile" class="btn bgSecundario">Editar perfil</button>

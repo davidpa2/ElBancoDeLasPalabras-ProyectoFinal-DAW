@@ -16,6 +16,7 @@ export class IndexComponent implements OnInit{
   ngOnInit(): void {
     this.recuperarUsuarioLog();
     console.log(this.user);
+    console.log('HOLAAA');
     
   }
   

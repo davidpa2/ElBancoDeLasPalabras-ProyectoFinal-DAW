@@ -3,6 +3,9 @@
         <h2 class="text-center mb-3">Iniciar sesión</h2>
     </div>
     <hr>
+    <div class="errorForm text-center" *ngIf="invalid">
+        *Correo electrónico o contraseña incorrectos
+    </div>
     <div class="row mt-4">
         <div class="col-md-3">
             <label for="user">Email:</label>

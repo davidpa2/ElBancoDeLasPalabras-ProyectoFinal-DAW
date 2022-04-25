@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   showPass = false;
   submitted = false;
+  invalid = false;
   loginForm!: FormGroup;
 
   constructor(private userService: UserService, private router: Router) { }
@@ -31,20 +32,19 @@ export class LoginComponent implements OnInit {
         email: (this.loginForm.controls['email'].value),
         pass: (this.loginForm.controls['pass'].value),
       }
-
+      
       this.userService.autenticaUsuario(this.loginForm.controls['email'].value, this.loginForm.controls['pass'].value).subscribe(data => {
         console.log(data);
         if (data.jwt) {
           this.userService.JWT = data.jwt;
           this.userService.emitirNuevoCambioEnUsuarioAutenticado();
           this.router.navigate(['/index']);
+        } else {
+          this.invalid = true;
         }
       })
-
       console.log("Datos obtenidos: "+ JSON.stringify(jsonUser));
-    }
-
-    
+    } 
   }
 
   get myForm() {

@@ -18,17 +18,18 @@ export class NavbarComponent implements OnInit {
     //this.recuperarUsuarioLog();
 
     //Protección de rutas
-    if (this.user != null) {
+    /* if (this.user != null) {
       this.router.navigate(['/index']);
     }
     if (this.user == null) {
       this.router.navigate(['/auth/login']);
-    }
+    } */
 
-    this.userService.cambiosEnMecanicosAutenticado.subscribe(data => {
-      console.log('Hay un cambio en el usuario autenticado');
+    this.userService.cambiosEnUserAutenticado.subscribe(data => {
+      console.log('Hay un cambio en el usuario autenticado', data);
       console.log(this.userService.authenticatedUser.email);
-      this.user = this.userService.authenticatedUser;
+      //this.user = this.userService.authenticatedUser;
+      this.user = data;
     });
   }
 

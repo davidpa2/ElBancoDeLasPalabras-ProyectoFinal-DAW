@@ -1,4 +1,4 @@
-<div class="container bg-white my-3">
+<form class="container bg-white my-3">
     <div class="row">
         <div class="col my-3">
             <h2 class="text-center">Editar perfil</h2>
@@ -9,12 +9,12 @@
         <div class="col-4 m-1">
             <div class="row bgPrimario">
                 <div class="col py-2 d-flex justify-content-center">
-                    <img src="https://images.unsplash.com/photo-1504593811423-6dd665756598?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
+                    <img src="data:image/jpg;base64,{{user.img}}" alt="">
                 </div>
             </div>
             <div class="row bgPrimario my-3 py-1">
                 <div class="col">
-                    <input type="file" name="book" id="book">
+                    <input type="file" id="profileImg">
                 </div>
             </div>
             <div class="row bgPrimario my-3">
@@ -22,7 +22,7 @@
                     <label for="date">Fecha de nacimiento:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input type="text" name="date" id="date">
+                    <input formControlName="birthday" [value]="user.birthday" type="text">
                 </div>
             </div>
             <div class="row bgPrimario my-3">
@@ -30,7 +30,7 @@
                     <label for="tlf">Teléfono:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input type="text" name="tlf" id="tlf">
+                    <input formControlName="tlf" [value]="user.tlf" type="text">
                 </div>
             </div>
             <div class="row bgPrimario my-3">
@@ -38,7 +38,7 @@
                     <label for="telegram">Telegram:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input type="text" name="telegram" id="telegram">
+                    <input formControlName="telegram" [value]="user.telegram" type="text">
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
                     <label for="nombre">Nombre:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input type="text" name="nombre" id="nombre">
+                    <input formControlName="name" [value]="user.name" type="text">
                 </div>
             </div>
             <div class="row bgPrimario mt-3 m-1">
@@ -57,7 +57,7 @@
                     <label for="apellidos">Apellidos:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input type="text" name="apellidos" id="apellidos">
+                    <input formControlName="surnamos" [value]="user.surnames" type="text">
                 </div>
             </div>
             <div class="row bgPrimario mt-3 m-1">
@@ -65,7 +65,7 @@
                     <label for="mail">Correo electrónico:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input type="text" name="mail" id="mail">
+                    <input formControlName="email" [value]="user.email" type="text">
                 </div>
             </div>
             <div class="row bgPrimario mt-3 m-1 pb-2">
@@ -73,10 +73,9 @@
                     <label for="desc">Descripción:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <textarea name="desc" id="desc"></textarea>
+                    <textarea formControlName="desc">{{user.description}}</textarea>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -89,4 +88,4 @@
         </div>
     </div>
 
-</div>
+</form>

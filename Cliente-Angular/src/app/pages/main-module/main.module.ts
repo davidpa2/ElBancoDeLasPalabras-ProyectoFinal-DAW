@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';  
 import { MainRoutingModule } from './main-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
 
 import { IndexComponent } from './pages/index/index.component';
@@ -30,7 +31,7 @@ import { EditProfileComponent } from './pages/edit-profile/edit-profile.componen
     EditProfileComponent
   ],
   imports: [
-    MainRoutingModule, CommonModule, GoogleMapsModule,
+    MainRoutingModule, CommonModule, GoogleMapsModule, ReactiveFormsModule
   ]
 })
 export class MainModule { }

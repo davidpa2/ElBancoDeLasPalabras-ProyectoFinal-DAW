@@ -9,8 +9,8 @@ import { Observable } from 'rxjs';
 export class UserService {
 
   authenticatedUser!: User;
-  @Output() cambiosEnMecanicosAutenticado = new EventEmitter<User>();
-  @Input() mostrarMecanico: EventEmitter<any> = new EventEmitter();
+  @Output() cambiosEnUserAutenticado = new EventEmitter<User>();
+  @Input() mostrarUsuario: EventEmitter<any> = new EventEmitter();
 
   JWT!: TokenJWT;
 
@@ -20,6 +20,9 @@ export class UserService {
 
   /**
    * Método para autenticar al usuario, recibiendo su email y su contraseña.
+   * @param email 
+   * @param password 
+   * @returns 
    */
   autenticaUsuario(email: string, password: string): Observable<TokenJWT> {
     var jsonObject = {
@@ -30,16 +33,51 @@ export class UserService {
     return this.http.post<TokenJWT>(this.url + '/autenticate', jsonObject);
   }
 
+  /**
+   * 
+   * @returns 
+   */
   public getUsuarioAutenticado(): Observable<User> {
     let headers = new HttpHeaders().set('Authorization', `Bearer ${this.JWT}`);
     return this.http.get<User>(this.url + '/authenticatedUserData', { headers: headers });
   }
 
+  /**
+   * 
+   */
   emitirNuevoCambioEnUsuarioAutenticado() {
     this.getUsuarioAutenticado().subscribe(authenticatedUser => {
       this.authenticatedUser = authenticatedUser;
       localStorage.setItem("authenticatedUser", JSON.stringify(authenticatedUser));
-      this.cambiosEnMecanicosAutenticado.emit(authenticatedUser);
+      this.cambiosEnUserAutenticado.emit(authenticatedUser);
     });
+  }
+
+  /**
+   * 
+   * @param name 
+   * @param surnames 
+   * @param description 
+   * @param birthday 
+   * @param tlf 
+   * @param telegram 
+   * @param img 
+   * @returns 
+   */
+  modifyUser(id: number, name: String, surnames: String, description: String, birthday: String, tlf: String, telegram: String, img: String) {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    let jsonUser = JSON.stringify({
+      id: id,
+      name: name,
+      surnames: surnames,
+      description: description,
+      birthday: birthday,
+      tlf: tlf,
+      telegram: telegram,
+      img: img
+    });
+
+    return this.http.post<any>(this.url + '/modifyUser', jsonUser, { headers: headers })
   }
 }

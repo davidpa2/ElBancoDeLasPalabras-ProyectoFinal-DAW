@@ -1,4 +1,4 @@
-<form class="container bg-white my-3">
+<form [formGroup]="editUserForm" class="container bg-white my-3">
     <div class="row">
         <div class="col my-3">
             <h2 class="text-center">Editar perfil</h2>
@@ -14,7 +14,8 @@
             </div>
             <div class="row bgPrimario my-3 py-1">
                 <div class="col">
-                    <input type="file" id="profileImg">
+                    <input type="file" (change)="saveImage();"
+                    value="Actualizar foto" id="fotoCocheInput"/>
                 </div>
             </div>
             <div class="row bgPrimario my-3">
@@ -22,7 +23,7 @@
                     <label for="date">Fecha de nacimiento:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input formControlName="birthday" [value]="user.birthday" type="text">
+                    <input formControlName="birthday" type="text">
                 </div>
             </div>
             <div class="row bgPrimario my-3">
@@ -30,7 +31,7 @@
                     <label for="tlf">Teléfono:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input formControlName="tlf" [value]="user.tlf" type="text">
+                    <input formControlName="tlf" type="text">
                 </div>
             </div>
             <div class="row bgPrimario my-3">
@@ -38,7 +39,7 @@
                     <label for="telegram">Telegram:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input formControlName="telegram" [value]="user.telegram" type="text">
+                    <input formControlName="telegram" type="text">
                 </div>
             </div>
         </div>
@@ -49,7 +50,7 @@
                     <label for="nombre">Nombre:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input formControlName="name" [value]="user.name" type="text">
+                    <input formControlName="name" type="text">
                 </div>
             </div>
             <div class="row bgPrimario mt-3 m-1">
@@ -57,7 +58,7 @@
                     <label for="apellidos">Apellidos:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input formControlName="surnamos" [value]="user.surnames" type="text">
+                    <input formControlName="surnamos" type="text">
                 </div>
             </div>
             <div class="row bgPrimario mt-3 m-1">
@@ -65,7 +66,7 @@
                     <label for="mail">Correo electrónico:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input formControlName="email" [value]="user.email" type="text">
+                    <input formControlName="email" type="text">
                 </div>
             </div>
             <div class="row bgPrimario mt-3 m-1 pb-2">
@@ -81,7 +82,7 @@
 
     <div class="row">
         <div class="col d-flex justify-content-end">
-            <button class="btn bgSecundario mt-2 mb-4">Actualizar perfil <i class="bi bi-arrow-up-circle"></i></button>
+            <button (click)="saveChanges()" class="btn bgSecundario mt-2 mb-4">Actualizar perfil <i class="bi bi-arrow-up-circle"></i></button>
         </div>
         <div class="col d-flex justify-content-start">
             <button routerLink="/profile" class="btn outlineSecondary mt-2 mb-4">Volver <i class="bi bi-arrow-counterclockwise"></i></button>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.book.model.entities.User;
 import com.book.repository.UserRepository;
 import com.book.security.AutenticadorJWT;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @CrossOrigin
 @RestController
@@ -58,7 +59,7 @@ public class UserController {
 			this.password = password;
 		}
 	}
-	
+
 	@GetMapping("/authenticatedUserData")
 	public DTO listarAutenticado(HttpServletRequest request) {
 		DTO dtoUser = new DTO();
@@ -76,5 +77,61 @@ public class UserController {
 		dtoUser.put("telegram", user.getTelegram());
 		dtoUser.put("img", user.getImg());
 		return dtoUser;
+	}
+
+	@PostMapping("/modifyUser")
+	public DTO modificarUsuario(@RequestBody DatosModificarUsuario d) {
+
+		DTO dto = new DTO();
+		dto.put("estado", "error");
+
+		User usuario = userRepo.getById(d.id);
+
+		usuario.setName(d.name);
+		usuario.setSurnames(d.surnames);
+		usuario.setDescription(d.description);
+		usuario.setBirthday(d.birthday);
+		usuario.setTlf(d.tlf);
+		usuario.setTelegram(d.telegram);
+		usuario.setBirthday(d.birthday);
+		usuario.setImg(d.img);
+
+		userRepo.save(usuario);
+
+		dto.put("idUser", usuario.getId());
+		dto.put("estado", "correcto");
+		return dto;
+	}
+
+	static class DatosModificarUsuario {
+		@JsonProperty("id")
+		int id;
+		@JsonProperty("name")
+		String name;
+		@JsonProperty("surnames")
+		String surnames;
+		@JsonProperty("description")
+		String description;
+		@JsonProperty("birthday")
+		String birthday;
+		@JsonProperty("tlf")
+		String tlf;
+		@JsonProperty("telegram")
+		String telegram;
+		@JsonProperty("img")
+		byte[] img;
+
+		public DatosModificarUsuario(int id, String name, String surnames, String description, String birthday, String tlf,
+				String telegram, byte[] img) {
+			super();
+			this.id = id;
+			this.name = name;
+			this.surnames = surnames;
+			this.description = description;
+			this.birthday = birthday;
+			this.tlf = tlf;
+			this.telegram = telegram;
+			this.img = img;
+		}
 	}
 }

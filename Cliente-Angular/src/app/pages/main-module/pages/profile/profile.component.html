@@ -20,7 +20,7 @@
                             <p class="valoracion text-center">Valoración del usuario:</p>
                         </div>
                         <div class="col-5">
-                            <app-rate-stars [isUser]="true" [stars]="3"></app-rate-stars>
+                            <app-rate-stars [isUser]="true" [stars]="round(user.rating)"></app-rate-stars>
                         </div>
                     </div>
                 </div>

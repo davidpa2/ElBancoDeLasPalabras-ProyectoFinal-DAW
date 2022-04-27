@@ -8,7 +8,8 @@ export interface User {
     birthday: string,
     tlf: string,
     telegram: string,
-    img: string
+    img: string,
+    rating: number
 }
 
 export interface Book {

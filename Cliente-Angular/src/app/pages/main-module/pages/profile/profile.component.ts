@@ -20,6 +20,9 @@ export class ProfileComponent implements OnInit {
   recuperarUsuarioLog() {
     this.user = JSON.parse(localStorage.getItem("authenticatedUser") || '{}')
     //console.log(localStorage.getItem("authenticatedUser"));
-    
+  }
+
+  round(number: number) {
+    return Math.round(number);
   }
 }

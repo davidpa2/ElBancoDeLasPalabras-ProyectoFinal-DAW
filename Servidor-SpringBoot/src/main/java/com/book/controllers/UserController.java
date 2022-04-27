@@ -76,6 +76,7 @@ public class UserController {
 		dtoUser.put("tlf", user.getTlf());
 		dtoUser.put("telegram", user.getTelegram());
 		dtoUser.put("img", user.getImg());
+		dtoUser.put("rating", user.getRating());
 		return dtoUser;
 	}
 

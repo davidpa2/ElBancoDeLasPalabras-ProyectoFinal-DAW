@@ -38,6 +38,8 @@ public class User implements Serializable {
 	private String telegram;
 
 	private String tlf;
+	
+	private float rating;
 
 	//bi-directional one-to-one association to Book
 	@OneToOne(mappedBy="user")
@@ -159,6 +161,14 @@ public class User implements Serializable {
 
 	public void setExchange2(Exchange exchange2) {
 		this.exchange2 = exchange2;
+	}
+	
+	public float getRating() {
+		return this.rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
 	}
 
 }

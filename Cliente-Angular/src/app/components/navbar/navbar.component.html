@@ -9,16 +9,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li *ngIf="user" class="nav-item ms-4">
+        <li *ngIf="user.name" class="nav-item ms-4">
           <a class="nav-link" routerLink="/profile">Mis libros</a>
         </li>
-        <li *ngIf="user" class="nav-item mx-3">
+        <li *ngIf="user.name" class="nav-item mx-3">
           <a class="nav-link" routerLink="/uploadBook">Subir libro</a>
         </li>
       </ul>
     </div>
 
-    <div *ngIf="user" class="dropdown">
+    <div *ngIf="user.name" class="dropdown">
       <button class="btn dropdown-toggle text-white bgTerciario" type="button" id="dropdownMenuLink"
         data-bs-toggle="dropdown" aria-expanded="false">
         Mi perfil
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <button *ngIf="!user" class="btn bgTerciario" routerLink="/auth/login">Iniciar sesión</button>
+    <button *ngIf="!user.name" class="btn bgTerciario" routerLink="/auth/login">Iniciar sesión</button>
 
   </div>
 </nav>

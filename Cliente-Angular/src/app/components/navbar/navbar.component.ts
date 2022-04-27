@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    //this.recuperarUsuarioLog();
+    this.recuperarUsuarioLog();
 
     //Protección de rutas
     /* if (this.user != null) {
@@ -38,6 +38,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logOut() {
+    this.user = JSON.parse('{}');
     localStorage.clear();
     this.router.navigate(['/auth/login']);
     //window.location.href = "/login";

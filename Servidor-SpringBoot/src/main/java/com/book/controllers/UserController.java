@@ -70,7 +70,6 @@ public class UserController {
 		u.setSurnames(datos.surnames);
 		u.setEmail(datos.email);
 		u.setPassword(datos.password);
-		u.setImg(datos.img);	
 		this.userRepo.save(u);
 		
 		// Intento localizar un usuario a partir de su nombre de usuario y su password
@@ -92,15 +91,13 @@ public class UserController {
 		String surnames;
 		String email;
 		String password;
-		byte[] img;
 
-		public DatosRegisterUser(String name, String surnames, String email, String password, byte[] img) {
+		public DatosRegisterUser(String name, String surnames, String email, String password) {
 			super();
 			this.name = name;
 			this.surnames = surnames;
 			this.email = email;
 			this.password = password;
-			this.img = img;
 		}
 	}
 

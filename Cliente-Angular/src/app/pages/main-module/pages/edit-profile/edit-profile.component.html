@@ -14,7 +14,9 @@
         <div class="col-4 m-1">
             <div class="row bgPrimario">
                 <div class="col py-2 d-flex justify-content-center">
-                    <img src="data:image/jpg;base64,{{user.img}}" alt="">
+                    <!-- <img [src]=" user.img ? 'data:image/jpg;base64,{{user.img}}' : '/assets/images/defaultProfile.png'" alt=""> -->
+                    <img *ngIf="user.img" src="data:image/jpg;base64,{{user.img}}" alt="">
+                    <img *ngIf="!user.img" src="/assets/images/defaultProfile.png" alt="">
                 </div>
             </div>
             <div class="row bgPrimario my-3 py-1">

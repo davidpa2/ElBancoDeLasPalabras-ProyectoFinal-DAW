@@ -59,6 +59,48 @@ public class UserController {
 			this.password = password;
 		}
 	}
+	
+	@PostMapping("register")
+	public DTO registerUser(@RequestBody DatosRegisterUser datos) {
+		DTO dto = new DTO(); // Voy a devolver un dto
+
+		User u = new User();
+		
+		u.setName(datos.name);
+		u.setSurnames(datos.surnames);
+		u.setEmail(datos.email);
+		u.setPassword(datos.password);
+		
+		this.userRepo.save(u);
+		
+		// Intento localizar un usuario a partir de su nombre de usuario y su password
+		User autenticatedUser = userRepo.findByEmailAndPassword(datos.email, datos.password);
+		if (autenticatedUser != null) {
+			dto.put("jwt", AutenticadorJWT.codificaJWT(autenticatedUser));
+		}
+
+		// Finalmente devuelvo el JWT creado, puede estar vacío si la autenticación no
+		// ha funcionado
+		return dto;
+	}
+	
+	/**
+	 * Clase que contiene los datos de registro del usuario
+	 */
+	static class DatosRegisterUser {
+		String name;
+		String surnames;
+		String email;
+		String password;
+
+		public DatosRegisterUser(String name, String surnames, String email, String password) {
+			super();
+			this.name = name;
+			this.surnames = surnames;
+			this.email = email;
+			this.password = password;
+		}
+	}
 
 	@GetMapping("/authenticatedUserData")
 	public DTO listarAutenticado(HttpServletRequest request) {

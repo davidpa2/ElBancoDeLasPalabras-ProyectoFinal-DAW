@@ -34,6 +34,23 @@ export class UserService {
   }
 
   /**
+   * Método para registrar un nuevo usuario e iniciar sesión con él
+   * @param email 
+   * @param password 
+   * @returns 
+   */
+  registerUser(name: string, surnames: string,  email: string, password: string): Observable<TokenJWT> {
+    var jsonObject = {
+      name: name,
+      surnames: surnames,
+      email: email,
+      password: password
+    };
+    // Envío la petición http y devuelvo el Observable, para que cualquiera pueda subscribirse.
+    return this.http.post<TokenJWT>(this.url + '/register', jsonObject);
+  }
+
+  /**
    * 
    * @returns 
    */

@@ -23,7 +23,11 @@ export class NavbarComponent implements OnInit {
     }
     if (this.user == null) {
       this.router.navigate(['/auth/login']);
-    } */
+    } 
+    
+    if (!this.user.tlf) {
+      this.router.navigate(['/editProfile'])
+    }*/
 
     this.userService.cambiosEnUserAutenticado.subscribe(data => {
       console.log('Hay un cambio en el usuario autenticado', data);

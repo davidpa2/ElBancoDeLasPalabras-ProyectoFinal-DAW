@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
             if (data.jwt) {
               this.userService.JWT = data.jwt;
               this.userService.emitirNuevoCambioEnUsuarioAutenticado();
-              this.router.navigate(['/index']);
+              this.router.navigate(['/editProfile']);
             }
           })
       } else {

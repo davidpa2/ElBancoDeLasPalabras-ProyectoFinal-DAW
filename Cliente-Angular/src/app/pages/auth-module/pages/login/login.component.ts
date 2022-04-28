@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { Md5 } from 'ts-md5';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
         pass: (this.loginForm.controls['pass'].value),
       }
       
-      this.userService.autenticaUsuario(this.loginForm.controls['email'].value, this.loginForm.controls['pass'].value).subscribe(data => {
+      this.userService.autenticaUsuario(this.loginForm.controls['email'].value, Md5.hashStr(this.loginForm.controls['pass'].value)).subscribe(data => {
         console.log(data);
         if (data.jwt) {
           this.userService.JWT = data.jwt;

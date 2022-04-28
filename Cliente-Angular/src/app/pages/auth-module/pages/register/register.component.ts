@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { Md5 } from 'ts-md5';
 
 @Component({
   selector: 'app-register',
@@ -32,7 +33,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       if (this.registerForm.value.pass == this.registerForm.value.repeatPass) {
         this.userService.registerUser(this.registerForm.value.name, this.registerForm.value.surnames, this.registerForm.value.email,
-          this.registerForm.value.pass).subscribe(data => {
+          Md5.hashStr(this.registerForm.value.pass)).subscribe(data => {
             console.log(data);
             if (data.jwt) {
               this.userService.JWT = data.jwt;

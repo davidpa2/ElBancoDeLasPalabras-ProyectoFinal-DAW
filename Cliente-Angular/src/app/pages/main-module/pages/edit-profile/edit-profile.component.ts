@@ -26,13 +26,12 @@ export class EditProfileComponent implements OnInit {
     this.editUserForm = new FormGroup({
       name: new FormControl(this.user.name, [Validators.required]),
       surnamos: new FormControl(this.user.surnames, [Validators.required]),
-      //tlf: new FormControl('', [Validators.required, Validators.pattern('(\d{3}\s\d{2}\s\d{2}\s\d{2})|(\d{3}\s\d{3}\s\d{3}\s\d{2})')]),
-      tlf: new FormControl(this.user.tlf, [Validators.required]),
-      //birthday: new FormControl('', [Validators.required, Validators.pattern('\d{2}/\d{2}/\d{4}')]),
-      birthday: new FormControl(this.user.birthday, [Validators.required]),
+      tlf: new FormControl(this.user.tlf, [Validators.required, Validators.pattern('[0-9]{3} [0-9]{3} [0-9]{3}')]),
+      //tlf: new FormControl(this.user.tlf, [Validators.required, Validators.pattern('([0-9]{3}\s[0-9]{2}\s[0-9]{2}\s[0-9]{2})|([0-9]{3}\s[0-9]{3}\s[0-9]{3}\s[0-9]{2})')]),
+      birthday: new FormControl(this.user.birthday, [Validators.required, Validators.pattern('[0-9]{2}\/[0-9]{2}\/[0-9]{4}')]),
       telegram: new FormControl(this.user.telegram, []),
       desc: new FormControl(this.user.description, [Validators.required]),
-      email: new FormControl({ value: this.user.email, disabled: true }, [Validators.required]),
+      email: new FormControl({ value: this.user.email, disabled: true }),
     })
   }
 
@@ -50,10 +49,11 @@ export class EditProfileComponent implements OnInit {
    */
   saveChanges() {
     console.log(this.user.id);
+    this.submitted = true;
 
     if (this.editUserForm.valid) {
       this.userService.modifyUser(this.user.id, this.editUserForm.value.name, this.editUserForm.value.surnamos, this.editUserForm.value.desc,
-        this.editUserForm.value.tlf, this.editUserForm.value.birthday, this.editUserForm.value.telegram, this.userImg).subscribe(data => {
+        this.editUserForm.value.birthday, this.editUserForm.value.tlf, this.editUserForm.value.telegram, this.userImg).subscribe(data => {
           console.log(data);
           if (data['estado'] != "error") {
             console.log('Usuario modificado correctamente')
@@ -61,6 +61,9 @@ export class EditProfileComponent implements OnInit {
             this.router.navigate(['/profile']);
           }
         })
+    } else {
+      console.log('Inválido');
+      
     }
 
   }

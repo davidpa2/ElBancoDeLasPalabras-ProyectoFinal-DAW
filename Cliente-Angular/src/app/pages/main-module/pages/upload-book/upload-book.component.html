@@ -5,16 +5,16 @@
         </div>
     </div>
 
-    <div class="row d-flex justify-content-center">
+    <form [formGroup]="uploadBookForm" class="row d-flex justify-content-center">
         <div class="col-4 m-1">
             <div class="row bgPrimario">
                 <div class="col py-2 d-flex justify-content-center">
-                    <img src="/assets/images/ElImperioFinal.jpg" alt="">
+                    <img src="data:image/jpg;base64,{{bookImg}}" alt="">
                 </div>
             </div>
             <div class="row bgPrimario my-3">
                 <div class="col">
-                    <input type="file" name="book" id="book">
+                    <input type="file" (change)="saveImage()" id="inputImg">
                 </div>
             </div>
             <div class="row bgPrimario my-3">
@@ -22,7 +22,7 @@
                     <label for="titulo">Precio:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input type="text" name="precio" id="precio">
+                    <input formControlName="price" type="text">
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                     <label for="titulo">Título:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input type="text" name="titulo" id="titulo">
+                    <input formControlName="title" type="text">
                 </div>
             </div>
             <div class="row bgPrimario mt-3 m-1">
@@ -41,7 +41,7 @@
                     <label for="autor">Autor:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input type="text" name="autor" id="autor">
+                    <input formControlName="author" type="text" name="autor" id="autor">
                 </div>
             </div>
             <div class="row bgPrimario mt-3 m-1">
@@ -49,7 +49,7 @@
                     <label for="desc">Una breve descripción:</label>
                 </div>
                 <div class="col-12 mb-2">
-                    <textarea name="desc" id="desc"></textarea>
+                    <textarea formControlName="description"></textarea>
                 </div>
             </div>
 
@@ -78,11 +78,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 
     <div *ngIf="!idBook" class="row">
         <div class="col d-flex justify-content-center">
-            <button class="btn bgSecundario mb-4">Subir libro <i class="bi bi-arrow-up-circle"></i></button>
+            <button class="btn bgSecundario mb-4" (click)="registerBook()">Subir libro <i class="bi bi-arrow-up-circle"></i></button>
         </div>
     </div>
     <div *ngIf="idBook" class="row d-flex justify-content-around">

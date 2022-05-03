@@ -32,7 +32,7 @@ public class Book implements Serializable {
 
 	private String price;
 
-	private String state;
+	private int state;
 
 	private String title;
 
@@ -111,11 +111,11 @@ public class Book implements Serializable {
 		this.price = price;
 	}
 
-	public String getState() {
+	public int getState() {
 		return this.state;
 	}
 
-	public void setState(String state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 

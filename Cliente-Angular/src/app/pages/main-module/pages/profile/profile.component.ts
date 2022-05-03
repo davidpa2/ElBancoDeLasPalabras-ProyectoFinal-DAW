@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/interfaces';
+import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,12 +10,20 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ProfileComponent implements OnInit {
 
+  changedInfo!: boolean;
   user!: User;
   tabSelected: any = 1;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.changedInfo = false;
+    this.route.queryParams.subscribe(params => {
+      console.log(params['change']);
+      
+      this.changedInfo = params['change'];
+    })
+
     this.recuperarUsuarioLog();
 
     this.userService.cambiosEnUserAutenticado.subscribe(data => {

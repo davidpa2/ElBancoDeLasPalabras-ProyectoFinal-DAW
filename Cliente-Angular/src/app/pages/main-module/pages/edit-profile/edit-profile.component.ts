@@ -58,7 +58,7 @@ export class EditProfileComponent implements OnInit {
           if (data['estado'] != "error") {
             console.log('Usuario modificado correctamente')
             this.userService.emitirNuevoCambioEnUsuarioAutenticado();
-            this.router.navigate(['/profile']);
+            this.router.navigate(['/profile'], { queryParams: {change: true}});
           }
         })
     } else {

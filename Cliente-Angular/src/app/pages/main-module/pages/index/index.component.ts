@@ -18,6 +18,9 @@ export class IndexComponent implements OnInit{
     console.log(this.user);
     console.log('HOLAAA');
     
+    this.userService.cambiosEnUserAutenticado.subscribe(data => {
+      this.user = data;
+    });
   }
   
   recuperarUsuarioLog() {

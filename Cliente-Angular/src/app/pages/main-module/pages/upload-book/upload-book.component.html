@@ -9,11 +9,12 @@
         <div class="col-4 m-1">
             <div class="row bgPrimario">
                 <div class="col py-2 d-flex justify-content-center">
-                    <img src="data:image/jpg;base64,{{bookImg}}" alt="">
+                    <img *ngIf="!bookImg" src="/assets/images/DefaultBook.png" alt="">
+                    <img *ngIf="bookImg" src="data:image/jpg;base64,{{bookImg}}" alt="">
                 </div>
             </div>
             <div class="row bgPrimario my-3">
-                <div class="col">
+                <div class="col my-1">
                     <input type="file" (change)="saveImage()" id="inputImg">
                 </div>
             </div>

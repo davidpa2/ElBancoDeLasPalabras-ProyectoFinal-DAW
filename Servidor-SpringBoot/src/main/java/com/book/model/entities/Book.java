@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * 
  */
 @Entity
+@Table(name = "book")
 @NamedQuery(name="Book.findAll", query="SELECT b FROM Book b")
 public class Book implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -23,10 +24,6 @@ public class Book implements Serializable {
 
 	private String description;
 
-	private int idBuyer;
-
-	private int idUser;
-
 	@Lob
 	private byte[] img;
 
@@ -36,11 +33,10 @@ public class Book implements Serializable {
 
 	private String title;
 
-	//bi-directional one-to-one association to User
-	@OneToOne
-	@JoinColumn(name="id")
-	@JsonIgnore
+	//bi-directional many-to-one association to User
+	@ManyToOne
 	private User user;
+	
 
 	//bi-directional one-to-one association to Exchange
 	@OneToOne(mappedBy="book1")
@@ -77,22 +73,6 @@ public class Book implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public int getIdBuyer() {
-		return this.idBuyer;
-	}
-
-	public void setIdBuyer(int idBuyer) {
-		this.idBuyer = idBuyer;
-	}
-
-	public int getIdUser() {
-		return this.idUser;
-	}
-
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
 	}
 
 	public byte[] getImg() {

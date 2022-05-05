@@ -40,6 +40,7 @@ public class BookController {
 		b.setState(data.state);
 		b.setPrice(data.price);
 		b.setImg(data.img);
+		System.out.println(data.user.getId());
 		b.setUser(data.user);
 		dto.put("correcto", true);
 		
@@ -64,13 +65,10 @@ public class BookController {
 		String price;
 		@JsonProperty("img")
 		byte[] img;
-		@JsonProperty("buyer")
-		User buyer;
 		@JsonProperty("user")
 		User user;
 
-		public DataUploadBook(String title, String author, String description, int state, String price, byte[] img,
-				User buyer, User user) {
+		public DataUploadBook(String title, String author, String description, int state, String price, byte[] img, User user) {
 			super();
 			this.title = title;
 			this.author = author;
@@ -78,7 +76,6 @@ public class BookController {
 			this.state = state;
 			this.price = price;
 			this.img = img;
-			this.buyer = buyer;
 			this.user = user;
 		}
 	}

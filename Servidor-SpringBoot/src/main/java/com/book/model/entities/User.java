@@ -1,6 +1,8 @@
 package com.book.model.entities;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -42,9 +44,9 @@ public class User implements Serializable {
 	private float rating;
 
 	//bi-directional one-to-one association to Book
-	@OneToOne(mappedBy="user")
+	@OneToMany(mappedBy="user")
 	@JsonIgnore
-	private Book book;
+	private List<Book> books;
 
 	//bi-directional one-to-one association to Exchange
 	@OneToOne(mappedBy="user1")
@@ -138,13 +140,27 @@ public class User implements Serializable {
 	public void setTlf(String tlf) {
 		this.tlf = tlf;
 	}
-
-	public Book getBook() {
-		return this.book;
+	
+	public List<Book> getBooks() {
+		return this.books;
 	}
 
-	public void setBook(Book book) {
-		this.book = book;
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+	
+	public Book addBook(Book book) {
+		getBooks().add(book);
+		book.setUser(this);
+
+		return book;
+	}
+
+	public Book removeBook(Book book) {
+		getBooks().remove(book);
+		book.setUser(null);
+
+		return book;
 	}
 
 	public Exchange getExchange1() {

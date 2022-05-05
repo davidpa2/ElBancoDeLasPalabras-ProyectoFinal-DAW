@@ -21,6 +21,8 @@ export class UploadBookComponent implements OnInit {
   constructor(private bookService: BookService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.recuperarUsuarioLog();
+
     this.uploadBookForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
       author: new FormControl('', [Validators.required]),

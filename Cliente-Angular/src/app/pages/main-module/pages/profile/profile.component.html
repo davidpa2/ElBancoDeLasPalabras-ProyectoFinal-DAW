@@ -43,17 +43,18 @@
         </div>
     </div>
 
-    <div *ngIf="tabSelected == 1" class="row board">
-        <div class="col-4" *ngFor="let i of [1,2,3,4,5,6,7,8,9]">
+    <div *ngIf="tabSelected == 1" class="row board d-flex justify-content-center">
+        <div class="col-6 col-sm-4 col-md-3" *ngFor="let book of uploadedBooksList">
             <div class="row bg-white">
                 <div class="col-12">
-                    <img class="thumbnail" src="/assets/images/ElImperioFinal.jpg" alt="">
+                    <img class="thumbnail" src="data:image/jpg;base64,{{book.img}}" alt="">
                 </div>
                 <div class="col-12">
-                    <h3 class="text-center my-3">El Imperio Final</h3>
+                    <h3 class="text-center mt-3">{{book.title}}</h3>
+                    <p class="text-center mb-3">{{book.author}}</p>
                 </div>
                 <div class="col-12 d-flex justify-content-center mb-4">
-                    <button [routerLink]="'/modifyBook/'+i" class="btn bgSecundario">Editar producto</button>
+                    <button [routerLink]="'/modifyBook/' + book.id" class="btn bgSecundario">Editar producto</button>
                 </div>
             </div>
         </div>

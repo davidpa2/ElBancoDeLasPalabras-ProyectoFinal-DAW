@@ -1,10 +1,15 @@
 package com.book.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.book.model.entities.Book;
@@ -78,5 +83,39 @@ public class BookController {
 			this.img = img;
 			this.user = user;
 		}
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/findByUserId/{id}")
+	public DTO findByUserId(@PathVariable(value="id") int id) {
+		DTO dto = new DTO();
+		// asumimos que va a salir mal
+		dto.put("estado", "error");
+		// lista de dto que meteremos en dto que devolveremos
+		List<DTO> dtoBooks = new ArrayList<DTO>();
+		// buscamos todos los libros según el id del usuario
+		List<Book> bookList = this.bookRepo.findByUserId(id);
+
+		for (Book b : bookList) {
+			DTO books = new DTO();
+			// creamos dto de objeto
+			books.put("id", b.getId());
+			books.put("title", b.getTitle());
+			books.put("author", b.getAuthor());
+			books.put("description", b.getDescription());
+			books.put("state", b.getState());
+			books.put("price", b.getPrice());
+			books.put("img", b.getImg());
+			// metemos cada dto en la lista dtos
+			dtoBooks.add(books);
+		}
+		//Si todo hay ido bien asignamos el estado como correcto y devolvemos el dto con la lista de libros
+		dto.put("estado", "correcto");
+		dto.put("bookList", dtoBooks);
+		return dto;
 	}
 }

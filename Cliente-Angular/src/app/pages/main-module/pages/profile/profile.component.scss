@@ -14,7 +14,8 @@
     font-size: 13px;
 }
 
-.tabSelect, .tab {
+.tabSelect,
+.tab {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     display: flex;
@@ -35,7 +36,8 @@
     user-select: none;
 }
 
-.tabSelect:hover, .tab:hover {
+.tabSelect:hover,
+.tab:hover {
     cursor: pointer;
 }
 
@@ -45,4 +47,31 @@
     padding-bottom: 1rem;
     padding-left: 3rem;
     padding-right: 3rem;
+}
+
+.upload {
+    position: fixed;
+    top: 400px;
+    right: 0;
+    width: 300px;
+    height: 200px;
+    z-index: 999;
+}
+
+.bi {
+    font-size: 5vw;
+}
+
+.text {
+    font-size: 2vw;
+}
+
+a,
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: rgba(211, 149, 75, 1);
 }

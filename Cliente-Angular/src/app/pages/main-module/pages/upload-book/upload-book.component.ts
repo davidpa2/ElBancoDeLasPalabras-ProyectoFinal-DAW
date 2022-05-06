@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { User } from 'src/app/interfaces/interfaces';
 import { BookService } from 'src/app/services/book.service';
 
@@ -18,7 +18,7 @@ export class UploadBookComponent implements OnInit {
   bookImg!: string;
   user!: User;
 
-  constructor(private bookService: BookService, private route: ActivatedRoute) { }
+  constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.recuperarUsuarioLog();
@@ -45,6 +45,7 @@ export class UploadBookComponent implements OnInit {
         this.stars, this.uploadBookForm.value.price, this.bookImg, this.user).subscribe(data => {
           if (data) {
             console.log(data);
+            this.router.navigate(['/profile']);
           }
         })
     }

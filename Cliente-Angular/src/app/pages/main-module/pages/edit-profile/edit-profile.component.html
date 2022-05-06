@@ -91,24 +91,26 @@
 
         <!-- VALIDACIÓN DEL FORMULARIO -->
         <div class="errorForm row d-flex justify-content-center" *ngIf="submitted && !editUserForm.valid">
-            Ha habido un error en los siguientes campos:
+            <div class="col-12 d-flex justify-content-center">
+                <h5>Ha habido un error en los siguientes campos:</h5>
+            </div>
 
-            <div class="col-10 d-flex justify-content-center" *ngIf="submitted && myForm['name'].errors">
+            <div class="col-12 col-sm-6 d-flex justify-content-center" *ngIf="submitted && myForm['name'].errors">
                 <div *ngIf="myForm['name'].errors['required']">
                     *Debes escribir tu nombre
                 </div>
             </div>
-            <div class="col-10 d-flex justify-content-center" *ngIf="submitted && myForm['surnamos'].errors">
+            <div class="col-12 col-sm-6 d-flex justify-content-center" *ngIf="submitted && myForm['surnamos'].errors">
                 <div *ngIf="myForm['surnamos'].errors['required']">
                     *Debes escribir tus apellidos
                 </div>
             </div>
-            <div class="col-10 d-flex justify-content-center" *ngIf="submitted && myForm['desc'].errors">
+            <div class="col-12 col-sm-6 d-flex justify-content-center" *ngIf="submitted && myForm['desc'].errors">
                 <div *ngIf="myForm['desc'].errors['required']">
                     *Debes escribir una descripción
                 </div>
             </div>
-            <div class="col-10 d-flex justify-content-center" *ngIf="submitted && myForm['birthday'].errors">
+            <div class="col-12 col-sm-6 d-flex justify-content-center" *ngIf="submitted && myForm['birthday'].errors">
                 <div *ngIf="myForm['birthday'].errors['pattern']">
                     *Fecha de nacimiento incorrecta ej: 00/00/0000
                 </div>
@@ -116,7 +118,7 @@
                     *Debes escribir una fecha de nacimiento
                 </div>
             </div>
-            <div class="col-10 d-flex justify-content-center" *ngIf="submitted && myForm['tlf'].errors">
+            <div class="col-12 col-sm-6 d-flex justify-content-center" *ngIf="submitted && myForm['tlf'].errors">
                 <div *ngIf="myForm['tlf'].errors['pattern']">
                     *Teléfono incorrecto ej: 600 000 000
                 </div>

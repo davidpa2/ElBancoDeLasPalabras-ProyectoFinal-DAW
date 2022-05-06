@@ -26,8 +26,8 @@ export class UploadBookComponent implements OnInit {
     this.uploadBookForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
       author: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      price: new FormControl('', [Validators.required, Validators.pattern('[0-9,]+[^.]')]),
+      description: new FormControl('', [Validators.required, Validators.minLength(100),Validators.maxLength(500)]),
+      price: new FormControl('', [Validators.required, Validators.pattern('[0-9]+((\.|,)[0-9][0-9]?)?')]),
     })
 
     this.route.params.subscribe(
@@ -35,6 +35,10 @@ export class UploadBookComponent implements OnInit {
         this.idBook = params['id'];
       }
     );
+  }
+
+  get myForm() {
+    return this.uploadBookForm.controls;
   }
 
   registerBook() {

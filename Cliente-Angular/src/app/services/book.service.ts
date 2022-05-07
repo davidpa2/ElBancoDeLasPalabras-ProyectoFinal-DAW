@@ -26,8 +26,26 @@ export class BookService {
     return this.http.post<Book>(this.url + '/uploadBook', jsonObject);
   }
 
+  updateBook(id: number, title: string, author: string,  description: string, state: number, price: string, img: string): Observable<Book> {
+    var jsonObject = {
+      id: id,
+      title: title,
+      author: author,
+      description: description,
+      state: state,
+      price: price,
+      img: img
+    };
+    // Envío la petición http y devuelvo el Observable, para que cualquiera pueda subscribirse.
+    return this.http.post<any>(this.url + '/updateBook', jsonObject);
+  }
+
   findBooksByUserId(id: any): Observable<any> {
     //http.get() manda una solicitud http y devuelve un objeto Observable que emite los datos solicitados
     return this.http.get<any>(this.url + '/findByUserId/' + id);
+  }
+
+  getBookById(id: any) {
+    return this.http.get<any>(this.url + '/getBookById/' + id)
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { User } from 'src/app/interfaces/interfaces';
+import { Book, User } from 'src/app/interfaces/interfaces';
 import { BookService } from 'src/app/services/book.service';
 
 @Component({
@@ -17,24 +17,36 @@ export class UploadBookComponent implements OnInit {
   uploadBookForm!: FormGroup;
   bookImg!: string;
   user!: User;
+  book: Book = {
+    id: 0, title: '', author: '', description: '', state: '', price: '', img: '', idBuyer: null, user_id: null
+  };
 
   constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    /*    //Puede ser que estemos modificando un libro
+       this.route.params.subscribe(
+         (params: Params) => {
+           this.idBook = params['id'];
+           //Si obtenemos un parámetro llamado id buscamos el libro que corresponda
+           if (this.idBook) {
+             this.getBookById();
+           }
+         }
+       ); */
     this.recuperarUsuarioLog();
+
+    //Si se ha pasado el parámetro id por url, buscar a qué libro corresponde
+    if (this.route.snapshot.params['id']) {
+      this.getBookById(this.route.snapshot.params['id']);
+    }
 
     this.uploadBookForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
       author: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required, Validators.minLength(100),Validators.maxLength(500)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(100), Validators.maxLength(500)]),
       price: new FormControl('', [Validators.required, Validators.pattern('[0-9]+((\.|,)[0-9][0-9]?)?')]),
     })
-
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.idBook = params['id'];
-      }
-    );
   }
 
   get myForm() {
@@ -55,14 +67,39 @@ export class UploadBookComponent implements OnInit {
     }
   }
 
+  modifyBook() {
+    this.submitted = true;
+
+    if (this.uploadBookForm.valid) {
+      this.bookService.updateBook(this.book.id, this.uploadBookForm.value.title, this.uploadBookForm.value.author,
+        this.uploadBookForm.value.description, this.stars, this.uploadBookForm.value.price, this.bookImg)
+        .subscribe(data => {
+          if (data) {
+            console.log(data);
+          }
+        })
+    }
+  }
+
+  getBookById(id: any) {
+    this.bookService.getBookById(id).subscribe(data => {
+      if (data['estado'] == 'correcto') {
+        this.idBook = id;
+        this.book = data['book'];
+        this.stars = this.book.state;
+        this.bookImg = this.book.img;
+      }
+    });
+  }
+
   recuperarUsuarioLog() {
     this.user = JSON.parse(localStorage.getItem("authenticatedUser") || '{}')
     //console.log(localStorage.getItem("authenticatedUser"));
   }
 
   /**
-* Método usado para convertir la imagen a 64bits
-*/
+  * Método usado para convertir la imagen a 64bits
+  */
   saveImage() {
     const inputImg: any = document.getElementById('inputImg');
 

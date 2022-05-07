@@ -20,8 +20,8 @@ export interface Book {
     state: string,
     price: string,
     img: string,
-    idBuyer: User,
-    idUser: User
+    idBuyer: User | null,
+    user_id: User | null
 }
 
 export interface Exchange {

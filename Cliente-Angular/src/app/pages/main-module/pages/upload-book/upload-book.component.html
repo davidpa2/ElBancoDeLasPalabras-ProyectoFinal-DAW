@@ -1,3 +1,7 @@
+<div *ngIf="submitted && uploadBookForm.valid" class="mt-1 container text-center alert alert-warning">
+    Se han actualizado los datos del libro
+</div>
+
 <div class="container bg-white my-3">
     <div class="row">
         <div class="col my-3">
@@ -128,20 +132,28 @@
         </div>
     </div>
 
-    <div *ngIf="!idBook" class="row">
-        <div class="col d-flex justify-content-center">
+    <div *ngIf="!idBook" class="row d-flex justify-content-around">
+        <div class="col-5 d-flex justify-content-end">
             <button class="btn bgSecundario mb-4" (click)="registerBook()">
                 Subir libro <i class="bi bi-arrow-up-circle"></i>
             </button>
         </div>
+        <div class="col-5 d-flex justify-content-start">
+            <button class="btn outlineSecondary mb-4" (click)="goBack()">
+                Volver <i class="bi bi-arrow-counterclockwise"></i>
+            </button>
+        </div>
     </div>
     <div *ngIf="idBook" class="row d-flex justify-content-around">
-        <div class="col-5 d-flex justify-content-end mb-4">
+        <div class="col-4 d-flex justify-content-end mb-4">
+            <button class="btn outlineSecondary">Eliminar libro <i class="bi bi-trash"></i></button>
+        </div>
+        <div class="col-4 d-flex justify-content-center mb-4">
             <button (click)="modifyBook()" class="btn bgSecundario">Actualizar libro <i
                     class="bi bi-arrow-repeat"></i></button>
         </div>
-        <div class="col-5 d-flex justify-content-start mb-4">
-            <button class="btn outlineSecondary">Eliminar libro <i class="bi bi-trash"></i></button>
+        <div class="col-4 d-flex justify-content-start mb-4">
+            <button class="btn outlineSecondary">Volver <i class="bi bi-arrow-counterclockwise"></i></button>
         </div>
     </div>
 

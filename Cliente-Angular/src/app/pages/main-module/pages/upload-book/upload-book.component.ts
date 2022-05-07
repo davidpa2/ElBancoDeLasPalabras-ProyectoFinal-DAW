@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Book, User } from 'src/app/interfaces/interfaces';
 import { BookService } from 'src/app/services/book.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-upload-book',
@@ -21,7 +22,7 @@ export class UploadBookComponent implements OnInit {
     id: 0, title: '', author: '', description: '', state: '', price: '', img: '', idBuyer: null, user_id: null
   };
 
-  constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router, private _location: Location) { }
 
   ngOnInit(): void {
     /*    //Puede ser que estemos modificando un libro
@@ -117,5 +118,9 @@ export class UploadBookComponent implements OnInit {
         new Uint8Array(e.target.result).reduce((data, byte) => data + String.fromCharCode(byte), '')
       );
     };
+  }
+
+  goBack() {
+    this._location.back();
   }
 }

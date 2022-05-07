@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.book.controllers.UserController.DatosModificarUsuario;
 import com.book.model.entities.Book;
 import com.book.model.entities.User;
 import com.book.repository.BookRepository;
@@ -24,12 +25,52 @@ public class BookController {
 	@Autowired
 	BookRepository bookRepo;
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/getBookById/{id}")
+	public DTO getBookById(@PathVariable(value="id") int id) {
+		DTO dto = new DTO();
+		// asumimos que va a salir mal
+		dto.put("estado", "error");
+		
+		Book book = this.bookRepo.getById(id);
+
+		//Si todo hay ido bien asignamos el estado como correcto y devolvemos el dto con la lista de libros
+		dto.put("estado", "correcto");
+		dto.put("book", book);
+		return dto;
+	}
+	
 	@GetMapping("/getAllBooks")
 	public DTO allBooks() {
 		DTO dto = new DTO();
 
 		dto.put("users", bookRepo.findAll());
 
+		return dto;
+	}
+	
+	@PostMapping("/updateBook")
+	public DTO updateBook(@RequestBody DataUploadBook data ) {
+
+		DTO dto = new DTO();
+		dto.put("estado", "error");
+
+		Book book = bookRepo.getById(data.id);
+
+		book.setTitle(data.title);
+		book.setAuthor(data.author);
+		book.setDescription(data.description);
+		book.setState(data.state);
+		book.setPrice(data.price);
+		book.setImg(data.img);
+
+		bookRepo.save(book);
+
+		dto.put("estado", "correcto");
 		return dto;
 	}
 	
@@ -57,7 +98,9 @@ public class BookController {
 	/**
 	 * Clase que contiene los datos de registro del usuario
 	 */
-	static class DataUploadBook {
+	static class DataUploadBook {		
+		@JsonProperty("id")
+		int id;
 		@JsonProperty("title")
 		String title;
 		@JsonProperty("author")
@@ -73,8 +116,9 @@ public class BookController {
 		@JsonProperty("user")
 		User user;
 
-		public DataUploadBook(String title, String author, String description, int state, String price, byte[] img, User user) {
+		public DataUploadBook(int id, String title, String author, String description, int state, String price, byte[] img, User user) {
 			super();
+			this.id = id;
 			this.title = title;
 			this.author = author;
 			this.description = description;

@@ -50,10 +50,10 @@
                     <img class="thumbnail" src="data:image/jpg;base64,{{book.img}}" alt="">
                 </div>
                 <div class="col-12">
-                    <h3 class="text-center mt-3">{{book.title}}</h3>
-                    <p class="text-center mb-3">{{book.author}}</p>
+                    <h3 class="titleCard text-center mt-1">{{book.title}}</h3>
+                    <p class="text-center mb-1">{{book.author}}</p>
                 </div>
-                <div class="col-12 d-flex justify-content-center mb-4">
+                <div class="col-12 d-flex justify-content-center mb-3">
                     <button [routerLink]="'/modifyBook/' + book.id" class="btn bgSecundario">Editar producto</button>
                 </div>
             </div>

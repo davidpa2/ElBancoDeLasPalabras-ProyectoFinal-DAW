@@ -39,15 +39,19 @@ export class UploadBookComponent implements OnInit {
 
     //Si se ha pasado el parámetro id por url, buscar a qué libro corresponde
     if (this.route.snapshot.params['id']) {
+      console.log('OJO');
       this.getBookById(this.route.snapshot.params['id']);
+
+    } else { //Si no existe el parámetro id por URL inicializar el formulario vacío para poder registrar un nuevo libro
+      this.uploadBookForm = new FormGroup({
+        title: new FormControl('', [Validators.required]),
+        author: new FormControl('', [Validators.required]),
+        description: new FormControl('', [Validators.required, Validators.minLength(100), Validators.maxLength(500)]),
+        price: new FormControl('', [Validators.required, Validators.pattern('[0-9]+((\.|,)[0-9][0-9]?)?')]),
+      })
     }
 
-    this.uploadBookForm = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      author: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required, Validators.minLength(100), Validators.maxLength(500)]),
-      price: new FormControl('', [Validators.required, Validators.pattern('[0-9]+((\.|,)[0-9][0-9]?)?')]),
-    })
+
   }
 
   get myForm() {
@@ -84,11 +88,22 @@ export class UploadBookComponent implements OnInit {
 
   getBookById(id: any) {
     this.bookService.getBookById(id).subscribe(data => {
+      //Obtenemos los datos y si está correcto, asignamos la imagen, el id y todos los valores para modificar el libro
       if (data['estado'] == 'correcto') {
-        this.idBook = id;
         this.book = data['book'];
+        this.idBook = id;
         this.stars = this.book.state;
         this.bookImg = this.book.img;
+        console.log(data['book'].price);
+
+        //Inicializar entonces el formulario con sus campos rellenos
+        this.uploadBookForm = new FormGroup({
+          title: new FormControl(data['book'].title, [Validators.required]),
+          author: new FormControl(data['book'].author, [Validators.required]),
+          description: new FormControl(data['book'].description, [Validators.required, Validators.minLength(100), Validators.maxLength(500)]),
+          price: new FormControl(data['book'].price, [Validators.required, Validators.pattern('[0-9]+((\.|,)[0-9][0-9]?)?')]),
+        })
+
       }
     });
   }

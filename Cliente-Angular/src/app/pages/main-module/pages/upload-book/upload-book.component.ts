@@ -86,6 +86,14 @@ export class UploadBookComponent implements OnInit {
     }
   }
 
+  deleteBook() {
+    this.bookService.deleteBook(this.idBook).subscribe(data => {
+      if (data['estado'] == 'correcto') {
+        this.router.navigate(['/profile'], { queryParams: {deleteBook: true}});
+      }
+    })
+  }
+
   getBookById(id: any) {
     this.bookService.getBookById(id).subscribe(data => {
       //Obtenemos los datos y si está correcto, asignamos la imagen, el id y todos los valores para modificar el libro

@@ -12,6 +12,7 @@ import { BookService } from 'src/app/services/book.service';
 export class ProfileComponent implements OnInit {
 
   changedInfo!: boolean;
+  deletedBook!: boolean;
   user!: User;
   tabSelected: any = 1;
   uploadedBooksList: Book[] = [];
@@ -20,8 +21,10 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.changedInfo = false;
+    this.deletedBook = false;
     this.route.queryParams.subscribe(params => {
       this.changedInfo = params['change'];
+      this.deletedBook = params['deleteBook'];
     })
 
     this.recuperarUsuarioLog();

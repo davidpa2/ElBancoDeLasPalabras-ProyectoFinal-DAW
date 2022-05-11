@@ -40,6 +40,10 @@ export class BookService {
     return this.http.post<any>(this.url + '/updateBook', jsonObject);
   }
 
+  deleteBook(id: number): Observable<any> {
+    return this.http.get<any>(this.url + '/deleteBook/' + id);
+  }
+
   findBooksByUserId(id: any): Observable<any> {
     //http.get() manda una solicitud http y devuelve un objeto Observable que emite los datos solicitados
     return this.http.get<any>(this.url + '/findByUserId/' + id);

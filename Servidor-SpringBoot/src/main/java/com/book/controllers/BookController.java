@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.book.controllers.UserController.DatosModificarUsuario;
 import com.book.model.entities.Book;
 import com.book.model.entities.User;
 import com.book.repository.BookRepository;
@@ -127,6 +126,24 @@ public class BookController {
 			this.img = img;
 			this.user = user;
 		}
+	}
+	
+	@RequestMapping("/deleteBook/{id}")
+	public DTO deleteBook(@PathVariable(value="id") int id) {
+		DTO dto = new DTO();
+		// asumimos que va a salir mal
+		dto.put("estado", "error");
+
+		// localizar el libro por su id
+		Book book = this.bookRepo.getById(id);
+		// Lo eliminaremos poniendo su estado en -1
+		book.setState(-1);
+		//Guardar el libro
+		bookRepo.save(book);
+
+		//Si todo hay ido bien asignamos el estado como correcto y devolvemos el dto con la lista de libros
+		dto.put("estado", "correcto");
+		return dto;
 	}
 	
 	/**

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "book")
 @NamedQuery(name="Book.findAll", query="SELECT b FROM Book b")
-@NamedQuery(name="Book.findByUserId", query="SELECT b FROM Book b where user_id = ?1")
+@NamedQuery(name="Book.findByUserId", query="SELECT b FROM Book b where user_id = ?1 and state != -1")
 public class Book implements Serializable {
 	private static final long serialVersionUID = 1L;
 

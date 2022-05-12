@@ -52,6 +52,18 @@ public class BookController {
 		return dto;
 	}
 	
+	@RequestMapping("/getAllBooksForSale/{id}")
+	public DTO getAllBooksForSale(@PathVariable(value="id") int id) {
+		DTO dto = new DTO();
+		dto.put("estado", "correcto");
+		//Obtenemos todos los libros que no tengan como user_id el id del usuario que los ha pedido
+		dto.put("books", bookRepo.getAllBooksForSale(id));
+		
+		dto.put("estado", "correcto");
+		
+		return dto;
+	}
+	
 	@PostMapping("/updateBook")
 	public DTO updateBook(@RequestBody DataUploadBook data ) {
 

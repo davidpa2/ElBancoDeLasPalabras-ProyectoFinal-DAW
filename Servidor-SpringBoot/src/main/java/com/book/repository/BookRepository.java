@@ -11,4 +11,5 @@ import com.book.model.entities.Book;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Serializable>{
 	public abstract List<Book> findByUserId(int idUser);
+	public abstract List<Book> getAllBooksForSale(int idUser);
 }

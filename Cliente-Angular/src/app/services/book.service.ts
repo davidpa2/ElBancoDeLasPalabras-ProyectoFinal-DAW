@@ -40,6 +40,10 @@ export class BookService {
     return this.http.post<any>(this.url + '/updateBook', jsonObject);
   }
 
+  getAllBooksForSale(id: number): Observable<any> {
+    return this.http.get<any>(this.url + '/getAllBooksForSale/' + id)
+  }
+
   deleteBook(id: number): Observable<any> {
     return this.http.get<any>(this.url + '/deleteBook/' + id);
   }

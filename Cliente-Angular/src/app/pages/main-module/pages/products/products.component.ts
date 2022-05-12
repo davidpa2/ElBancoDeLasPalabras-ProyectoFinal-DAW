@@ -10,6 +10,7 @@ import { BookService } from 'src/app/services/book.service';
 export class ProductsComponent implements OnInit {
 
   bookList: Book[] = [];
+  userList: User[] = [];
   user!: User;
 
   constructor(private bookService: BookService) { }
@@ -25,7 +26,9 @@ export class ProductsComponent implements OnInit {
     this.bookService.getAllBooksForSale(this.user.id).subscribe(data => {
       if (data['estado'] == "correcto") {
         this.bookList = data['books'];
+        this.userList = data['users'];
         console.log(this.bookList);
+        console.log(this.userList);
       }
     });
     

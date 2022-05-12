@@ -1,6 +1,7 @@
 package com.book.controllers;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.book.model.entities.Book;
 import com.book.model.entities.User;
 import com.book.repository.BookRepository;
+import com.book.repository.UserRepository;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @CrossOrigin
@@ -23,6 +25,8 @@ public class BookController {
 
 	@Autowired
 	BookRepository bookRepo;
+	@Autowired
+	UserRepository userRepo;
 	
 	/**
 	 * 
@@ -57,8 +61,15 @@ public class BookController {
 		DTO dto = new DTO();
 		dto.put("estado", "correcto");
 		//Obtenemos todos los libros que no tengan como user_id el id del usuario que los ha pedido
-		dto.put("books", bookRepo.getAllBooksForSale(id));
-		
+		List <Book> bookList = bookRepo.getAllBooksForSale(id);
+		//Guardar en una lista los dueños de cada libro en el mismo orden
+		List <User> userList = new ArrayList<User>();
+		//Recorrer la lista de libros buscando por el id del usuario que lo haya subido
+		for (int i = 0; i < bookList.size(); i++) {
+			userList.add(userRepo.getById(bookList.get(i).getUser().getId()));
+		}		
+		dto.put("books", bookList);
+		dto.put("users",userList);
 		dto.put("estado", "correcto");
 		
 		return dto;

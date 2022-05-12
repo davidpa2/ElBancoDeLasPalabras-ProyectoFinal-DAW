@@ -60,8 +60,16 @@ public class BookController {
 	public DTO getAllBooksForSale(@PathVariable(value="id") int id) {
 		DTO dto = new DTO();
 		dto.put("estado", "correcto");
-		//Obtenemos todos los libros que no tengan como user_id el id del usuario que los ha pedido
-		List <Book> bookList = bookRepo.getAllBooksForSale(id);
+		
+		List <Book> bookList = new ArrayList<Book>();
+		
+		//Puede pasar que el id sea -1, quiere decir que se ha accedido a la app sin iniciar sesión
+		if (id == -1) {
+			bookList = bookRepo.findAll();
+		} else {			
+			//Obtenemos todos los libros que no tengan como user_id el id del usuario que los ha pedido
+			bookList = bookRepo.getAllBooksForSale(id);
+		}
 		//Guardar en una lista los dueños de cada libro en el mismo orden
 		List <User> userList = new ArrayList<User>();
 		//Recorrer la lista de libros buscando por el id del usuario que lo haya subido

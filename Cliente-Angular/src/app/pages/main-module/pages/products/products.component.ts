@@ -18,8 +18,13 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     //Primero hay que obtener el usuario que haya iniciado sesión
     this.recuperarUsuarioLog();
-    //Luego obtenemos todos los libros que no pertenezcan a ese usuario
-    this.getAllBooksForSale();
+
+    if (!this.user.id) {
+      this.getAllBooks();
+    } else {
+      //Luego obtenemos todos los libros que no pertenezcan a ese usuario
+      this.getAllBooksForSale();
+    }
   }
 
   getAllBooksForSale() {
@@ -31,7 +36,15 @@ export class ProductsComponent implements OnInit {
         console.log(this.userList);
       }
     });
-    
+  }
+
+  getAllBooks() {
+    this.bookService.getAllBooksForSale(0).subscribe(data => {
+      if (data['estado'] == "correcto") {
+        this.bookList = data['books'];
+        this.userList = data['users'];
+      }
+    })
   }
 
   recuperarUsuarioLog() {

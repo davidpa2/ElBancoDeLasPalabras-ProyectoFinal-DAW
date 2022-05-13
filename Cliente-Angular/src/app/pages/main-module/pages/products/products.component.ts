@@ -18,33 +18,24 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     //Primero hay que obtener el usuario que haya iniciado sesión
     this.recuperarUsuarioLog();
-
-    if (!this.user.id) {
-      this.getAllBooks();
-    } else {
-      //Luego obtenemos todos los libros que no pertenezcan a ese usuario
-      this.getAllBooksForSale();
-    }
+    //Luego obtenemos todos los libros que no pertenezcan a ese usuario
+    this.getAllBooksForSale();
   }
 
+  /**
+   * Obtener todo el catálogo de libros a la venta
+   */
   getAllBooksForSale() {
-    this.bookService.getAllBooksForSale(this.user.id).subscribe(data => {
+    // Puede ocurrir que se haya accedido sin iniciar sesión. Por tanto pasaremos el id como -1 para obtener todos los libros
+    this.bookService.getAllBooksForSale(this.user.id ? this.user.id : -1).subscribe(data => {
       if (data['estado'] == "correcto") {
+        //Obtenemos una lista de libros y una lista de usuarios, cada uno asociado a un libro
         this.bookList = data['books'];
         this.userList = data['users'];
         console.log(this.bookList);
         console.log(this.userList);
       }
     });
-  }
-
-  getAllBooks() {
-    this.bookService.getAllBooksForSale(0).subscribe(data => {
-      if (data['estado'] == "correcto") {
-        this.bookList = data['books'];
-        this.userList = data['users'];
-      }
-    })
   }
 
   recuperarUsuarioLog() {

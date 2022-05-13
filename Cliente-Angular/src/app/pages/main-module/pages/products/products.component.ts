@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Book, User } from 'src/app/interfaces/interfaces';
 import { BookService } from 'src/app/services/book.service';
 
@@ -12,6 +12,7 @@ export class ProductsComponent implements OnInit {
   bookList: Book[] = [];
   userList: User[] = [];
   user!: User;
+  showScrollButton = false;
 
   constructor(private bookService: BookService) { }
 
@@ -40,6 +41,19 @@ export class ProductsComponent implements OnInit {
 
   recuperarUsuarioLog() {
     this.user = JSON.parse(localStorage.getItem("authenticatedUser") || '{}')
-    //console.log(localStorage.getItem("authenticatedUser"));
+  }
+
+  showScrollUp() {
+    if (document.documentElement.scrollTop > 400) {
+      this.showScrollButton = true;
+    } else {
+      this.showScrollButton = false;
+    }
+  }
+
+  scrollUp() {
+    window.requestAnimationFrame(this.scrollUp)
+    /* window.scrollTo(0, document.documentElement.scrollTop - (document.documentElement.scrollTop / 10)) */
+    window.scrollTo(0, 0)
   }
 }

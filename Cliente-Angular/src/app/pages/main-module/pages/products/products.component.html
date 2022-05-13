@@ -48,3 +48,9 @@
         </div>
     </div>
 </div>
+<!-- [class]="showScrollButton ? 'appear' : 'disappear'"  -->
+<span (window:scroll)="showScrollUp()" (click)="scrollUp()">
+    <div *ngIf="showScrollButton" class="up d-flex justify-content-center align-items-center">
+        <i class="bi bi-chevron-compact-up"></i>
+    </div>
+</span>

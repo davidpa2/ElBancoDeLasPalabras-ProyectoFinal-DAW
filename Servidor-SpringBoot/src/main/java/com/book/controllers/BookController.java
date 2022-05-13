@@ -65,7 +65,7 @@ public class BookController {
 		
 		//Puede pasar que el id sea -1, quiere decir que se ha accedido a la app sin iniciar sesión
 		if (id == -1) {
-			bookList = bookRepo.findAll();
+			bookList = bookRepo.getAllBooks();
 		} else {			
 			//Obtenemos todos los libros que no tengan como user_id el id del usuario que los ha pedido
 			bookList = bookRepo.getAllBooksForSale(id);

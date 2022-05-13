@@ -40,7 +40,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/getUserById/{id}")
-	public DTO getBookById(@PathVariable(value="id") int id) {
+	public DTO getUserById(@PathVariable(value="id") int id) {
 		DTO dto = new DTO();
 		// asumimos que va a salir mal
 		dto.put("estado", "error");

@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'editProfile', component: EditProfileComponent },
   { path: 'products', component: ProductsComponent },
-  { path: 'productView/:id', component: ProductViewComponent },
+  { path: 'productView/:bookId/:userId', component: ProductViewComponent },
   { path: 'purchase/:idBook', component: PurchaseComponent },
   { path: 'exchange/:idS/:idP', component: ExchangeComponent },
   { path: 'confirmExchanges', component: ConfirmExchangesComponent },

@@ -97,4 +97,8 @@ export class UserService {
 
     return this.http.post<any>(this.url + '/modifyUser', jsonUser, { headers: headers })
   }
+
+  getUserById(id: any) {
+    return this.http.get<any>(this.url + '/getUserById/' + id)
+  }
 }

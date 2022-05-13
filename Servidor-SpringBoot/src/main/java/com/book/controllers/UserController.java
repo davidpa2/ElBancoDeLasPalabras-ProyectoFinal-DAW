@@ -5,10 +5,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.book.model.entities.Book;
 import com.book.model.entities.User;
 import com.book.repository.UserRepository;
 import com.book.security.AutenticadorJWT;
@@ -28,6 +31,25 @@ public class UserController {
 
 		dto.put("users", userRepo.findAll());
 
+		return dto;
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/getUserById/{id}")
+	public DTO getBookById(@PathVariable(value="id") int id) {
+		DTO dto = new DTO();
+		// asumimos que va a salir mal
+		dto.put("estado", "error");
+		
+		User user = this.userRepo.getById(id);
+
+		//Si todo hay ido bien asignamos el estado como correcto y devolvemos el dto con la lista de libros
+		dto.put("estado", "correcto");
+		dto.put("user", user);
 		return dto;
 	}
 

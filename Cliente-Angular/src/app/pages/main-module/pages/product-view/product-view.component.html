@@ -76,7 +76,7 @@
                                 alt="">
                         </div>
                         <div class="col-12 d-flex justify-content-center">
-                            <button class="btn bgSecundario mt-4">Visitar perfil</button>
+                            <button routerLink="/profile" [queryParams]="{'idUser': user.id}" class="btn bgSecundario mt-4">Visitar perfil</button>
                         </div>
                     </div>
                 </div>

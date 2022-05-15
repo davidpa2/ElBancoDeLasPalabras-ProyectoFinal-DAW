@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Book, User } from 'src/app/interfaces/interfaces';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { BookService } from 'src/app/services/book.service';
 
@@ -17,9 +17,23 @@ export class ProfileComponent implements OnInit {
   tabSelected: any = 1;
   uploadedBooksList: Book[] = [];
 
-  constructor(private userService: UserService, private bookService: BookService, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private bookService: BookService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      const userId: any = params['idUser'] || null;
+
+      // Visitar perfil de usuario autenticado
+      if (!userId) {
+        this.recuperarUsuarioLog();
+      } else { // Visitando otro perfil
+        this.getUserById(userId).then(() => console.log(this.user));
+        console.log(this.user);
+        
+      }
+    });
+
+    // Comprobar si ha habido cambios en el perfil
     this.changedInfo = false;
     this.deletedBook = false;
     this.route.queryParams.subscribe(params => {
@@ -27,7 +41,6 @@ export class ProfileComponent implements OnInit {
       this.deletedBook = params['deleteBook'];
     })
 
-    this.recuperarUsuarioLog();
     this.getBooks();
 
     this.userService.cambiosEnUserAutenticado.subscribe(data => {
@@ -45,6 +58,14 @@ export class ProfileComponent implements OnInit {
         });
       }
     });
+  }
+
+  getUserById(id: any): any {
+    this.userService.getUserById(id).subscribe(data => {
+      if (data['estado'] == 'correcto') {
+        this.user = data['user'];
+      }
+    })
   }
 
   recuperarUsuarioLog() {

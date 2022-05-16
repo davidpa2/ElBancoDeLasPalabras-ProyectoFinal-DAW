@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { JwtAutenticatorService } from 'src/app/services/jwt-autenticator.service';
 import { UserService } from 'src/app/services/user.service';
 import { Md5 } from 'ts-md5';
 
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   invalid = false;
   loginForm!: FormGroup;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private jwtAutenticatorService: JwtAutenticatorService) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -27,24 +28,18 @@ export class LoginComponent implements OnInit {
 
   authUser() {
     this.submitted = true;
-
-    if (this.loginForm.valid) {
-      var jsonUser = {
-        email: (this.loginForm.controls['email'].value),
-        pass: (this.loginForm.controls['pass'].value),
-      }
-      
+    if (this.loginForm.valid) {      
       this.userService.autenticaUsuario(this.loginForm.controls['email'].value, Md5.hashStr(this.loginForm.controls['pass'].value)).subscribe(data => {
         console.log(data);
         if (data.jwt) {
-          this.userService.JWT = data.jwt;
+          this.jwtAutenticatorService.storeJWT(data.jwt)
+          //this.userService.JWT = data.jwt;
           this.userService.emitirNuevoCambioEnUsuarioAutenticado();
           this.router.navigate(['/index']);
         } else {
           this.invalid = true;
         }
       })
-      console.log("Datos obtenidos: "+ JSON.stringify(jsonUser));
     } 
   }
 

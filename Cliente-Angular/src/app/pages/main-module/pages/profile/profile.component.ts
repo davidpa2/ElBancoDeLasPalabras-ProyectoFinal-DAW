@@ -23,16 +23,18 @@ export class ProfileComponent implements OnInit {
     private _location: Location) { }
 
   ngOnInit(): void {
+    console.log('SE HA CARGADO');
+    
     this.route.queryParams.subscribe(params => {
       this.userId = params['idUser'] || null;
 
       // Visitar perfil de usuario autenticado
       if (!this.userId) {
         this.recuperarUsuarioLog();
+        this.getBooks(this.user.id); // Llamada a getBooks por separado para evitar problemas al reusar la vista profile
       } else { // Visitando otro perfil
         this.getUserById(this.userId);
-        console.log(this.user);
-
+        this.getBooks(this.userId);
       }
     });
 
@@ -44,8 +46,6 @@ export class ProfileComponent implements OnInit {
       this.deletedBook = params['deleteBook'];
     })
 
-    this.getBooks();
-
     this.userService.cambiosEnUserAutenticado.subscribe(data => {
       console.log('Hay un cambio en el usuario autenticado (edit profile)', data);
       //this.user = this.userService.authenticatedUser;
@@ -53,8 +53,9 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  getBooks() {
-    this.bookService.findBooksByUserId(this.userId ? this.userId : this.user.id).subscribe(result => {
+  getBooks(id: any) {
+    this.uploadedBooksList = []; //Asegurar que la lista está vacía
+    this.bookService.findBooksByUserId(id).subscribe(result => {
       if (result['estado'] != "error") {
         result.bookList.forEach((b: Book) => {
           this.uploadedBooksList.push(b)

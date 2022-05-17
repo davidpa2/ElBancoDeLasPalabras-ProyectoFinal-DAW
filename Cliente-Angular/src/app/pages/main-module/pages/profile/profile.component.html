@@ -37,46 +37,71 @@
         </div>
     </div>
 
-    <div class="row mt-4">
-        <div (click)="tabSelected = 1" [class]="(tabSelected == 1) ? 'tabSelect col-4' : 'tab col-4'">
-            Mis libros subidos
+    <div *ngIf="!userId; else justUploaded">
+        <div class="row mt-4">
+            <div (click)="tabSelected = 1" [class]="(tabSelected == 1) ? 'tabSelect col-4' : 'tab col-4'">
+                Mis libros subidos
+            </div>
+            <div (click)="tabSelected = 2" [class]="(tabSelected == 2) ? 'tabSelect col-4' : 'tab col-4'">
+                Mis intercambios
+            </div>
+            <div (click)="tabSelected = 3" [class]="(tabSelected == 3) ? 'tabSelect col-4' : 'tab col-4'">
+                Mis ventas
+            </div>
         </div>
-        <div (click)="tabSelected = 2" [class]="(tabSelected == 2) ? 'tabSelect col-4' : 'tab col-4'">
-            Mis intercambios
+    
+        <div *ngIf="tabSelected == 1" class="row board d-flex justify-content-center">
+            <div class="col-6 col-sm-4 col-md-3" *ngFor="let book of uploadedBooksList">
+                <div class="row bg-white">
+                    <div class="col-12 d-flex justify-content-center">
+                        <img class="thumbnail" src="data:image/jpg;base64,{{book.img}}" alt="">
+                    </div>
+                    <div class="col-12">
+                        <h3 class="titleCard text-center mt-1">{{book.title}}</h3>
+                        <p class="text-center mb-1">{{book.author}}</p>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center mb-3">
+                        <button *ngIf="!userId" [routerLink]="'/modifyBook/' + book.id" class="btn bgSecundario">Editar producto</button>
+                        <button *ngIf="userId" [routerLink]="'/productView/' + book.id + '/' + userId" class="btn bgSecundario mb-4">Ver libro</button>
+                    </div>
+                </div>
+            </div>
+    
+            <a *ngIf="!userId" routerLink="/uploadBook">
+                <div class="upload d-flex align-items-center">
+                    <p class="text mt-2">Subir un libro</p>&nbsp;
+                    <i class="bi bi-plus-circle-fill"></i>
+                </div>
+            </a>
         </div>
-        <div (click)="tabSelected = 3" [class]="(tabSelected == 3) ? 'tabSelect col-4' : 'tab col-4'">
-            Mis ventas
+        <div *ngIf="tabSelected == 2" class="row board">
+            pues hola2
+        </div>
+        <div *ngIf="tabSelected == 3" class="row board">
+            hola 3 sin más
         </div>
     </div>
-
-    <div *ngIf="tabSelected == 1" class="row board d-flex justify-content-center">
-        <div class="col-6 col-sm-4 col-md-3" *ngFor="let book of uploadedBooksList">
-            <div class="row bg-white">
-                <div class="col-12 d-flex justify-content-center">
-                    <img class="thumbnail" src="data:image/jpg;base64,{{book.img}}" alt="">
-                </div>
-                <div class="col-12">
-                    <h3 class="titleCard text-center mt-1">{{book.title}}</h3>
-                    <p class="text-center mb-1">{{book.author}}</p>
-                </div>
-                <div class="col-12 d-flex justify-content-center mb-3">
-                    <button *ngIf="!userId" [routerLink]="'/modifyBook/' + book.id" class="btn bgSecundario">Editar producto</button>
-                    <button *ngIf="userId" [routerLink]="'/productView/' + book.id + '/' + userId" class="btn bgSecundario mb-4">Ver libro</button>
+    
+    <ng-template #justUploaded>
+        <div class="row board d-flex justify-content-center justUploaded">
+            <div class="text-center text-white my-2">
+                <h3>Sus libros subidos</h3>
+            </div>
+            <div class="col-6 col-sm-4 col-md-3" *ngFor="let book of uploadedBooksList">
+                <div class="row bg-white">
+                    <div class="col-12 d-flex justify-content-center">
+                        <img class="thumbnail" src="data:image/jpg;base64,{{book.img}}" alt="">
+                    </div>
+                    <div class="col-12">
+                        <h3 class="titleCard text-center mt-1">{{book.title}}</h3>
+                        <p class="text-center mb-1">{{book.author}}</p>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center mb-3">
+                        <button *ngIf="!userId" [routerLink]="'/modifyBook/' + book.id" class="btn bgSecundario">Editar producto</button>
+                        <button *ngIf="userId" [routerLink]="'/productView/' + book.id + '/' + userId" class="btn bgSecundario mb-4">Ver libro</button>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <a *ngIf="!userId" routerLink="/uploadBook">
-            <div class="upload d-flex align-items-center">
-                <p class="text mt-2">Subir un libro</p>&nbsp;
-                <i class="bi bi-plus-circle-fill"></i>
-            </div>
-        </a>
-    </div>
-    <div *ngIf="tabSelected == 2" class="row board">
-        pues hola2
-    </div>
-    <div *ngIf="tabSelected == 3" class="row board">
-        hola 3 sin más
-    </div>
+    </ng-template>
 </div>

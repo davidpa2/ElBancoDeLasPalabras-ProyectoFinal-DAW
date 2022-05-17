@@ -18,7 +18,7 @@
             <p>Fecha de nacimiento: {{user.birthday}}</p>
             <div class="row">
                 <div class="col-3">
-                    <button routerLink="/editProfile" class="btn bgSecundario">Editar perfil</button>
+                    <button *ngIf="!userId" routerLink="/editProfile" class="btn bgSecundario">Editar perfil</button>
                 </div>
                 <div class="col-9">
                     <div class="row d-flex justify-content-center">
@@ -30,6 +30,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="d-flex justify-content-center mt-4">
+                <button *ngIf="userId" (click)="goBack()" class="btn outlineSecondary">Volver <i class="bi bi-arrow-counterclockwise"></i></button>
             </div>
         </div>
     </div>
@@ -57,12 +60,13 @@
                     <p class="text-center mb-1">{{book.author}}</p>
                 </div>
                 <div class="col-12 d-flex justify-content-center mb-3">
-                    <button [routerLink]="'/modifyBook/' + book.id" class="btn bgSecundario">Editar producto</button>
+                    <button *ngIf="!userId" [routerLink]="'/modifyBook/' + book.id" class="btn bgSecundario">Editar producto</button>
+                    <button *ngIf="userId" [routerLink]="'/productView/' + book.id + '/' + userId" class="btn bgSecundario mb-4">Ver libro</button>
                 </div>
             </div>
         </div>
 
-        <a routerLink="/uploadBook">
+        <a *ngIf="!userId" routerLink="/uploadBook">
             <div class="upload d-flex align-items-center">
                 <p class="text mt-2">Subir un libro</p>&nbsp;
                 <i class="bi bi-plus-circle-fill"></i>

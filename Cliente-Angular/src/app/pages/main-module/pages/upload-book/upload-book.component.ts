@@ -81,6 +81,7 @@ export class UploadBookComponent implements OnInit {
         .subscribe(data => {
           if (data) {
             console.log(data);
+            this.scrollUp();
           }
         })
     }
@@ -145,5 +146,9 @@ export class UploadBookComponent implements OnInit {
 
   goBack() {
     this._location.back();
+  }
+
+  scrollUp() {
+    window.scrollTo(0, 0)
   }
 }

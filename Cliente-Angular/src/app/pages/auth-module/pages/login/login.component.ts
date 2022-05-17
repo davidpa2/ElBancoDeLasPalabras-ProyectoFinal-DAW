@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { JwtAutenticatorService } from 'src/app/services/jwt-autenticator.service';
 import { UserService } from 'src/app/services/user.service';
 import { Md5 } from 'ts-md5';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   invalid = false;
   loginForm!: FormGroup;
 
-  constructor(private userService: UserService, private router: Router, private jwtAutenticatorService: JwtAutenticatorService) { }
+  constructor(private userService: UserService, private router: Router, private jwtAutenticatorService: JwtAutenticatorService,
+    private _location: Location) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -35,7 +37,8 @@ export class LoginComponent implements OnInit {
           this.jwtAutenticatorService.storeJWT(data.jwt)
           //this.userService.JWT = data.jwt;
           this.userService.emitirNuevoCambioEnUsuarioAutenticado();
-          this.router.navigate(['/index']);
+          // this.router.navigate(['/index']);
+          this.goBack();
         } else {
           this.invalid = true;
         }
@@ -47,4 +50,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
+  goBack() {
+    this._location.back();
+  }
 }

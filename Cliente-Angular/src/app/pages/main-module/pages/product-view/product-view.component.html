@@ -2,7 +2,8 @@
     <div class="row book">
         <div class="col-4 bgPrimario colImg">
             <div class="d-flex justify-content-center">
-                <img src="data:image/jpg;base64,{{book.img}}" class="mt-3 cover" alt="">
+                <img *ngIf="!book.img" src="/assets/images/DefaultBook.png" class="mt-3 cover" alt="">
+                <img *ngIf="book.img" src="data:image/jpg;base64,{{book.img}}" class="mt-3 cover" alt="">
             </div>
             <p class="text-center mt-3">Comparte el libro con tus amigos</p>
             <div class="d-flex justify-content-around mb-3 share">
@@ -26,12 +27,28 @@
                 <app-price [price]="book.price" class="col-4"></app-price>
             </div>
 
-            <div class="row mt-4">
+            <div *ngIf="authUser.id" class="row mt-4">
                 <div class="col d-flex justify-content-center">
                     <button class="btn bgSecundario">Intercambiar <i class="bi bi-arrow-left-right"></i></button>
                 </div>
                 <div class="col d-flex justify-content-center">
-                    <button routerLink="/purchase/1" class="btn bgSecundario">COMPRAR <i class="bi bi-cart-check-fill"></i></button>
+                    <button routerLink="/purchase/1" class="btn bgSecundario">COMPRAR <i
+                            class="bi bi-cart-check-fill"></i></button>
+                </div>
+            </div>
+            <div *ngIf="!authUser.id" class="row mt-4">
+                <div class="col d-flex justify-content-center">
+                    <div class="row">
+                        <div class="col-7">
+                            <p class="signIn">Inicia sesión en el Banco de las Palabras para poder comprar o
+                                intercambiar el libro.</p>
+                        </div>
+                        <div class="col-5 d-flex align-items-center justify-content-between">
+                            <button class="btn bgTerciario" routerLink="/auth/login">Iniciar sesión</button>
+                            <button (click)="goBack()" class="btn outlineSecondary">Volver <i
+                                    class="bi bi-arrow-counterclockwise"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,12 +90,11 @@
                 <div class="col-5">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center">
-                            <img class="imgProfile mt-5"
-                                src="data:image/jpg;base64,{{user.img}}"
-                                alt="">
+                            <img class="imgProfile mt-5" src="data:image/jpg;base64,{{user.img}}" alt="">
                         </div>
                         <div class="col-12 d-flex justify-content-center">
-                            <button routerLink="/profile" [queryParams]="{'idUser': user.id}" class="btn bgSecundario mt-4">Visitar perfil</button>
+                            <button routerLink="/profile" [queryParams]="{'idUser': user.id}"
+                                class="btn bgSecundario mt-4">Visitar perfil</button>
                         </div>
                     </div>
                 </div>

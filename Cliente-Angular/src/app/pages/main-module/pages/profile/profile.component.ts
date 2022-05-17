@@ -3,6 +3,7 @@ import { Book, User } from 'src/app/interfaces/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { BookService } from 'src/app/services/book.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
@@ -16,20 +17,24 @@ export class ProfileComponent implements OnInit {
   user!: User;
   tabSelected: any = 1;
   uploadedBooksList: Book[] = [];
+  userId = null;
 
-  constructor(private userService: UserService, private bookService: BookService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private userService: UserService, private bookService: BookService, private route: ActivatedRoute, private router: Router,
+    private _location: Location) { }
 
   ngOnInit(): void {
+    console.log('SE HA CARGADO');
+    
     this.route.queryParams.subscribe(params => {
-      const userId: any = params['idUser'] || null;
+      this.userId = params['idUser'] || null;
 
       // Visitar perfil de usuario autenticado
-      if (!userId) {
+      if (!this.userId) {
         this.recuperarUsuarioLog();
+        this.getBooks(this.user.id); // Llamada a getBooks por separado para evitar problemas al reusar la vista profile
       } else { // Visitando otro perfil
-        this.getUserById(userId).then(() => console.log(this.user));
-        console.log(this.user);
-        
+        this.getUserById(this.userId);
+        this.getBooks(this.userId);
       }
     });
 
@@ -41,8 +46,6 @@ export class ProfileComponent implements OnInit {
       this.deletedBook = params['deleteBook'];
     })
 
-    this.getBooks();
-
     this.userService.cambiosEnUserAutenticado.subscribe(data => {
       console.log('Hay un cambio en el usuario autenticado (edit profile)', data);
       //this.user = this.userService.authenticatedUser;
@@ -50,8 +53,9 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  getBooks() {
-    this.bookService.findBooksByUserId(this.user.id).subscribe(result => {
+  getBooks(id: any) {
+    this.uploadedBooksList = []; //Asegurar que la lista está vacía
+    this.bookService.findBooksByUserId(id).subscribe(result => {
       if (result['estado'] != "error") {
         result.bookList.forEach((b: Book) => {
           this.uploadedBooksList.push(b)
@@ -75,5 +79,9 @@ export class ProfileComponent implements OnInit {
 
   round(number: number) {
     return Math.round(number);
+  }
+
+  goBack() {
+    this._location.back();
   }
 }

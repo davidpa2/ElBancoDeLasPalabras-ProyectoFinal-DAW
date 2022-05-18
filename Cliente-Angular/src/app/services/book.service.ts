@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Book, User } from '../interfaces/interfaces';
 import { Observable } from 'rxjs';
+import axios from 'axios';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,10 @@ export class BookService {
     };
     // Envío la petición http y devuelvo el Observable, para que cualquiera pueda subscribirse.
     return this.http.post<any>('/updateBook', jsonObject);
+  }
+
+  lookForABook(search: String, id: number): Observable<any>{
+    return this.http.get<any>('/lookForABook/' + search + '/' + id)
   }
 
   getAllBooksForSale(id: number): Observable<any> {

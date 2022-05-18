@@ -6,7 +6,7 @@
         <div class="col-12 mb-4">
             <div class="row">
                 <div class="col-10 d-flex justify-content-end">
-                    <input type="text" name="search" id="search" class="input"
+                    <input #search (keyup)="lookForABook(search.value)" type="text" name="search" id="search" class="input"
                         placeholder="Busca por título, por autor...">
                 </div>
                 <div class="col-2 d-flex justify-content-start">
@@ -22,7 +22,7 @@
         <h3 class="text-center my-4">Todos nuestros libros</h3>
     </div>
 
-    <div class="row d-flex justify-content-center">
+    <div *ngIf="!search.value" class="row d-flex justify-content-center">
         <div class="col-4" *ngFor="let book of bookList; let i = index">
             <div class="row">
                 <div class="col-12 d-flex justify-content-center">
@@ -45,6 +45,35 @@
                     <button [routerLink]="'/productView/' + book.id + '/' + userList[i].id" class="btn bgSecundario mb-4">Ver libro</button>
                 </div>
             </div>
+        </div>
+    </div>
+    <div *ngIf="search.value" class="row d-flex justify-content-center">
+        <div class="col-4" *ngFor="let book of searchBookList; let i = index">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <img src="data:image/jpg;base64,{{book.img}}" class="cover" alt="">
+                </div>
+                <div class="col-12 mt-3">
+                    <h4 class="text-center">{{book.title}}</h4>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-8 d-flex align-items-center justify-content-end">
+                            <p class="text-center">{{userList[i].name}} {{userList[i].surnames}}</p>
+                        </div>
+                        <div class="col-4 d-flex justify-content-start">
+                            <img src="data:image/jpg;base64,{{searchUsersList[i].img}}" class="imgProfile" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="co-12 d-flex justify-content-center">
+                    <button [routerLink]="'/productView/' + book.id + '/' + searchUsersList[i].id" class="btn bgSecundario mb-4">Ver libro</button>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="searchBookList.length == 0;">
+            <h4 class="text-center">No se ha encontrado ningún resultado para la búsqueda: "{{search.value}}"</h4>
         </div>
     </div>
 </div>

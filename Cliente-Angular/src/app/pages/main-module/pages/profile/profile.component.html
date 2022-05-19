@@ -18,7 +18,7 @@
             <p>Fecha de nacimiento: {{user.birthday}}</p>
             <div class="row">
                 <div class="col-3">
-                    <button *ngIf="!userId" routerLink="/editProfile" class="btn bgSecundario">Editar perfil</button>
+                    <button *ngIf="!userId" routerLink="/editProfile" class="btn bgSecundario">Editar perfil <i class="bi bi-person-bounding-box"></i></button>
                 </div>
                 <div class="col-9">
                     <div class="row d-flex justify-content-center">
@@ -61,8 +61,8 @@
                         <p class="text-center mb-1">{{book.author}}</p>
                     </div>
                     <div class="col-12 d-flex justify-content-center mb-3">
-                        <button *ngIf="!userId" [routerLink]="'/modifyBook/' + book.id" class="btn bgSecundario">Editar producto</button>
-                        <button *ngIf="userId" [routerLink]="'/productView/' + book.id + '/' + userId" class="btn bgSecundario mb-4">Ver libro</button>
+                        <button *ngIf="!userId" [routerLink]="'/modifyBook/' + book.id" class="btn bgSecundario">Editar producto <i class="bi bi-pencil-square"></i></button>
+                        <button *ngIf="userId" [routerLink]="'/productView/' + book.id + '/' + userId" class="btn bgSecundario mb-4">Ver libro <i class="bi bi-book"></i></button>
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                     </div>
                     <div class="col-12 d-flex justify-content-center mb-3">
                         <button *ngIf="!userId" [routerLink]="'/modifyBook/' + book.id" class="btn bgSecundario">Editar producto</button>
-                        <button *ngIf="userId" [routerLink]="'/productView/' + book.id + '/' + userId" class="btn bgSecundario mb-4">Ver libro</button>
+                        <button *ngIf="userId" [routerLink]="'/productView/' + book.id + '/' + userId" class="btn bgSecundario mb-4">Ver libro <i class="bi bi-book"></i></button>
                     </div>
                 </div>
             </div>

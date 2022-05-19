@@ -10,7 +10,8 @@
                         placeholder="Busca por título, por autor...">
                 </div>
                 <div class="col-2 d-flex justify-content-start">
-                    <button *ngIf="search.value" (click)="search.value = ''" class="btn bgSecundario">Borrar <i class="bi bi-trash"></i> </button>
+                    <button *ngIf="search.value" (click)="search.value = ''" class="btn bgSecundario">Borrar <i
+                            class="bi bi-trash"></i> </button>
                     <button *ngIf="!search.value" class="btn bgSecundario">Buscar <i class="bi bi-search"></i> </button>
                 </div>
             </div>
@@ -44,7 +45,8 @@
                     </div>
                 </div>
                 <div class="co-12 d-flex justify-content-center">
-                    <button [routerLink]="'/productView/' + book.id + '/' + userList[i].id" class="btn bgSecundario mb-4">Ver libro</button>
+                    <button [routerLink]="'/productView/' + book.id + '/' + userList[i].id"
+                        class="btn bgSecundario mb-4">Ver libro <i class="bi bi-book"></i></button>
                 </div>
             </div>
         </div>
@@ -69,13 +71,15 @@
                     </div>
                 </div>
                 <div class="co-12 d-flex justify-content-center">
-                    <button [routerLink]="'/productView/' + book.id + '/' + searchUsersList[i].id" class="btn bgSecundario mb-4">Ver libro</button>
+                    <button [routerLink]="'/productView/' + book.id + '/' + searchUsersList[i].id"
+                        class="btn bgSecundario mb-4">Ver libro <i class="bi bi-book"></i></button>
                 </div>
             </div>
         </div>
 
         <div *ngIf="searchBookList.length == 0;">
-            <h4 class="text-center mb-4 noResult">No se ha encontrado ningún resultado para la búsqueda: "{{search.value}}"</h4>
+            <h4 class="text-center mb-4 noResult">No se ha encontrado ningún resultado para la búsqueda:
+                "{{search.value}}"</h4>
         </div>
     </div>
 </div>

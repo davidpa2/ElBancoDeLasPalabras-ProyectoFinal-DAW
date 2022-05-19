@@ -45,6 +45,7 @@ public class JwtWebFilter implements Filter {
 				urlWebRequest.startsWith("/getUserById") || // Se pueden acceder al perfil de un usuario sin haber
 															// iniciado sesión
 				urlWebRequest.startsWith("/lookForABook") || // Se pueden realizar una búsqueda sin haber iniciado sesión
+				urlWebRequest.startsWith("/findByUserId") || // Se puede acceder al perfil de un usuario sin inicar sesión
 				urlWebRequest.equals("/autenticate") || // Web de autenticado, aunque no traiga JWT en la cabecera se le
 														// permite pasar
 				urlWebRequest.equals("/register") || // Web de registro, aunque no traiga JWT en la cabecera se le

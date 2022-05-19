@@ -1,5 +1,4 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import axios from 'axios';
 import { Book, User } from 'src/app/interfaces/interfaces';
 import { BookService } from 'src/app/services/book.service';
 
@@ -20,10 +19,14 @@ export class ProductsComponent implements OnInit {
   constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
+    console.log('VAMOS A VER');
+    
     //Primero hay que obtener el usuario que haya iniciado sesión
     this.recuperarUsuarioLog();
+    console.log(this.user.id);
     //Luego obtenemos todos los libros que no pertenezcan a ese usuario
     this.getAllBooksForSale();
+    console.log(this.user.id);
   }
 
   /**
@@ -44,14 +47,15 @@ export class ProductsComponent implements OnInit {
 
   lookForABook(search: String) {
     console.log('ESTAMOS BUSCANDO');
-    
-    this.bookService.lookForABook(search, this.user.id ? this.user.id : -1).subscribe(data => {
-      if (data['estado'] == "correcto") {
-        //Obtenemos una lista de libros y una lista de usuarios, cada uno asociado a un libro
-        this.searchBookList = data['bookList'];
-        this.searchUsersList = data['userList']
-      }
-    })
+    if (search.length != 0) {      
+      this.bookService.lookForABook(search, this.user.id ? this.user.id : -1).subscribe(data => {
+        if (data['estado'] == "correcto") {
+          //Obtenemos una lista de libros y una lista de usuarios, cada uno asociado a un libro
+          this.searchBookList = data['bookList'];
+          this.searchUsersList = data['userList']
+        }
+      })
+    }
   }
 
   recuperarUsuarioLog() {

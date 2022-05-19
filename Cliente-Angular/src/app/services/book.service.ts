@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Book, User } from '../interfaces/interfaces';
 import { Observable } from 'rxjs';
-import axios from 'axios';
 
 @Injectable({
   providedIn: 'root'

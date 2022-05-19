@@ -6,11 +6,12 @@
         <div class="col-12 mb-4">
             <div class="row">
                 <div class="col-10 d-flex justify-content-end">
-                    <input #search (keyup)="lookForABook(search.value)" type="text" name="search" id="search" class="input"
+                    <input #search (keyup)="lookForABook(search.value)" type="text" class="input"
                         placeholder="Busca por título, por autor...">
                 </div>
                 <div class="col-2 d-flex justify-content-start">
-                    <button class="btn bgSecundario">Buscar <i class="bi bi-search"></i> </button>
+                    <button *ngIf="search.value" (click)="search.value = ''" class="btn bgSecundario">Borrar <i class="bi bi-trash"></i> </button>
+                    <button *ngIf="!search.value" class="btn bgSecundario">Buscar <i class="bi bi-search"></i> </button>
                 </div>
             </div>
         </div>
@@ -19,7 +20,8 @@
 
 <div class="container products">
     <div class="row">
-        <h3 class="text-center my-4">Todos nuestros libros</h3>
+        <h3 *ngIf="!search.value" class="text-center my-4">Todos nuestros libros</h3>
+        <h3 *ngIf="search.value" class="text-center my-4">Resultados de la búsqueda</h3>
     </div>
 
     <div *ngIf="!search.value" class="row d-flex justify-content-center">
@@ -59,7 +61,7 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="col-8 d-flex align-items-center justify-content-end">
-                            <p class="text-center">{{userList[i].name}} {{userList[i].surnames}}</p>
+                            <p class="text-center">{{searchUsersList[i].name}} {{searchUsersList[i].surnames}}</p>
                         </div>
                         <div class="col-4 d-flex justify-content-start">
                             <img src="data:image/jpg;base64,{{searchUsersList[i].img}}" class="imgProfile" alt="">
@@ -73,7 +75,7 @@
         </div>
 
         <div *ngIf="searchBookList.length == 0;">
-            <h4 class="text-center">No se ha encontrado ningún resultado para la búsqueda: "{{search.value}}"</h4>
+            <h4 class="text-center mb-4 noResult">No se ha encontrado ningún resultado para la búsqueda: "{{search.value}}"</h4>
         </div>
     </div>
 </div>

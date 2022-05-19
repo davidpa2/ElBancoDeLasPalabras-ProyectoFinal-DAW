@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
           this.jwtAutenticatorService.storeJWT(data.jwt)
           //this.userService.JWT = data.jwt;
           this.userService.emitirNuevoCambioEnUsuarioAutenticado();
-          // this.router.navigate(['/index']);
-          this.goBack();
+          this.router.navigate(['/index']);
+          /* this.goBack(); */
         } else {
           this.invalid = true;
         }

@@ -219,9 +219,15 @@ public class BookController {
 		dto.put("estado", "error");
 		// lista de dto que meteremos en dto que devolveremos
 		List<DTO> dtoBooks = new ArrayList<DTO>();
-		// buscamos todos los libros según el id del usuario
-		List<Book> bookList = bookRepo.lookForABook(search, id);
-		System.out.println(bookList);
+		List<Book> bookList = new ArrayList<Book>();
+		//Si se ha accedido sin iniciar sesión buscamos todos los libros subidos según la búsqueda
+		if (id == -1) {
+			bookList = bookRepo.lookForABookNoUser(search);
+		} else {			
+			// buscamos todos los libros según el id del usuario y la búsqueda
+			bookList = bookRepo.lookForABook(search, id);
+		}
+
 		for (Book b : bookList) {
 			System.out.println("VA VAAAAAA");
 			DTO books = new DTO();

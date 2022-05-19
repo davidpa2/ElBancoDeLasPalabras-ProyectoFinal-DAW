@@ -220,7 +220,7 @@ public class BookController {
 		// lista de dto que meteremos en dto que devolveremos
 		List<DTO> dtoBooks = new ArrayList<DTO>();
 		// buscamos todos los libros según el id del usuario
-		List<Book> bookList = bookRepo.lookForABook(search);
+		List<Book> bookList = bookRepo.lookForABook(search, id);
 		System.out.println(bookList);
 		for (Book b : bookList) {
 			System.out.println("VA VAAAAAA");

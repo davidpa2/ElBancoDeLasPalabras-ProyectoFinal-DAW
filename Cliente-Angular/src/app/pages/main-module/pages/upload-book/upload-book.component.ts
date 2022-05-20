@@ -25,33 +25,25 @@ export class UploadBookComponent implements OnInit {
   constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router, private _location: Location) { }
 
   ngOnInit(): void {
-    /*    //Puede ser que estemos modificando un libro
-       this.route.params.subscribe(
-         (params: Params) => {
-           this.idBook = params['id'];
-           //Si obtenemos un parámetro llamado id buscamos el libro que corresponda
-           if (this.idBook) {
-             this.getBookById();
-           }
-         }
-       ); */
     this.recuperarUsuarioLog();
+    this.initFromGroup(null);
 
-    //Si se ha pasado el parámetro id por url, buscar a qué libro corresponde
     if (this.route.snapshot.params['id']) {
       console.log('OJO');
       this.getBookById(this.route.snapshot.params['id']);
-
-    } else { //Si no existe el parámetro id por URL inicializar el formulario vacío para poder registrar un nuevo libro
-      this.uploadBookForm = new FormGroup({
-        title: new FormControl('', [Validators.required]),
-        author: new FormControl('', [Validators.required]),
-        description: new FormControl('', [Validators.required, Validators.minLength(100), Validators.maxLength(500)]),
-        price: new FormControl('', [Validators.required, Validators.pattern('[0-9]+((\.|,)[0-9][0-9]?)?')]),
-      })
     }
+  }
 
 
+
+  initFromGroup(data: any) {
+
+    this.uploadBookForm = new FormGroup({
+      title: new FormControl( (data != null)? data['book'].title : '' , [Validators.required]),
+      author: new FormControl( (data != null)? data['book'].author : '', [Validators.required]),
+      description: new FormControl( (data != null)? data['book'].description : '', [Validators.required, Validators.minLength(100), Validators.maxLength(500)]),
+      price: new FormControl( (data != null)? data['book'].price : '', [Validators.required, Validators.pattern('[0-9]+((\.|,)[0-9][0-9]?)?')]),
+    })
   }
 
   get myForm() {
@@ -106,13 +98,7 @@ export class UploadBookComponent implements OnInit {
         console.log(data['book'].price);
 
         //Inicializar entonces el formulario con sus campos rellenos
-        this.uploadBookForm = new FormGroup({
-          title: new FormControl(data['book'].title, [Validators.required]),
-          author: new FormControl(data['book'].author, [Validators.required]),
-          description: new FormControl(data['book'].description, [Validators.required, Validators.minLength(100), Validators.maxLength(500)]),
-          price: new FormControl(data['book'].price, [Validators.required, Validators.pattern('[0-9]+((\.|,)[0-9][0-9]?)?')]),
-        })
-
+        this.initFromGroup(data);
       }
     });
   }

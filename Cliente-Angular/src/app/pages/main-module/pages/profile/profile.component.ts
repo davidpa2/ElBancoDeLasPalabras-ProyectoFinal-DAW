@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
     private _location: Location) { }
 
   ngOnInit(): void {
-    console.log('SE HA CARGADO');
+    this.scrollUp();
     
     this.route.queryParams.subscribe(params => {
       this.userId = params['idUser'] || null;
@@ -83,5 +83,11 @@ export class ProfileComponent implements OnInit {
 
   goBack() {
     this._location.back();
+  }
+
+  scrollUp() {
+    window.requestAnimationFrame(this.scrollUp)
+    /* window.scrollTo(0, document.documentElement.scrollTop - (document.documentElement.scrollTop / 10)) */
+    window.scrollTo(0, 0)
   }
 }

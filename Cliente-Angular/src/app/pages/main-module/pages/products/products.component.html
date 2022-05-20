@@ -31,10 +31,10 @@
                 <div class="col-12 d-flex justify-content-center">
                     <img src="data:image/jpg;base64,{{book.img}}" class="cover" alt="">
                 </div>
-                <div class="col-12 mt-3">
+                <div class="col-12 mt-2">
                     <h4 class="text-center">{{book.title}}</h4>
                 </div>
-                <div class="col-12">
+                <div class="col-12 user">
                     <div class="row">
                         <div class="col-8 d-flex align-items-center justify-content-end">
                             <p class="text-center">{{userList[i].name}} {{userList[i].surnames}}</p>
@@ -44,9 +44,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="co-12 d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-center">
                     <button [routerLink]="'/productView/' + book.id + '/' + userList[i].id"
-                        class="btn bgSecundario mb-4">Ver libro <i class="bi bi-book"></i></button>
+                        class="btn bgSecundario mb-4 seeBook">Ver libro <i class="bi bi-book"></i></button>
                 </div>
             </div>
         </div>
@@ -57,10 +57,10 @@
                 <div class="col-12 d-flex justify-content-center">
                     <img src="data:image/jpg;base64,{{book.img}}" class="cover" alt="">
                 </div>
-                <div class="col-12 mt-3">
+                <div class="col-12 mt-2">
                     <h4 class="text-center">{{book.title}}</h4>
                 </div>
-                <div class="col-12">
+                <div class="col-12 user">
                     <div class="row">
                         <div class="col-8 d-flex align-items-center justify-content-end">
                             <p class="text-center">{{searchUsersList[i].name}} {{searchUsersList[i].surnames}}</p>
@@ -70,9 +70,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="co-12 d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-center">
                     <button [routerLink]="'/productView/' + book.id + '/' + searchUsersList[i].id"
-                        class="btn bgSecundario mb-4">Ver libro <i class="bi bi-book"></i></button>
+                        class="btn bgSecundario mb-4 seeBook">Ver libro <i class="bi bi-book"></i></button>
                 </div>
             </div>
         </div>

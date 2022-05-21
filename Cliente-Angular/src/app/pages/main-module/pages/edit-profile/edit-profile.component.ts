@@ -50,6 +50,7 @@ export class EditProfileComponent implements OnInit {
       birthday: new FormControl(user.birthday, [Validators.required, Validators.pattern('[0-9]{2}\/[0-9]{2}\/[0-9]{4}')]),
       telegram: new FormControl(user.telegram, []),
       desc: new FormControl(user.description, [Validators.required]),
+      location: new FormControl(user.location, [Validators.required]),
       email: new FormControl({ value: user.email, disabled: true }),
     })
   }
@@ -67,8 +68,9 @@ export class EditProfileComponent implements OnInit {
     this.submitted = true;
 
     if (this.editUserForm.valid) {
-      this.userService.modifyUser(this.user.id, this.editUserForm.value.name, this.editUserForm.value.surnamos, this.editUserForm.value.desc,
-        this.editUserForm.value.birthday, this.editUserForm.value.tlf, this.editUserForm.value.telegram, this.userImg).subscribe(data => {
+      this.userService.modifyUser(this.user.id, this.editUserForm.value.name, this.editUserForm.value.surnamos,
+        this.editUserForm.value.desc, this.editUserForm.value.birthday, this.editUserForm.value.tlf, this.editUserForm.value.telegram, 
+        this.userImg, this.editUserForm.value.location).subscribe(data => {
           console.log(data);
           if (data['estado'] != "error") {
             console.log('Usuario modificado correctamente')

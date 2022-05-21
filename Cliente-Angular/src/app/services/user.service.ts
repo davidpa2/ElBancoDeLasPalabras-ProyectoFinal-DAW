@@ -80,7 +80,8 @@ export class UserService {
    * @param img 
    * @returns 
    */
-  modifyUser(id: number, name: String, surnames: String, description: String, birthday: String, tlf: String, telegram: String, img: String) {
+  modifyUser(id: number, name: String, surnames: String, description: String, birthday: String, tlf: String, telegram: String,
+    img: String, location: String) {
     let jsonUser = JSON.stringify({
       id: id,
       name: name,
@@ -89,7 +90,8 @@ export class UserService {
       birthday: birthday,
       tlf: tlf,
       telegram: telegram,
-      img: img
+      img: img,
+      location: location
     });
 
     return this.http.post<any>('/modifyUser', jsonUser)

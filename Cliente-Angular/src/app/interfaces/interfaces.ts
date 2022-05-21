@@ -9,7 +9,8 @@ export interface User {
     tlf: string,
     telegram: string,
     img: string,
-    rating: number
+    rating: number,
+    location: string
 }
 
 export interface Book {

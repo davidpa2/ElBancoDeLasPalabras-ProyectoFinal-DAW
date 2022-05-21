@@ -1,7 +1,5 @@
 package com.book.controllers;
 
-import java.sql.SQLException;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.book.model.entities.Book;
 import com.book.model.entities.User;
 import com.book.repository.UserRepository;
 import com.book.security.AutenticadorJWT;
@@ -148,6 +145,7 @@ public class UserController {
 		dtoUser.put("telegram", user.getTelegram());
 		dtoUser.put("img", user.getImg());
 		dtoUser.put("rating", user.getRating());
+		dtoUser.put("location", user.getLocation());
 		return dtoUser;
 	}
 
@@ -167,6 +165,7 @@ public class UserController {
 		usuario.setTelegram(d.telegram);
 		usuario.setBirthday(d.birthday);
 		usuario.setImg(d.img);
+		usuario.setLocation(d.location);
 
 		userRepo.save(usuario);
 
@@ -192,9 +191,11 @@ public class UserController {
 		String telegram;
 		@JsonProperty("img")
 		byte[] img;
+		@JsonProperty("location")
+		String location;
 
 		public DatosModificarUsuario(int id, String name, String surnames, String description, String birthday, String tlf,
-				String telegram, byte[] img) {
+				String telegram, byte[] img, String location) {
 			super();
 			this.id = id;
 			this.name = name;
@@ -204,6 +205,7 @@ public class UserController {
 			this.tlf = tlf;
 			this.telegram = telegram;
 			this.img = img;
+			this.location = location;
 		}
 	}
 }

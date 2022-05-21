@@ -42,6 +42,8 @@ public class User implements Serializable {
 	private String tlf;
 	
 	private float rating;
+	
+	private String location;
 
 	//bi-directional one-to-one association to Book
 	@OneToMany(mappedBy="user")
@@ -141,6 +143,22 @@ public class User implements Serializable {
 		this.tlf = tlf;
 	}
 	
+	public float getRating() {
+		return this.rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+	
+	public String getLocation() {
+		return this.location;
+	}
+	
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	
 	public List<Book> getBooks() {
 		return this.books;
 	}
@@ -177,14 +195,6 @@ public class User implements Serializable {
 
 	public void setExchange2(Exchange exchange2) {
 		this.exchange2 = exchange2;
-	}
-	
-	public float getRating() {
-		return this.rating;
-	}
-
-	public void setRating(float rating) {
-		this.rating = rating;
 	}
 
 }

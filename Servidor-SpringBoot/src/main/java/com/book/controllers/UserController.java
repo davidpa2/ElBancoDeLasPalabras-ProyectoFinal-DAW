@@ -1,5 +1,7 @@
 package com.book.controllers;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,20 +88,26 @@ public class UserController {
 	public DTO registerUser(@RequestBody DatosRegisterUser datos) {
 		DTO dto = new DTO(); // Voy a devolver un dto
 
-		User u = new User();
-		
-		u.setName(datos.name);
-		u.setSurnames(datos.surnames);
-		u.setEmail(datos.email);
-		u.setPassword(datos.password);
-		this.userRepo.save(u);
-		
+		try {
+			User u = new User();
+			
+			u.setName(datos.name);
+			u.setSurnames(datos.surnames);
+			u.setEmail(datos.email);
+			u.setPassword(datos.password);
+			this.userRepo.save(u);
+			
+		} catch (Exception sqle) {
+			if (sqle.getMessage().contains("ConstraintViolationException")) {				
+				dto.put("error", "Ya existe una cuenta con ese correo");
+				return dto;
+			}
+		}
 		// Intento localizar un usuario a partir de su nombre de usuario y su password
 		User autenticatedUser = userRepo.findByEmailAndPassword(datos.email, datos.password);
 		if (autenticatedUser != null) {
 			dto.put("jwt", AutenticadorJWT.codificaJWT(autenticatedUser));
 		}
-
 		// Finalmente devuelvo el JWT creado, puede estar vacío si la autenticación no
 		// ha funcionado
 		return dto;

@@ -129,12 +129,12 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col d-flex justify-content-end">
+    <div class="row d-flex justify-content-around">
+        <div class="col d-flex justify-content-center">
             <button (click)="saveChanges()" class="btn bgSecundario mt-2 mb-4">Actualizar perfil <i
                     class="bi bi-arrow-up-circle"></i></button>
         </div>
-        <div class="col d-flex justify-content-start">
+        <div *ngIf="user.tlf" class="col d-flex justify-content-center">
             <button routerLink="/profile" class="btn outlineSecondary mt-2 mb-4">Volver <i
                     class="bi bi-arrow-counterclockwise"></i></button>
         </div>

@@ -21,22 +21,37 @@ export class EditProfileComponent implements OnInit {
   ngOnInit(): void {
     this.recuperarUsuarioLog();
 
-    this.userImg = this.user.img;
+    this.initFormGroup(this.user);
 
-    this.editUserForm = new FormGroup({
-      name: new FormControl(this.user.name, [Validators.required]),
-      surnamos: new FormControl(this.user.surnames, [Validators.required]),
-      tlf: new FormControl(this.user.tlf, [Validators.required, Validators.pattern('[0-9]{3} [0-9]{3} [0-9]{3}')]),
-      //tlf: new FormControl(this.user.tlf, [Validators.required, Validators.pattern('([0-9]{3}\s[0-9]{2}\s[0-9]{2}\s[0-9]{2})|([0-9]{3}\s[0-9]{3}\s[0-9]{3}\s[0-9]{2})')]),
-      birthday: new FormControl(this.user.birthday, [Validators.required, Validators.pattern('[0-9]{2}\/[0-9]{2}\/[0-9]{4}')]),
-      telegram: new FormControl(this.user.telegram, []),
-      desc: new FormControl(this.user.description, [Validators.required]),
-      email: new FormControl({ value: this.user.email, disabled: true }),
-    })
+    this.userService.cambiosEnUserAutenticado.subscribe(data => {
+      console.log('Hay un cambio en el usuario autenticado', data);
+      //this.user = this.userService.authenticatedUser;
+      this.user = data;
+      this.initFormGroup(data);
+    });
+
+    this.userImg = this.user.img;
   }
 
   get myForm() {
     return this.editUserForm.controls;
+  }
+
+  /**
+   * Inicializar el furmulario con los valores que nos pasen
+   * @param user 
+   */
+  initFormGroup(user: User) {
+    this.editUserForm = new FormGroup({
+      name: new FormControl(user.name, [Validators.required]),
+      surnamos: new FormControl(user.surnames, [Validators.required]),
+      tlf: new FormControl(user.tlf, [Validators.required, Validators.pattern('[0-9]{3} [0-9]{3} [0-9]{3}')]),
+      //tlf: new FormControl(this.user.tlf, [Validators.required, Validators.pattern('([0-9]{3}\s[0-9]{2}\s[0-9]{2}\s[0-9]{2})|([0-9]{3}\s[0-9]{3}\s[0-9]{3}\s[0-9]{2})')]),
+      birthday: new FormControl(user.birthday, [Validators.required, Validators.pattern('[0-9]{2}\/[0-9]{2}\/[0-9]{4}')]),
+      telegram: new FormControl(user.telegram, []),
+      desc: new FormControl(user.description, [Validators.required]),
+      email: new FormControl({ value: user.email, disabled: true }),
+    })
   }
 
   recuperarUsuarioLog() {
@@ -58,12 +73,12 @@ export class EditProfileComponent implements OnInit {
           if (data['estado'] != "error") {
             console.log('Usuario modificado correctamente')
             this.userService.emitirNuevoCambioEnUsuarioAutenticado();
-            this.router.navigate(['/profile'], { queryParams: {change: true}});
+            this.router.navigate(['/profile'], { queryParams: { change: true } });
           }
         })
     } else {
       console.log('Inválido');
-      
+
     }
 
   }

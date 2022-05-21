@@ -44,6 +44,9 @@
                 *Escriba un email correcto
             </div>
         </div>
+        <div class="errorForm" *ngIf="existsUserEmail">
+        *Ya existe una cuenta con este correo electrónico
+        </div>
     </div>
     <div class="row my-4">
         <div class="col-4">

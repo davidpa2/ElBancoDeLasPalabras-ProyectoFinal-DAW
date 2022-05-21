@@ -37,7 +37,7 @@ export class UserService {
    * @param password 
    * @returns 
    */
-  registerUser(name: string, surnames: string,  email: string, password: string): Observable<TokenJWT> {
+  registerUser(name: string, surnames: string,  email: string, password: string): Observable<any> {
     var jsonObject = {
       name: name,
       surnames: surnames,

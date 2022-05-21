@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { JwtAutenticatorService } from 'src/app/services/jwt-autenticator.service';
 import { UserService } from 'src/app/services/user.service';
 import { Md5 } from 'ts-md5';
 
@@ -13,9 +14,10 @@ export class RegisterComponent implements OnInit {
 
   submitted = false;
   passEquals = true;
+  existsUserEmail = false;
   registerForm!: FormGroup;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private jwtAutenticatorService: JwtAutenticatorService) { }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -34,11 +36,13 @@ export class RegisterComponent implements OnInit {
       if (this.registerForm.value.pass == this.registerForm.value.repeatPass) {
         this.userService.registerUser(this.registerForm.value.name, this.registerForm.value.surnames, this.registerForm.value.email,
           Md5.hashStr(this.registerForm.value.pass)).subscribe(data => {
-            console.log(data);
-            if (data.jwt) {
-              this.userService.JWT = data.jwt;
+            if (data['jwt']) {
+              this.jwtAutenticatorService.storeJWT(data.jwt)
               this.userService.emitirNuevoCambioEnUsuarioAutenticado();
               this.router.navigate(['/editProfile']);
+            } 
+            if (data['error']){
+              this.existsUserEmail = true;
             }
           })
       } else {

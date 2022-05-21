@@ -44,7 +44,8 @@
                                 intercambiar el libro.</p>
                         </div>
                         <div class="col-5 d-flex align-items-center justify-content-between">
-                            <button class="btn bgTerciario" routerLink="/auth/login">Iniciar sesión <i class="bi bi-person-check-fill"></i></button>
+                            <button class="btn bgTerciario" routerLink="/auth/login">Iniciar sesión <i
+                                    class="bi bi-person-check-fill"></i></button>
                             <button (click)="goBack()" class="btn outlineSecondary">Volver <i
                                     class="bi bi-arrow-counterclockwise"></i></button>
                         </div>
@@ -74,27 +75,27 @@
         </div>
         <div class="col-7 bg-white profile">
             <div class="row">
-                <div class="col-7 mt-4">
-                    <h3 class="text-center bold">{{user.name}} {{user.surnames}}</h3>
-                    <p class="d-flex justify-content-end mt-3">8 productos</p>
-                    <p class="d-flex justify-content-end mt-3"><span class="bold">Ubicación: &nbsp;</span> Albendín
-                        (Córdoba)</p>
+                <div class="col-7 mt-4 d-flex flex-column align-self-center">
+                    <h3 class="text-center bold mt-2">{{user.name}} {{user.surnames}}</h3>
+                    <p class="text-center mt-4">8 productos</p>
+                    <p class="text-center mt-4"><span class="bold">Ubicación: &nbsp;</span> {{user.location}}</p>
+                    <div class="col-12 d-flex justify-content-center">
+                        <button routerLink="/profile" [queryParams]="{'idUser': user.id}"
+                            class="btn bgSecundario mt-3">Visitar perfil <i
+                                class="bi bi-person-lines-fill"></i></button>
+                    </div>
                     <!-- <iframe
                         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d666.2203779737522!2d-4.478393117679868!3d37.4112044661761!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6d70ce974c2423%3A0x440c7613e1515361!2s14900%20Lucena%2C%20C%C3%B3rdoba!5e0!3m2!1ses!2ses!4v1649783284300!5m2!1ses!2ses"
                         class="map" allowfullscreen="true" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe> -->
-                    <google-map class="map" width="300px" height="200px" [center]="center" [zoom]="zoom">
-                    </google-map>
+                    <!-- <google-map class="map" width="300px" height="200px" [center]="center" [zoom]="zoom">
+                    </google-map> -->
                 </div>
 
                 <div class="col-5">
                     <div class="row">
-                        <div class="col-12 d-flex align-items-center">
+                        <div class="col-12 mt-4 d-flex align-items-center">
                             <img class="imgProfile mt-5" src="data:image/jpg;base64,{{user.img}}" alt="">
-                        </div>
-                        <div class="col-12 d-flex justify-content-center">
-                            <button routerLink="/profile" [queryParams]="{'idUser': user.id}"
-                                class="btn bgSecundario mt-4">Visitar perfil <i class="bi bi-person-lines-fill"></i></button>
                         </div>
                     </div>
                 </div>

@@ -13,7 +13,7 @@ import { Location } from '@angular/common';
 export class ProductViewComponent implements OnInit {
 
   center = { lat: 24, lng: 12 };
-  zoom = 15;
+  zoom = 20;
   display?: google.maps.LatLngLiteral;
 
   authUser!: User;

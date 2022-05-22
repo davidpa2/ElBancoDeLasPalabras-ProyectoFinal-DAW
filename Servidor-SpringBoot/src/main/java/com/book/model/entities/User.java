@@ -44,6 +44,8 @@ public class User implements Serializable {
 	private float rating;
 	
 	private String location;
+	
+	private String recoveryKey;
 
 	//bi-directional one-to-one association to Book
 	@OneToMany(mappedBy="user")
@@ -157,6 +159,14 @@ public class User implements Serializable {
 	
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	
+	public String getRecoveryKey() {
+		return this.recoveryKey;
+	}
+	
+	public void setRecoveryKey(String recoveryKey) {
+		this.recoveryKey = recoveryKey;
 	}
 	
 	public List<Book> getBooks() {

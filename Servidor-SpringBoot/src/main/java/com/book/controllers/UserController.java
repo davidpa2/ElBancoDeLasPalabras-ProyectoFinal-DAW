@@ -92,6 +92,7 @@ public class UserController {
 			u.setSurnames(datos.surnames);
 			u.setEmail(datos.email);
 			u.setPassword(datos.password);
+			u.setRecoveryKey("" + System.currentTimeMillis() / 1000L);
 			this.userRepo.save(u);
 			
 		} catch (Exception sqle) {

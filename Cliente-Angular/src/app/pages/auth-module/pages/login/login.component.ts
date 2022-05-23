@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JwtAutenticatorService } from 'src/app/services/jwt-autenticator.service';
 import { UserService } from 'src/app/services/user.service';
 import { Md5 } from 'ts-md5';
@@ -16,12 +16,17 @@ export class LoginComponent implements OnInit {
   showPass = false;
   submitted = false;
   invalid = false;
+  uploadedPassword = false;
   loginForm!: FormGroup;
 
   constructor(private userService: UserService, private router: Router, private jwtAutenticatorService: JwtAutenticatorService,
-    private _location: Location) { }
+    private _location: Location, private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.uploadedPassword = params['newPass'] || null;
+    });
+
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')]),
       pass: new FormControl('', [Validators.required])

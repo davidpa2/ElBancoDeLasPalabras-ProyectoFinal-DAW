@@ -97,7 +97,20 @@ export class UserService {
     return this.http.post<any>('/modifyUser', jsonUser)
   }
 
+  updatePassword(id: number, pass: String) {
+    let json = JSON.stringify({
+      id: id,
+      pass: pass
+    })
+
+    return this.http.post<any>('/updatePassword', json);
+  }
+
   getUserById(id: any) {
     return this.http.get<any>('/getUserById/' + id)
+  }
+
+  getUserByMail(mail: any) {
+    return this.http.get<any>('/getUserByMail/' + mail)
   }
 }

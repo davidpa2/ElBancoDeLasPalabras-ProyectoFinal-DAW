@@ -32,6 +32,7 @@ public class SendMailController {
 		sendMailService.sendMail(data.mail, subject, message);
 		System.out.println("Mandando mail a: " + data.mail);
 		
+		dto.put("key", user.getRecoveryKey());
 		dto.put("estado", "correcto");	
 		return dto;
 	}

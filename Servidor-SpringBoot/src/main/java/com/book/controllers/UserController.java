@@ -229,4 +229,34 @@ public class UserController {
 			this.location = location;
 		}
 	}
+	
+	@PostMapping("/updatePassword")
+	public DTO updatePassword(@RequestBody DataUpdatePass d) {
+
+		DTO dto = new DTO();
+		dto.put("estado", "error");
+
+		User user = userRepo.getById(d.id);
+
+		user.setPassword(d.pass);
+		user.setRecoveryKey("" + System.currentTimeMillis() / 1000L);
+
+		userRepo.save(user);
+
+		dto.put("estado", "correcto");
+		return dto;
+	}
+	
+	static class DataUpdatePass {
+		@JsonProperty("id")
+		int id;
+		@JsonProperty("pass")
+		String pass;
+
+		public DataUpdatePass(int id, String pass) {
+			super();
+			this.id = id;
+			this.pass = pass;
+		}
+	}
 }

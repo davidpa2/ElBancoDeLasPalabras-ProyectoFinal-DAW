@@ -29,11 +29,15 @@
 
             <div *ngIf="authUser.id" class="row mt-4">
                 <div class="col d-flex justify-content-center">
+                    <button (click)="goBack()" class="btn outlineSecondary">Volver <i
+                        class="bi bi-arrow-counterclockwise"></i></button>
+                </div>
+                <div class="col d-flex justify-content-center">
                     <button (click)="chooseBook()" class="btn bgSecundario">Intercambiar <i
                             class="bi bi-arrow-left-right"></i></button>
                 </div>
                 <div class="col d-flex justify-content-center">
-                    <button routerLink="/purchase/1" class="btn bgSecundario">COMPRAR <i
+                    <button routerLink="/purchase/1" class="btn bgSecundario">Comprar <i
                             class="bi bi-cart-check-fill"></i></button>
                 </div>
             </div>

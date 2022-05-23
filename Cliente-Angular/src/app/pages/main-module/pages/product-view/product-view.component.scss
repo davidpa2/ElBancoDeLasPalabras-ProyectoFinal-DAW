@@ -45,3 +45,57 @@
 .signIn {
     color: rgba(99, 61, 16, 1)
 }
+
+.modalCover {
+    height: 350px;
+}
+
+
+/* The Modal (background) */
+.modal {
+    /* Hidden by default */
+    display: none;
+    /* Stay in place */
+    position: fixed;
+    /* Sit on top */
+    z-index: 1;
+    left: 0;
+    top: 0;
+    /* Full width */
+    width: 100%;
+    /* Full height */
+    height: 100%;
+    /* Enable scroll if needed */
+    overflow: auto;
+    /* Fallback color */
+    background-color: rgb(0, 0, 0);
+    /* Black w/ opacity */
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: rgba(255, 240, 223, 1);
+    /* 15% from the top and centered */
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    /* Could be more or less, depending on screen size */
+    width: 80%;
+    border-radius: 15px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

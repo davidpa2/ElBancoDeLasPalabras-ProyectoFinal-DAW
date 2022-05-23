@@ -19,6 +19,9 @@ export class ProductViewComponent implements OnInit {
   authUser!: User;
   user!: User;
   book!: Book;
+  bookList: Book[] = [];
+
+  showModal = false;
 
   constructor(private bookService: BookService, private userService: UserService, private route: ActivatedRoute, private _location: Location) { }
 
@@ -45,6 +48,20 @@ export class ProductViewComponent implements OnInit {
         this.user = data['user'];
       }
     });
+  }
+
+  chooseBook() {
+    this.showModal = true;
+
+    if (!this.bookList.length) {
+      this.bookService.findBooksByUserId(this.authUser.id).subscribe(data => {
+        if (data['estado'] == 'correcto') {
+          data.bookList.forEach((b: Book) => {
+            this.bookList.push(b);
+          });
+        }
+      })
+    }
   }
 
   recuperarUsuarioLog() {

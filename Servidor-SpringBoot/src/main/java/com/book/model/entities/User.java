@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "user")
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@NamedQuery(name="User.getUserByMail", query="SELECT u FROM User u where email = ?1")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 

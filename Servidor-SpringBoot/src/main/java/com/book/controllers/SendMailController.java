@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.book.model.entities.User;
+import com.book.repository.UserRepository;
 import com.book.service.SendMailService;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,18 +17,22 @@ public class SendMailController {
 	
 	@Autowired
 	private SendMailService sendMailService;
+	@Autowired
+	private UserRepository userRepo;
 
 	@PostMapping("/sendMail")
 	public DTO sendMail(@RequestBody DataSendmail data) {
 		DTO dto = new DTO();
+
+		User user = userRepo.getById(data.idUser);
 		
 		String subject = "Recuperación de contraseña";
-		String message = "Hola!";
+		String message = "Su código de recuperación de contraseña es: " + user.getRecoveryKey();
 		
 		sendMailService.sendMail(data.mail, subject, message);
 		System.out.println("Mandando mail a: " + data.mail);
-		dto.put("estado", "correcto");
 		
+		dto.put("estado", "correcto");	
 		return dto;
 	}
 	
@@ -36,12 +42,15 @@ public class SendMailController {
 	static class DataSendmail {
 		@JsonProperty("mail")
 		String mail;
+		@JsonProperty("idUser")
+		int idUser;
 
 		public DataSendmail() { }
 		
-		public DataSendmail(String mail) {
+		public DataSendmail(String mail, int idUser) {
 			super();
 			this.mail = mail;
+			this.idUser = idUser;
 		}
 	}
 }

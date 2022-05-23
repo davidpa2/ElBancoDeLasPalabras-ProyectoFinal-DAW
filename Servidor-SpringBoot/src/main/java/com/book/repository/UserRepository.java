@@ -11,4 +11,5 @@ import com.book.model.entities.User;
 public interface UserRepository extends JpaRepository<User, Serializable>{
 	
 	public User findByEmailAndPassword(String email,String password);
+	public abstract User getUserByMail(String mail);
 }

@@ -10,7 +10,7 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  uploadBook(title: string, author: string,  description: string, state: number, price: string, img: string, user: User): Observable<Book> {
+  uploadBook(title: string, author: string, description: string, state: number, price: string, img: string, user: User): Observable<Book> {
     var jsonObject = {
       title: title,
       author: author,
@@ -24,7 +24,7 @@ export class BookService {
     return this.http.post<Book>('/uploadBook', jsonObject);
   }
 
-  updateBook(id: number, title: string, author: string,  description: string, state: number, price: string, img: string): Observable<Book> {
+  updateBook(id: number, title: string, author: string, description: string, state: number, price: string, img: string): Observable<Book> {
     var jsonObject = {
       id: id,
       title: title,
@@ -38,7 +38,7 @@ export class BookService {
     return this.http.post<any>('/updateBook', jsonObject);
   }
 
-  lookForABook(search: String, id: number): Observable<any>{
+  lookForABook(search: String, id: number): Observable<any> {
     return this.http.get<any>('/lookForABook/' + search + '/' + id)
   }
 
@@ -50,12 +50,20 @@ export class BookService {
     return this.http.get<any>('/deleteBook/' + id);
   }
 
-  findBooksByUserId(id: any): Observable<any> {
+  findBooksByUserId(id: any, authenticated: boolean): Observable<any> {
     //http.get() manda una solicitud http y devuelve un objeto Observable que emite los datos solicitados
-    return this.http.get<any>('/findByUserId/' + id);
+    return this.http.get<any>('/findByUserId/' + id + '/' + authenticated);
+  }
+
+  getBuyReservedBooks(id: any): Observable<any> {
+    return this.http.get<any>('/getBuyReservedBooks/' + id);
   }
 
   getBookById(id: any) {
     return this.http.get<any>('/getBookById/' + id)
+  }
+
+  reserveBook(idBook: number, idBuyer: number, action: number = 1 | 2): Observable<any> {
+    return this.http.get<any>('/reserveBook/' + idBook + '/' + idBuyer + '/' + action);
   }
 }

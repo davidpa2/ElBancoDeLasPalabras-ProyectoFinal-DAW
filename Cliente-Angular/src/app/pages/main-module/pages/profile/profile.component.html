@@ -56,7 +56,12 @@
                 <h3>¿Todavía no has subido ningún libro?</h3>
                 <h4>¡Vamos a desempolvar la estantería!</h4>
             </div>
-            <div class="col-6 col-sm-4 col-md-3 mt-3" *ngFor="let book of uploadedBooksList">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-3" *ngFor="let book of uploadedBooksList">
+                <div *ngIf="book.state == '-1'" routerLink="/confirmExchanges" class="reservedMark d-flex align-items-center">
+                    <i class="bi bi-bookmark-star-fill"></i>
+                    <span>Reservado</span>
+                </div>
+                
                 <div class="row bg-white">
                     <div class="col-12 d-flex justify-content-center mt-3">
                         <img class="thumbnail" src="data:image/jpg;base64,{{book.img}}" alt="">
@@ -72,7 +77,7 @@
                 </div>
             </div>
     
-            <a *ngIf="!userId" routerLink="/uploadBook">
+            <a class="uploadLink" *ngIf="!userId" routerLink="/uploadBook">
                 <div class="upload d-flex align-items-center">
                     <p class="text mt-2">Subir un libro</p>&nbsp;
                     <i class="bi bi-plus-circle-fill"></i>

@@ -91,3 +91,33 @@ button i {
 .justUploaded {
     border-radius: 15px;
 }
+
+.reservedMark {
+    position: absolute;
+    cursor: pointer;
+    color: rgba(211, 149, 75, 1);
+    /* color: rgba(99, 61, 16, 1); */
+    -webkit-text-stroke: 1px white;
+
+    span {
+        font-size: 20px !important;
+        background-color: rgba(255, 255, 255, 0.6);
+        -webkit-text-stroke: 1px black !important;
+    }
+
+    i {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .uploadLink {
+        display: none;
+    }
+}
+
+@media (max-width: 575px) {
+    .reservedMark {
+        margin-left: 15vw;
+    }
+}

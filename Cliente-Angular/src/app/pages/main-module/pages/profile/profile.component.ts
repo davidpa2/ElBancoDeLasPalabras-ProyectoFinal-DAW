@@ -31,10 +31,10 @@ export class ProfileComponent implements OnInit {
       // Visitar perfil de usuario autenticado
       if (!this.userId) {
         this.recuperarUsuarioLog();
-        this.getBooks(this.user.id); // Llamada a getBooks por separado para evitar problemas al reusar la vista profile
+        this.getBooks(this.user.id, true); // Llamada a getBooks por separado para evitar problemas al reusar la vista profile
       } else { // Visitando otro perfil
         this.getUserById(this.userId);
-        this.getBooks(this.userId);
+        this.getBooks(this.userId, false);
       }
     });
 
@@ -53,9 +53,9 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  getBooks(id: any) {
+  getBooks(id: any, authenticated: boolean) {
     this.uploadedBooksList = []; //Asegurar que la lista está vacía
-    this.bookService.findBooksByUserId(id).subscribe(result => {
+    this.bookService.findBooksByUserId(id, authenticated).subscribe(result => {
       if (result['estado'] != "error") {
         result.bookList.forEach((b: Book) => {
           this.uploadedBooksList.push(b)
@@ -86,7 +86,7 @@ export class ProfileComponent implements OnInit {
   }
 
   scrollUp() {
-    window.requestAnimationFrame(this.scrollUp)
+    /* window.requestAnimationFrame(this.scrollUp) */
     /* window.scrollTo(0, document.documentElement.scrollTop - (document.documentElement.scrollTop / 10)) */
     window.scrollTo(0, 0)
   }

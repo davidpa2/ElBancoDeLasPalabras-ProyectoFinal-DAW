@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @NamedQuery(name="Book.findByUserIdAutenticated", query="SELECT b FROM Book b where user_id = ?1 and (state > 0 or state = -1)")
 @NamedQuery(name="Book.getAllBooksForSale", query="SELECT b FROM Book b where user_id != ?1 and state > 0")
 @NamedQuery(name="Book.getAllBooks", query="SELECT b FROM Book b where state > 0")
+@NamedQuery(name="Book.getBuyReservedBooks", query="SELECT b FROM Book b where state = -1 and buyer_id != null and user_id = ?1")
 // @NamedQuery(name="Book.lookForABook", query="SELECT b FROM Book b where state != -1 and title like %?1%")
 public class Book implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -114,7 +115,7 @@ public class Book implements Serializable {
 		this.title = title;
 	}
 	
-	public Integer setBuyer_id() {
+	public Integer getBuyer_id() {
 		return this.buyer_id;
 	}
 	

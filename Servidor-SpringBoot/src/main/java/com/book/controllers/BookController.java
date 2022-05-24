@@ -295,4 +295,27 @@ public class BookController {
 		dto.put("estado", "correcto");
 		return dto;
 	}
+	
+	@RequestMapping("/getBuyReservedBooks/{id}")
+	public DTO getBuyReservedBooks(@PathVariable(value="id") int id) {
+		DTO dto = new DTO();
+		dto.put("estado", "correcto");
+		
+		List <Book> bookList = new ArrayList<Book>();
+
+
+		bookList = bookRepo.getBuyReservedBooks(id);
+		
+		//Guardar en una lista los dueños de cada libro en el mismo orden
+		List <User> userList = new ArrayList<User>();
+		for (Book b : bookList) {
+			userList.add(userRepo.getById(b.getBuyer_id()));
+		}
+			
+		dto.put("books", bookList);
+		dto.put("users",userList);
+		dto.put("estado", "correcto");
+		
+		return dto;
+	}
 }

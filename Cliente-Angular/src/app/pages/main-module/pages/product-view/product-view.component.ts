@@ -24,6 +24,7 @@ export class ProductViewComponent implements OnInit {
   showModal = false;
   showPurchaseModal = false;
   reserved = false;
+  reserveError = false;
 
   constructor(private bookService: BookService, private userService: UserService, private route: ActivatedRoute, private _location: Location) { 
     
@@ -59,7 +60,7 @@ export class ProductViewComponent implements OnInit {
     this.showModal = true;
 
     if (!this.bookList.length) {
-      this.bookService.findBooksByUserId(this.authUser.id).subscribe(data => {
+      this.bookService.findBooksByUserId(this.authUser.id, true).subscribe(data => {
         if (data['estado'] == 'correcto') {
           data.bookList.forEach((b: Book) => {
             this.bookList.push(b);
@@ -70,8 +71,15 @@ export class ProductViewComponent implements OnInit {
   }
 
   confirmPurchase() {
-    this.reserved = true;
     this.showPurchaseModal = false;
+
+    this.bookService.reserveBook(this.book.id, this.authUser.id, 1).subscribe(data => {
+      if (data['estado'] == 'correcto') {
+        this.reserved = true;
+      } else {
+        this.reserveError = true;
+      }
+    })
   }
 
   recuperarUsuarioLog() {

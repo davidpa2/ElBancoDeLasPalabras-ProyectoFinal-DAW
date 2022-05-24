@@ -1,6 +1,9 @@
 <div *ngIf="reserved" class="mt-4 container text-center alert alert-warning">
     Se ha reservado el libro, será el dueño el que se ponga en contacto contigo.
 </div>
+<div *ngIf="reserveError" class="mt-4 container text-center alert alert-warning">
+    No se ha podido reservar el libro.
+</div>
 
 <div class="container mt-4">
     <div class="row book">

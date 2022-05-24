@@ -71,7 +71,7 @@ export class ProductsComponent implements OnInit {
   }
 
   scrollUp() {
-    window.requestAnimationFrame(this.scrollUp)
+    /* window.requestAnimationFrame(this.scrollUp) */
     /* window.scrollTo(0, document.documentElement.scrollTop - (document.documentElement.scrollTop / 10)) */
     window.scrollTo(0, 0)
   }

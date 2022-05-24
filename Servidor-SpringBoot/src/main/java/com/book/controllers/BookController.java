@@ -168,7 +168,7 @@ public class BookController {
 		// localizar el libro por su id
 		Book book = this.bookRepo.getById(id);
 		// Lo eliminaremos poniendo su estado en -1
-		book.setState(-1);
+		book.setState(0);
 		//Guardar el libro
 		bookRepo.save(book);
 

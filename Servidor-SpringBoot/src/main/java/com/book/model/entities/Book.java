@@ -13,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "book")
 @NamedQuery(name="Book.findAll", query="SELECT b FROM Book b")
-@NamedQuery(name="Book.findByUserId", query="SELECT b FROM Book b where user_id = ?1 and state != -1")
-@NamedQuery(name="Book.getAllBooksForSale", query="SELECT b FROM Book b where user_id != ?1 and state != -1")
-@NamedQuery(name="Book.getAllBooks", query="SELECT b FROM Book b where state != -1")
+@NamedQuery(name="Book.findByUserId", query="SELECT b FROM Book b where user_id = ?1 and state > 0")
+@NamedQuery(name="Book.getAllBooksForSale", query="SELECT b FROM Book b where user_id != ?1 and state > 0")
+@NamedQuery(name="Book.getAllBooks", query="SELECT b FROM Book b where state > 0")
 // @NamedQuery(name="Book.lookForABook", query="SELECT b FROM Book b where state != -1 and title like %?1%")
 public class Book implements Serializable {
 	private static final long serialVersionUID = 1L;

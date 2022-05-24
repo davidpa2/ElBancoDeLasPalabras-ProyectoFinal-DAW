@@ -182,15 +182,23 @@ public class BookController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping("/findByUserId/{id}")
-	public DTO findByUserId(@PathVariable(value="id") int id) {
+	@RequestMapping(value="/findByUserId/{id}/{authenticated}")
+	public DTO findByUserId(@PathVariable(value="id") int id, @PathVariable(value="authenticated") boolean authenticated) {
 		DTO dto = new DTO();
 		// asumimos que va a salir mal
 		dto.put("estado", "error");
 		// lista de dto que meteremos en dto que devolveremos
 		List<DTO> dtoBooks = new ArrayList<DTO>();
-		// buscamos todos los libros según el id del usuario
-		List<Book> bookList = this.bookRepo.findByUserId(id);
+		
+		List<Book> bookList = new ArrayList<Book>();
+		
+		if (authenticated) {			
+			// buscamos todos los libros según el id del usuario
+			bookList = this.bookRepo.findByUserIdAutenticated(id);
+		} else {
+			// buscamos todos los libros segú
+			bookList = this.bookRepo.findByUserId(id);
+		}
 
 		for (Book b : bookList) {
 			DTO books = new DTO();
@@ -251,6 +259,40 @@ public class BookController {
 		dto.put("estado", "correcto");
 		dto.put("userList", userList);
 		dto.put("bookList", dtoBooks);
+		return dto;
+	}
+	
+	@RequestMapping(value="/reserveBook/{idBook}/{idBuyer}/{action}", method = RequestMethod.GET)
+	public DTO reserveBook(@PathVariable(value="idBook") int idBook, @PathVariable(value="idBuyer") int idBuyer,
+			@PathVariable(value="action") int action) {
+		
+		DTO dto = new DTO();
+		// asumimos que va a salir mal
+		dto.put("estado", "error");
+
+		// localizar el libro por su id
+		Book book = this.bookRepo.getById(idBook);
+		
+		
+		switch (action) {
+		case 1: { // Si la acción es 1 quiere decir que estamos reservando el libro para comprarlo
+			book.setState(-1);
+			book.setBuyer_id(idBuyer);
+			break;
+		}
+		case 2: {
+			
+			break;
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + action);
+		}
+		
+		//Guardar los cambios realizados en el libro
+		bookRepo.save(book);
+
+		//Si todo hay ido bien asignamos el estado como correcto y devolvemos el dto con la lista de libros
+		dto.put("estado", "correcto");
 		return dto;
 	}
 }

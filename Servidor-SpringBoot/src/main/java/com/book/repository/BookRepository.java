@@ -13,6 +13,7 @@ import com.book.model.entities.Book;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Serializable>{
 	public abstract List<Book> findByUserId(int idUser);
+	public abstract List<Book> findByUserIdAutenticated(int idUser);
 	public abstract List<Book> getAllBooksForSale(int idUser);
 	public abstract List<Book> getAllBooks();
 	@Query("SELECT b FROM Book b where user_id != :userId and state > 0 and (title like %:search% or author like %:search%)")

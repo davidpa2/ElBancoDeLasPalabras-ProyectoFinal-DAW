@@ -22,14 +22,16 @@ export class ProductViewComponent implements OnInit {
   bookList: Book[] = [];
 
   showModal = false;
+  showPurchaseModal = false;
+  reserved = false;
 
-  constructor(private bookService: BookService, private userService: UserService, private route: ActivatedRoute, private _location: Location) { }
+  constructor(private bookService: BookService, private userService: UserService, private route: ActivatedRoute, private _location: Location) { 
+    
+  }
 
   ngOnInit(): void {
     this.getBookAndUserById();
     this.recuperarUsuarioLog();
-    console.log(this.user.id);
-    
   }
 
   /**
@@ -38,9 +40,12 @@ export class ProductViewComponent implements OnInit {
   getBookAndUserById() {
     this.bookService.getBookById(this.route.snapshot.params['bookId']).subscribe(data => {
       if (data['estado'] == "correcto") {
-        console.log(data);
         this.book = data['book'];
-        console.log(this.book.state);
+
+        //Comprobamos si el libro que se ha solicitado está reservado
+        if (data['book'].state == '-1') {
+          this.reserved = true;
+        }
       }
     });
     this.userService.getUserById(this.route.snapshot.params['userId']).subscribe(data => {
@@ -62,6 +67,11 @@ export class ProductViewComponent implements OnInit {
         }
       })
     }
+  }
+
+  confirmPurchase() {
+    this.reserved = true;
+    this.showPurchaseModal = false;
   }
 
   recuperarUsuarioLog() {

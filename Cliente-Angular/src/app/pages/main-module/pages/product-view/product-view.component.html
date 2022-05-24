@@ -1,3 +1,7 @@
+<div *ngIf="reserved" class="mt-4 container text-center alert alert-warning">
+    Se ha reservado el libro, será el dueño el que se ponga en contacto contigo.
+</div>
+
 <div class="container mt-4">
     <div class="row book">
         <div class="col-4 bgPrimario colImg">
@@ -29,16 +33,17 @@
 
             <div *ngIf="authUser.id" class="row mt-4">
                 <div class="col d-flex justify-content-center">
-                    <button (click)="goBack()" class="btn outlineSecondary">Volver <i
-                        class="bi bi-arrow-counterclockwise"></i></button>
+                    <button (click)="goBack()" class="btn outlineSecondary">Volver
+                        <i class="bi bi-arrow-counterclockwise"></i></button>
                 </div>
                 <div class="col d-flex justify-content-center">
-                    <button (click)="chooseBook()" class="btn bgSecundario">Intercambiar <i
-                            class="bi bi-arrow-left-right"></i></button>
+                    <button [disabled]="reserved ? true : false" (click)="chooseBook()"
+                        class="btn bgSecundario">Intercambiar <i class="bi bi-arrow-left-right"></i></button>
                 </div>
                 <div class="col d-flex justify-content-center">
-                    <button routerLink="/purchase/1" class="btn bgSecundario">Comprar <i
-                            class="bi bi-cart-check-fill"></i></button>
+                    <button [disabled]="reserved ? true : false" (click)="showPurchaseModal = true"
+                        class="btn bgSecundario">Comprar <i class="bi bi-cart-check-fill"></i></button>
+                    <!-- routerLink="/purchase/1" -->
                 </div>
             </div>
             <div *ngIf="!authUser.id" class="row mt-4">
@@ -114,7 +119,10 @@
     <div class="modal-content">
         <div class="row mb-4">
             <div class="col-11">
-                <h2 class="text-center mt-3 ms-5">Seleccione uno de sus libros para intercambiar</h2>
+                <h2 *ngIf="bookList.length" class="text-center mt-3 ms-5">Seleccione uno de sus libros para intercambiar
+                </h2>
+                <h2 *ngIf="!bookList.length" class="text-center mt-3 ms-5">¡Vaya, parece que no tienes ningún libro para
+                    intercambiar!</h2>
             </div>
             <div class="col-1">
                 <i class="bi bi-x close" (click)="showModal = false"></i>
@@ -143,7 +151,44 @@
         </div>
         <div class="row d-flex justify-content-center">
             <div class="col-6 d-flex justify-content-center">
-                <button class="btn outlineSecondary" (click)="showModal = false">Cancelar <i class="bi bi-arrow-counterclockwise"></i></button>
+                <button class="btn outlineSecondary" (click)="showModal = false">Cancelar <i
+                        class="bi bi-arrow-counterclockwise"></i></button>
+            </div>
+            <div class="col-6 d-flex justify-content-center">
+                <button routerLink="/uploadBook" class="btn bgSecundario">Subir un libro <i
+                        class="bi bi-arrow-up-circle"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal" [style]="showPurchaseModal ? 'display: block;' : 'display: none;'">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="row mb-4 d-flex justify-content-center">
+            <div class="col-11">
+                <h2 class="text-center mt-3 ms-5">¿Quieres comprar el libro "{{book.title}}"?
+                </h2>
+            </div>
+            <div class="col-1">
+                <i class="bi bi-x close" (click)="showPurchaseModal = false"></i>
+            </div>
+            <div class="col-10">
+                <p class="text-center">Al hacer click en <span class="bold">"Confirmar compra"</span> se le informará al
+                    dueño del libro de tu solicitud y será él quien decidirá si
+                    aceptar la compra y ponerse en contacto contigo.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 d-flex justify-content-end">
+                <button class="btn outlineSecondary" (click)="showPurchaseModal = false">Cancelar <i
+                        class="bi bi-arrow-counterclockwise"></i></button>
+            </div>
+            <div class="col-6 d-flex justify-content-start">
+                <button (click)="confirmPurchase()" class="btn bgSecundario">Confirmar compra <i
+                        class="bi bi-arrow-up-circle"></i></button>
             </div>
         </div>
     </div>

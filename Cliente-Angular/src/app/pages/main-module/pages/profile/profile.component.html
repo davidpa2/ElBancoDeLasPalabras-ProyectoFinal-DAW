@@ -52,6 +52,10 @@
         </div>
     
         <div *ngIf="tabSelected == 1" class="row board d-flex justify-content-center">
+            <div *ngIf="!uploadedBooksList.length" class="text-white my-4 text-center">
+                <h3>¿Todavía no has subido ningún libro?</h3>
+                <h4>¡Vamos a desempolvar la estantería!</h4>
+            </div>
             <div class="col-6 col-sm-4 col-md-3 mt-3" *ngFor="let book of uploadedBooksList">
                 <div class="row bg-white">
                     <div class="col-12 d-flex justify-content-center mt-3">

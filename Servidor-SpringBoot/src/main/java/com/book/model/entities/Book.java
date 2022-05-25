@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "book")
 @NamedQuery(name="Book.findAll", query="SELECT b FROM Book b")
 @NamedQuery(name="Book.findByUserId", query="SELECT b FROM Book b where user_id = ?1 and state > 0")
-@NamedQuery(name="Book.findByUserIdAutenticated", query="SELECT b FROM Book b where user_id = ?1 and (state > 0 or state = -1)")
+@NamedQuery(name="Book.findByUserIdAutenticated", query="SELECT b FROM Book b where user_id = ?1 and (state > 0 or reserved > 0)")
 @NamedQuery(name="Book.getAllBooksForSale", query="SELECT b FROM Book b where user_id != ?1 and state > 0")
 @NamedQuery(name="Book.getAllBooks", query="SELECT b FROM Book b where state > 0")
 @NamedQuery(name="Book.getBuyReservedBooks", query="SELECT b FROM Book b where state = -1 and buyer_id != null and user_id = ?1")
@@ -39,6 +39,8 @@ public class Book implements Serializable {
 
 	private String title;
 
+	private Integer reserved;
+	
 	private Integer buyer_id;
 	
 	//bi-directional many-to-one association to User
@@ -113,6 +115,14 @@ public class Book implements Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public Integer getReserved() {
+		return this.reserved;
+	}
+
+	public void setReserved(Integer reserved) {
+		this.reserved = reserved;
 	}
 	
 	public Integer getBuyer_id() {

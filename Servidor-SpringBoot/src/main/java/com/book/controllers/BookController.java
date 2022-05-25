@@ -146,7 +146,8 @@ public class BookController {
 		@JsonProperty("user")
 		User user;
 
-		public DataUploadBook(int id, String title, String author, String description, int state, String price, byte[] img, User user) {
+		public DataUploadBook(int id, String title, String author, String description, int state, String price, 
+				byte[] img, User user) {
 			super();
 			this.id = id;
 			this.title = title;
@@ -210,6 +211,7 @@ public class BookController {
 			books.put("state", b.getState());
 			books.put("price", b.getPrice());
 			books.put("img", b.getImg());
+			books.put("reserved", b.getReserved());
 			// metemos cada dto en la lista dtos
 			dtoBooks.add(books);
 		}
@@ -246,6 +248,7 @@ public class BookController {
 			books.put("state", b.getState());
 			books.put("price", b.getPrice());
 			books.put("img", b.getImg());
+			books.put("reserved", b.getReserved());
 			// metemos cada dto en la lista dtos
 			dtoBooks.add(books);
 		}
@@ -276,7 +279,7 @@ public class BookController {
 		
 		switch (action) {
 		case 1: { // Si la acción es 1 quiere decir que estamos reservando el libro para comprarlo
-			book.setState(-1);
+			book.setReserved(1);
 			book.setBuyer_id(idBuyer);
 			break;
 		}

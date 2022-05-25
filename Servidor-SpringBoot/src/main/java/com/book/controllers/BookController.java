@@ -321,4 +321,21 @@ public class BookController {
 		
 		return dto;
 	}
+	
+	@GetMapping("/sellBook/{id}")
+	public DTO sellBook(@PathVariable(value="id") int id) {
+		DTO dto = new DTO();
+		dto.put("estado", "correcto");
+		
+		Book book = bookRepo.getById(id);
+		
+		// Vamos a entender que al poner reservado como -1 será que se ha terminado comprando el libro
+		book.setReserved(-1);
+		
+		bookRepo.save(book);
+		
+		dto.put("estado", "correcto");
+		
+		return dto;
+	}
 }

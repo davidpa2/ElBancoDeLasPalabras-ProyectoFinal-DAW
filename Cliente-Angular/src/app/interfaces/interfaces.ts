@@ -21,6 +21,7 @@ export interface Book {
     state: string,
     price: string,
     img: string,
+    reserved: number,
     idBuyer: User | null,
     user_id: User | null
 }

@@ -58,6 +58,8 @@ export class ProfileComponent implements OnInit {
     this.bookService.findBooksByUserId(id, authenticated).subscribe(result => {
       if (result['estado'] != "error") {
         result.bookList.forEach((b: Book) => {
+          console.log(b.reserved);
+          
           this.uploadedBooksList.push(b)
         });
       }

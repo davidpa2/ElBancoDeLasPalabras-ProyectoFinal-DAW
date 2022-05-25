@@ -19,7 +19,7 @@ export class UploadBookComponent implements OnInit {
   bookImg!: string;
   user!: User;
   book: Book = {
-    id: 0, title: '', author: '', description: '', state: '', price: '', img: '', idBuyer: null, user_id: null
+    id: 0, title: '', author: '', description: '', state: '', price: '', img: '', idBuyer: null, user_id: null, reserved: 0
   };
 
   constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router, private _location: Location) { }

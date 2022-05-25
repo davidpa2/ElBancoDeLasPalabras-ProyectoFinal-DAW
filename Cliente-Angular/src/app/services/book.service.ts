@@ -55,6 +55,10 @@ export class BookService {
     return this.http.get<any>('/findByUserId/' + id + '/' + authenticated);
   }
 
+  sellBook(id: number): Observable<any> {
+    return this.http.get<any>('/sellBook/' + id);
+  }
+
   getBuyReservedBooks(id: any): Observable<any> {
     return this.http.get<any>('/getBuyReservedBooks/' + id);
   }

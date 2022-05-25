@@ -13,6 +13,9 @@ export class ConfirmExchangesComponent implements OnInit {
   bookBuyReservedList: Book[] = [];
   userBuyReservedList: User[] = [];
 
+  showConfirmModal = false;
+  bookSelected = 0; 
+
   constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
@@ -26,6 +29,16 @@ export class ConfirmExchangesComponent implements OnInit {
       if (data['estado'] == 'correcto') {
         this.bookBuyReservedList = data['books'];
         this.userBuyReservedList = data['users'];
+      }
+    })
+  }
+
+  confirmPurchase(id: any) {
+    this.showConfirmModal = false;
+    this.bookService.sellBook(id).subscribe(data => {
+      if (data['estado'] = 'correcto') {
+        console.log(' SE HA VENDIDO EL LIBRO ');
+        
       }
     })
   }

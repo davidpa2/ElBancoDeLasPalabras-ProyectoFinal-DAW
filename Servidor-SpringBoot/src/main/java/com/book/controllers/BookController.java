@@ -265,9 +265,8 @@ public class BookController {
 		return dto;
 	}
 	
-	@RequestMapping(value="/reserveBook/{idBook}/{idBuyer}/{action}", method = RequestMethod.GET)
-	public DTO reserveBook(@PathVariable(value="idBook") int idBook, @PathVariable(value="idBuyer") int idBuyer,
-			@PathVariable(value="action") int action) {
+	@RequestMapping(value="/reserveBuyBook/{idBook}/{idBuyer}", method = RequestMethod.GET)
+	public DTO reserveBook(@PathVariable(value="idBook") int idBook, @PathVariable(value="idBuyer") int idBuyer) {
 		
 		DTO dto = new DTO();
 		// asumimos que va a salir mal
@@ -276,21 +275,9 @@ public class BookController {
 		// localizar el libro por su id
 		Book book = this.bookRepo.getById(idBook);
 		
-		
-		switch (action) {
-		case 1: { // Si la acción es 1 quiere decir que estamos reservando el libro para comprarlo
-			book.setReserved(1);
-			book.setBuyer_id(idBuyer);
-			break;
-		}
-		case 2: {
-			
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + action);
-		}
-		
+		book.setReserved(1);
+		book.setBuyer_id(idBuyer);
+
 		//Guardar los cambios realizados en el libro
 		bookRepo.save(book);
 

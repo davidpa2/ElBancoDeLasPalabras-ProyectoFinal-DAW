@@ -42,6 +42,7 @@ export class ConfirmExchangesComponent implements OnInit {
         console.log(' SE HA VENDIDO EL LIBRO ');
         this.soldBook = title;
         this.getBuyReservedBooks();
+        this.scrollUp();
       }
     })
   }
@@ -52,5 +53,9 @@ export class ConfirmExchangesComponent implements OnInit {
 
   goBack() {
     this._location.back();
+  }
+
+  scrollUp() {
+    window.scrollTo(0, 0)
   }
 }

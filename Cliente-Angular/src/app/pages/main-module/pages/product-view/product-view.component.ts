@@ -17,7 +17,7 @@ export class ProductViewComponent implements OnInit {
   display?: google.maps.LatLngLiteral;
 
   authUser!: User;
-  user!: User;
+  userOwner!: User;
   book!: Book;
   bookList: Book[] = [];
 
@@ -26,13 +26,15 @@ export class ProductViewComponent implements OnInit {
   reserved = false;
   reserveError = false;
 
-  constructor(private bookService: BookService, private userService: UserService, private route: ActivatedRoute, private _location: Location) { 
-    
+  constructor(private bookService: BookService, private userService: UserService, private route: ActivatedRoute, private _location: Location) {
+
   }
 
   ngOnInit(): void {
     this.getBookAndUserById();
     this.recuperarUsuarioLog();
+    console.log(this.userOwner);
+    
   }
 
   /**
@@ -42,16 +44,15 @@ export class ProductViewComponent implements OnInit {
     this.bookService.getBookById(this.route.snapshot.params['bookId']).subscribe(data => {
       if (data['estado'] == "correcto") {
         this.book = data['book'];
-
         //Comprobamos si el libro que se ha solicitado está reservado
-        if (data['book'].state == '-1') {
+        if (data['book'].reserved == '1') {
           this.reserved = true;
         }
       }
     });
     this.userService.getUserById(this.route.snapshot.params['userId']).subscribe(data => {
       if (data['estado'] == "correcto") {
-        this.user = data['user'];
+        this.userOwner = data['user'];
       }
     });
   }
@@ -73,7 +74,7 @@ export class ProductViewComponent implements OnInit {
   confirmPurchase() {
     this.showPurchaseModal = false;
 
-    this.bookService.reserveBook(this.book.id, this.authUser.id, 1).subscribe(data => {
+    this.bookService.reserveBuyBook(this.book.id, this.authUser.id).subscribe(data => {
       if (data['estado'] == 'correcto') {
         this.reserved = true;
       } else {
@@ -81,6 +82,17 @@ export class ProductViewComponent implements OnInit {
       }
     })
   }
+
+  confirmExchange(idBookP: Book, idUserOwner: number) {
+    this.showModal = false;
+    // Vamos a proceder a reservar ambos libros
+    this.bookService.reserveExchangeBook(idBookP, this.authUser, this.book.id, idUserOwner).subscribe(data => {
+      if (data['estado'] == 'correcto') {
+        this.reserved = true;
+      }
+    })
+  }
+
 
   recuperarUsuarioLog() {
     this.authUser = JSON.parse(localStorage.getItem("authenticatedUser") || '{}')

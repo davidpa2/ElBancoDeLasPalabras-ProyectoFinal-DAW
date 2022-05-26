@@ -67,7 +67,25 @@ export class BookService {
     return this.http.get<any>('/getBookById/' + id)
   }
 
-  reserveBook(idBook: number, idBuyer: number, action: number = 1 | 2): Observable<any> {
-    return this.http.get<any>('/reserveBook/' + idBook + '/' + idBuyer + '/' + action);
+  reserveBuyBook(idBook: number, idBuyer: number): Observable<any> {
+    return this.http.get<any>('/reserveBuyBook/' + idBook + '/' + idBuyer);
+  }
+
+  /**
+   * Método usado para reservar un libro cuando se quiere intercambiar
+   * @param idBookP id del libro de quien está solicitando intercambio
+   * @param idPetitioner id del usuario que está solicitando intercambio
+   * @param idBookO id del libro del dueño del libro que se está solicitando
+   * @param idOwner id del dueño del libro que se está solicitando
+   * @returns 
+   */
+  reserveExchangeBook(idBookP: Book, idPetitioner: User, idBookO: number, idOwner: number): Observable<any> {
+    var jsonObject = {
+      bookP: idBookP,
+      petitioner: idPetitioner,
+      bookO: idBookO,
+      owner: idOwner,
+    };
+    return this.http.post<any>('/reserveExchangeBook', jsonObject);
   }
 }

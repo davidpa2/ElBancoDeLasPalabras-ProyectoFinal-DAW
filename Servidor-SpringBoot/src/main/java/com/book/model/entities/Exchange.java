@@ -21,43 +21,22 @@ public class Exchange implements Serializable {
 
 	private String date;
 
-	private int idBookP;
-
-	private int idBookT;
-
-	private int idPetitioner;
-
-	private int idTitular;
-
-	//bi-directional one-to-one association to Book
-	@OneToOne
-	@JoinColumn(name="id")
-	@JsonIgnore
-	private Book book1;
-
-	//bi-directional one-to-one association to Book
-	@OneToOne
-	@JoinColumn(name="id")
-	@JsonIgnore
-	private Book book2;
-
-	//bi-directional one-to-one association to User
-	@OneToOne
-	@JoinColumn(name="id")
-	@JsonIgnore
-	private User user1;
-
-	//bi-directional one-to-one association to User
-	@OneToOne
-	@JoinColumn(name="id")
-	@JsonIgnore
-	private User user2;
+	@ManyToOne
+	private User userP;
+	
+	@ManyToOne
+	private Book bookP;
+	
+	private int idUserO;
+	
+	private int idBookO;
 
 	public Exchange() {
+		
 	}
-
+	
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(int id) {
@@ -65,75 +44,42 @@ public class Exchange implements Serializable {
 	}
 
 	public String getDate() {
-		return this.date;
+		return date;
 	}
 
 	public void setDate(String date) {
 		this.date = date;
 	}
 
-	public int getIdBookP() {
-		return this.idBookP;
+	public User getUserP() {
+		return userP;
 	}
 
-	public void setIdBookP(int idBookP) {
-		this.idBookP = idBookP;
+	public void setUserP(User userP) {
+		this.userP = userP;
 	}
 
-	public int getIdBookT() {
-		return this.idBookT;
+	public Book getBookP() {
+		return bookP;
 	}
 
-	public void setIdBookT(int idBookT) {
-		this.idBookT = idBookT;
+	public void setBookP(Book bookP) {
+		this.bookP = bookP;
 	}
 
-	public int getIdPetitioner() {
-		return this.idPetitioner;
+	public int getIdUserO() {
+		return idUserO;
 	}
 
-	public void setIdPetitioner(int idPetitioner) {
-		this.idPetitioner = idPetitioner;
+	public void setIdUserO(int idUserO) {
+		this.idUserO = idUserO;
 	}
 
-	public int getIdTitular() {
-		return this.idTitular;
+	public int getIdBookO() {
+		return idBookO;
 	}
 
-	public void setIdTitular(int idTitular) {
-		this.idTitular = idTitular;
+	public void setIdBookO(int idBookO) {
+		this.idBookO = idBookO;
 	}
-
-	public Book getBook1() {
-		return this.book1;
-	}
-
-	public void setBook1(Book book1) {
-		this.book1 = book1;
-	}
-
-	public Book getBook2() {
-		return this.book2;
-	}
-
-	public void setBook2(Book book2) {
-		this.book2 = book2;
-	}
-
-	public User getUser1() {
-		return this.user1;
-	}
-
-	public void setUser1(User user1) {
-		this.user1 = user1;
-	}
-
-	public User getUser2() {
-		return this.user2;
-	}
-
-	public void setUser2(User user2) {
-		this.user2 = user2;
-	}
-
 }

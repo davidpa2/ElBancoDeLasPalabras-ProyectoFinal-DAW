@@ -52,16 +52,12 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="user")
 	@JsonIgnore
 	private List<Book> books;
-
+	
 	//bi-directional one-to-one association to Exchange
-	@OneToOne(mappedBy="user1")
+	@OneToMany(mappedBy="userP")
 	@JsonIgnore
-	private Exchange exchange1;
+	private List<Exchange> exchanges;
 
-	//bi-directional one-to-one association to Exchange
-	@OneToOne(mappedBy="user2")
-	@JsonIgnore
-	private Exchange exchange2;
 
 	public User() {
 	}
@@ -191,21 +187,28 @@ public class User implements Serializable {
 
 		return book;
 	}
-
-	public Exchange getExchange1() {
-		return this.exchange1;
+	
+	public List<Exchange> getExchanges() {
+		return this.exchanges;
+	}
+	
+	public void setExchanges(List<Exchange> exchanges) {
+		this.exchanges = exchanges;
+	}
+	
+	public Exchange addExchange(Exchange exchange) {
+		getExchanges().add(exchange);
+		exchange.setUserP(this);
+		
+		return exchange;
+	}
+	
+	public Exchange removeExchange(Exchange exchange) {
+		getExchanges().remove(exchange);
+		exchange.setUserP(null);
+		
+		return exchange;
 	}
 
-	public void setExchange1(Exchange exchange1) {
-		this.exchange1 = exchange1;
-	}
-
-	public Exchange getExchange2() {
-		return this.exchange2;
-	}
-
-	public void setExchange2(Exchange exchange2) {
-		this.exchange2 = exchange2;
-	}
 
 }

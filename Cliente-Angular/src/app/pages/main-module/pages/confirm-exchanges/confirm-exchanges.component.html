@@ -1,3 +1,7 @@
+<div *ngIf="soldBook" class="mt-4 container text-center alert alert-warning">
+    Se ha completado la venta del libro {{soldBook}}.
+</div>
+
 <h3 class="text-center my-4">Intercambios y ventas pendientes</h3>
 
 <div class="container">
@@ -50,6 +54,14 @@
     </div>
 </div>
 
+<div class="container board marginY p-4 d-flex flex-column justify-content-center">
+    <h4 class="text-center">¡Vaya, parece que ningún usuario ha solicitado algún intercambio ni compra de tus libros!</h4>
+    <div class="col d-flex justify-content-center mt-3">
+        <button (click)="goBack()" class="btn outlineSecondary">Volver <i
+            class="bi bi-arrow-counterclockwise"></i></button>
+    </div>
+</div>
+
 <div id="myModal" class="modal" [style]="showConfirmModal ? 'display: block;' : 'display: none;'">
     <!-- Modal content -->
     <div class="modal-content">
@@ -76,7 +88,7 @@
                         class="bi bi-arrow-counterclockwise"></i></button>
             </div>
             <div class="col-6 d-flex justify-content-start">
-                <button (click)="confirmPurchase(bookBuyReservedList[bookSelected].id)" class="btn bgSecundario">Finalizar compra <i
+                <button (click)="confirmPurchase(bookBuyReservedList[bookSelected].id, bookBuyReservedList[bookSelected].title)" class="btn bgSecundario">Finalizar compra <i
                         class="bi bi-bookmark-check"></i></button>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Book, User } from 'src/app/interfaces/interfaces';
 import { BookService } from 'src/app/services/book.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-confirm-exchanges',
@@ -14,9 +15,10 @@ export class ConfirmExchangesComponent implements OnInit {
   userBuyReservedList: User[] = [];
 
   showConfirmModal = false;
-  bookSelected = 0; 
+  bookSelected = 0;
+  soldBook!: String;
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService, private _location: Location) { }
 
   ngOnInit(): void {
     this.recuperarUsuarioLog();
@@ -33,17 +35,22 @@ export class ConfirmExchangesComponent implements OnInit {
     })
   }
 
-  confirmPurchase(id: any) {
+  confirmPurchase(id: number, title: String) {
     this.showConfirmModal = false;
     this.bookService.sellBook(id).subscribe(data => {
       if (data['estado'] = 'correcto') {
         console.log(' SE HA VENDIDO EL LIBRO ');
-        
+        this.soldBook = title;
+        this.getBuyReservedBooks();
       }
     })
   }
 
   recuperarUsuarioLog() {
     this.authUser = JSON.parse(localStorage.getItem("authenticatedUser") || '{}')
+  }
+
+  goBack() {
+    this._location.back();
   }
 }

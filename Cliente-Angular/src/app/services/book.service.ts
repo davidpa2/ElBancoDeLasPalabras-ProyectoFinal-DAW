@@ -63,6 +63,10 @@ export class BookService {
     return this.http.get<any>('/getBuyReservedBooks/' + id);
   }
 
+  getExchangeReservedBooks(id: any): Observable<any> {
+    return this.http.get<any>('/getExchangeReservedBooks/' + id);
+  }
+
   getBookById(id: any) {
     return this.http.get<any>('/getBookById/' + id)
   }

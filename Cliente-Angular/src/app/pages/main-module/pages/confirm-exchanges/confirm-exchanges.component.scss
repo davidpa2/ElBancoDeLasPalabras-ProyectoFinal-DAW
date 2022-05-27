@@ -4,9 +4,20 @@
     border-radius: 15px;
 }
 
+.roundImgProfile {
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
+}
+
 .imgCover {
     height: 250px;
     border-radius: 15px;
+}
+
+.imgMiniCover {
+    height: 150px;
+    border-radius: 10px;
 }
 
 .board {
@@ -14,6 +25,28 @@
     border-radius: 15px;
 }
 
+.endBuy {
+    margin-top: 65px;
+}
+
+.cancelBuy {
+    margin-top: -10px;
+}
+
+.price {
+    display: flex;
+    align-self: center;
+    color: rgba(99, 61, 16, 1);
+    font-size: 35px;
+    font-weight: bolder;
+    text-shadow: 3px 3px 2px rgba(211, 149, 75, 1);
+}
+
+@media (max-width: 992px) {
+    .infoBook {
+        display: none;
+    }
+}
 
 /* The Modal (background) */
 .modal {
@@ -67,4 +100,10 @@
 .marginY {
     margin-top: 90px;
     margin-bottom: 90px;
+}
+
+.exchangeIcon {
+    font-size: 80px;
+    font-weight: 20px;
+    color: rgba(99, 61, 16, 1);
 }

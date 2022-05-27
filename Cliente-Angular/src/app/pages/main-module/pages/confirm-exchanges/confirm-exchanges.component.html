@@ -4,8 +4,8 @@
 
 <h3 class="text-center my-4">Intercambios y ventas pendientes</h3>
 
-<div class="container">
-    <div class="row board" *ngFor="let book of bookBuyReservedList; let i = index">
+<div *ngIf="bookBuyReservedList.length" class="container">
+    <div class="row board mb-4" *ngFor="let book of bookBuyReservedList; let i = index">
         <h4 class="text-center my-4">{{userBuyReservedList[i].name}} ha solicitado la compra de tu libro:</h4>
 
         <div class="col-3 d-flex flex-column align-items-center">
@@ -26,7 +26,8 @@
                 {{userBuyReservedList[i].telegram || 'No especificado'}}
             </p>
 
-            <button (click)="showConfirmModal = true; bookSelected = i;" class="btn bgSecundario my-2">Finalizar compra
+            <button (click)="showConfirmBuyModal = true; bookSelected = i;" class="btn bgSecundario endBuy">Finalizar
+                compra
                 <i class="bi bi-bookmark-check"></i></button>
         </div>
         <div class="col-3">
@@ -43,36 +44,160 @@
                 <app-price class="d-flex justify-content-end" [price]="book.price"></app-price>
             </p>
 
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-end cancelBuy">
                 <button class="btn outlineSecondary my-2">Rechazar compra <i class="bi bi-bookmark-x"></i></button>
             </div>
         </div>
         <div class="col-3 d-flex flex-column align-items-center">
             <img src="data:image/jpg;base64,{{book.img}}" alt="" class="imgCover">
-            <h5 class="bold my-4">El Imperio Final</h5>
+            <h5 class="bold my-4">{{book.title}}</h5>
         </div>
     </div>
 </div>
 
-<div class="container board marginY p-4 d-flex flex-column justify-content-center">
-    <h4 class="text-center">¡Vaya, parece que ningún usuario ha solicitado algún intercambio ni compra de tus libros!</h4>
-    <div class="col d-flex justify-content-center mt-3">
-        <button (click)="goBack()" class="btn outlineSecondary">Volver <i
-            class="bi bi-arrow-counterclockwise"></i></button>
+<div *ngIf="bookPExchangeReservedList.length" class="container">
+    <div class="row board mb-4" *ngFor="let bookP of bookPExchangeReservedList; let i = index">
+        <div class="col">
+            <h4 class="text-center mt-4 mb-3">{{petitionerExchangeReservedList[i].name}} ha solicitado el intercambio de
+                tu libro:</h4>
+
+            <div class="row">
+                <div class="col-2 infoBook">
+                    <h5 class="bold text-end mt-5">Sobre el libro:</h5>
+                    <p class="text-end">Autor: <br>
+                        {{bookP.author}}
+                    </p>
+
+                    <p class="text-end">Estado:
+                        <app-rate-stars [stars]="bookP.state" [isUser]="true"></app-rate-stars>
+                    </p>
+
+                    <p class="text-end">Precio:
+                        <span class="price d-flex justify-content-end">{{bookP.price}}€</span>
+                    </p>
+                    <div class="d-flex justify-content-end">
+                        <button [routerLink]="'/productView/' + bookP.id + '/' + petitionerExchangeReservedList[i].id"
+                            class="btn bgSecundario mb-4 seeBook">Ver libro <i class="bi bi-book"></i></button>
+                    </div>
+                </div>
+                <div class="col-4 col-lg-3">
+                    <h5 class="text-center">Ofrece:</h5>
+                    <div class=" d-flex flex-column align-items-center">
+                        <img src="data:image/jpg;base64,{{bookP.img}}" alt="" class="imgCover">
+                    </div>
+                    <h5 class="bold my-4 text-center">{{bookP.title}}</h5>
+                </div>
+
+                <div class="col-4 col-lg-2 d-flex justify-content-center align-items-center">
+                    <i class="bi bi-arrow-left-right exchangeIcon"></i>
+                </div>
+
+                <div class="col-4 col-lg-3">
+                    <h5 class="text-center">Solicita:</h5>
+                    <div class=" d-flex flex-column align-items-center">
+                        <img src="data:image/jpg;base64,{{bookOExchangeReservedList[i].img}}" alt="" class="imgCover">
+                    </div>
+                    <h5 class="bold my-4 text-center">{{ bookOExchangeReservedList[i].title }}</h5>
+                </div>
+                <div class="col-2 infoBook">
+                    <h5 class="bold text-start mt-5">Sobre el libro:</h5>
+                    <p class="text-start">Autor: <br>
+                        {{bookOExchangeReservedList[i].author}}
+                    </p>
+
+                    <p class="text-start">Estado:
+                        <app-rate-stars [stars]="bookOExchangeReservedList[i].state" [isUser]="true"></app-rate-stars>
+                    </p>
+
+                    <p class="text-start">Precio:
+                        <span class="price d-flex justify-content-start">{{bookOExchangeReservedList[i].price}}€</span>
+                    </p>
+                    <div class="d-flex justify-content-start">
+                        <button [routerLink]="'/productView/' + bookOExchangeReservedList[i].id + '/' + authUser.id"
+                            class="btn bgSecundario mb-4 seeBook">Ver libro <i class="bi bi-book"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-6 col-md-3">
+                    <div class="d-flex flex-column align-items-center">
+                        <img class="roundImgProfile"
+                            src="data:image/jpg;base64,{{petitionerExchangeReservedList[i].img}}" alt="">
+                    </div>
+                    <h5 class="bold my-4 text-center">{{petitionerExchangeReservedList[i].name}}
+                        {{petitionerExchangeReservedList[i].surnames}}</h5>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="row">
+                        <h5 class="bold">Sus datos de contacto:</h5>
+                    </div>
+                    <div class="row">
+                        <p>Correo electrónico: <br>
+                            {{userBuyReservedList[i].email}}
+                        </p>
+
+                        <p class="mt-2">Número de teléfono: <br>
+                            {{userBuyReservedList[i].tlf}}
+                        </p>
+
+                        <p class="mt-2">Telegram: <br>
+                            {{userBuyReservedList[i].telegram || 'No especificado'}}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5">
+                    <div class="row">
+                        <h5 class="bold me-3 text-center">Ten en cuenta:</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col text-start">
+                            <span class="bold">{{petitionerExchangeReservedList[i].name}}
+                                {{petitionerExchangeReservedList[i].surnames}}</span> ha
+                            solicitado el intercambio de tu libro <span
+                                class="bold">"{{bookOExchangeReservedList[i].title}}"</span> ofreciendo
+                            su libro <span class="bold">"{{bookP.title}}"</span>. <br>
+                            Póngase en contacto con el usuario en el caso de que le parezca un intercambio justo.
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-4 mb-md-0">
+                        <div class="col-12 col-sm-6 d-flex justify-content-center">
+                            <button (click)="showConfirmExchangeModal = true; exchangeSelected = i;"
+                                class="btn bgSecundario">Finalizar intercambio
+                                <i class="bi bi-bookmark-check"></i></button>
+                        </div>
+                        <div class="col-12 col-sm-6 mt-3 mt-sm-0 d-flex justify-content-center">
+                            <button class="btn outlineSecondary">Rechazar intercambio <i
+                                    class="bi bi-bookmark-x"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div id="myModal" class="modal" [style]="showConfirmModal ? 'display: block;' : 'display: none;'">
+<div *ngIf="!bookBuyReservedList && !bookPExchangeReservedList"
+    class="container board marginY p-4 d-flex flex-column justify-content-center">
+    <h4 class="text-center">¡Vaya, parece que ningún usuario ha solicitado algún intercambio ni compra de tus libros!
+    </h4>
+    <div class="col d-flex justify-content-center mt-3">
+        <button (click)="goBack()" class="btn outlineSecondary">Volver <i
+                class="bi bi-arrow-counterclockwise"></i></button>
+    </div>
+</div>
+
+<div id="myModal" class="modal" [style]="showConfirmBuyModal ? 'display: block;' : 'display: none'">
     <!-- Modal content -->
     <div class="modal-content">
         <div class="row mb-4 d-flex justify-content-center">
             <div class="col-11">
-                <h2 class="text-center mt-3 ms-5">¿Finalizar la compra de el libro {{
-                    bookBuyReservedList[bookSelected].title }}?
+                <h2 class="text-center mt-3 ms-5">¿Finalizar la compra de el libro
+                    {{ bookBuyReservedList[bookSelected].title }}?
                 </h2>
             </div>
             <div class="col-1">
-                <i class="bi bi-x close" (click)="showConfirmModal = false"></i>
+                <i class="bi bi-x close" (click)="showConfirmBuyModal = false"></i>
             </div>
             <div class="col-10">
                 <p class="text-center">Al hacer click en <span class="bold">"Finalizar compra"</span> confirmas que te
@@ -84,12 +209,74 @@
 
         <div class="row">
             <div class="col-6 d-flex justify-content-end">
-                <button class="btn outlineSecondary" (click)="showConfirmModal = false">Cancelar <i
+                <button class="btn outlineSecondary" (click)="showConfirmBuyModal = false">Cancelar <i
                         class="bi bi-arrow-counterclockwise"></i></button>
             </div>
             <div class="col-6 d-flex justify-content-start">
-                <button (click)="confirmPurchase(bookBuyReservedList[bookSelected].id, bookBuyReservedList[bookSelected].title)" class="btn bgSecundario">Finalizar compra <i
-                        class="bi bi-bookmark-check"></i></button>
+                <button
+                    (click)="confirmPurchase(bookBuyReservedList[bookSelected].id, bookBuyReservedList[bookSelected].title)"
+                    class="btn bgSecundario">Finalizar compra <i class="bi bi-bookmark-check"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal" [style]="showConfirmExchangeModal ? 'display: block;' : 'display: none'">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="row mb-4 d-flex justify-content-center">
+            <div class="col-11">
+                <h2 class="text-center mt-3 ms-5">¿Quieres finalizar el intercambio con
+                    {{petitionerExchangeReservedList[exchangeSelected].name}}
+                    {{petitionerExchangeReservedList[exchangeSelected].surnames}}?
+                </h2>
+            </div>
+            <div class="col-1">
+                <i class="bi bi-x close" (click)="showConfirmExchangeModal = false"></i>
+            </div>
+
+            <div class="col-10">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-4">
+                        <h5 class="text-center">Ofrece:</h5>
+                        <div class=" d-flex flex-column align-items-center">
+                            <img src="data:image/jpg;base64,{{bookPExchangeReservedList[exchangeSelected].img}}" alt=""
+                                class="imgMiniCover">
+                        </div>
+                        <h5 class="bold my-4 text-center">{{bookPExchangeReservedList[exchangeSelected].title}}</h5>
+                    </div>
+                    <div class="col-4 col-lg-2 d-flex justify-content-center align-items-center">
+                        <i class="bi bi-arrow-left-right exchangeIcon"></i>
+                    </div>
+                    <div class="col-4">
+                        <h5 class="text-center">Solicita:</h5>
+                        <div class=" d-flex flex-column align-items-center">
+                            <img src="data:image/jpg;base64,{{bookOExchangeReservedList[exchangeSelected].img}}" alt=""
+                                class="imgMiniCover">
+                        </div>
+                        <h5 class="bold my-4 text-center">{{ bookOExchangeReservedList[exchangeSelected].title }}</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-10">
+                <p class="text-center">Al hacer click en <span class="bold">"Finalizar intercambio"</span> confirmas que
+                    te
+                    has puesto en contacto con el usuario que solicitó el intercambio y habeís llegado a un acuerdo en el
+                    intercambio de vuestros libros.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 d-flex justify-content-end">
+                <button class="btn outlineSecondary" (click)="showConfirmExchangeModal = false">Cancelar <i
+                        class="bi bi-arrow-counterclockwise"></i></button>
+            </div>
+            <div class="col-6 d-flex justify-content-start">
+                <button
+                    (click)="confirmPurchase(bookBuyReservedList[bookSelected].id, bookBuyReservedList[bookSelected].title)"
+                    class="btn bgSecundario">Finalizar intercambio<i class="bi bi-bookmark-check"></i></button>
             </div>
         </div>
     </div>

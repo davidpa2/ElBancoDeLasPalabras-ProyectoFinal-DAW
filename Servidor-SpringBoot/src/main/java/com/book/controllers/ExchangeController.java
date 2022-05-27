@@ -47,10 +47,10 @@ public class ExchangeController {
 //		exchange.setDate(new SimpleDateFormat("dd-MM-yyyy").format(currentDate));
 		
 		Book bookP = bookRepo.getById(data.bookP.getId());
-		bookP.setReserved(-1);
+		bookP.setReserved(1);
 		bookRepo.save(bookP);
 		Book bookO = bookRepo.getById(data.bookO);
-		bookO.setReserved(-1);
+		bookO.setReserved(1);
 		bookRepo.save(bookO);
 		
 		exchangeRepo.save(exchange);
@@ -105,6 +105,33 @@ public class ExchangeController {
 		dto.put("usersP",userPList);
 		dto.put("booksP", bookPList);
 		dto.put("booksO", bookOList);
+		dto.put("estado", "correcto");
+		
+		return dto;
+	}
+	
+	@PostMapping("/exchangeBooks")
+	public DTO exchangeBooks(@RequestBody DataExchange data) {
+		DTO dto = new DTO();
+		dto.put("estado", "error");
+		System.out.println(data.petitioner.getId());
+		System.out.println(data.bookP.getId());
+		System.out.println(data.bookO);
+		System.out.println(data.owner);
+		Exchange exchange = exchangeRepo.exchangeBooks(data.petitioner.getId(), data.bookP.getId(), data.owner, data.bookO);
+		
+		Date currentDate = new Date();
+		exchange.setDate(new SimpleDateFormat("dd-MM-yyyy").format(currentDate));
+		
+		Book bookP = bookRepo.getById(data.bookP.getId());
+		bookP.setReserved(-1);
+		bookRepo.save(bookP);
+		Book bookO = bookRepo.getById(data.bookO);
+		bookO.setReserved(-1);
+		bookRepo.save(bookO);
+		
+		exchangeRepo.save(exchange);
+		
 		dto.put("estado", "correcto");
 		
 		return dto;

@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @NamedQuery(name="Exchange.findAll", query="SELECT e FROM Exchange e")
+@NamedQuery(name="Exchange.getExchangeReservedBooks", query="SELECT e FROM Exchange e where idUserO = ?1 and date = null")
 public class Exchange implements Serializable {
 	private static final long serialVersionUID = 1L;
 

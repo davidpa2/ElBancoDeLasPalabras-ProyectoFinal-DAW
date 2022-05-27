@@ -121,10 +121,10 @@ public class ExchangeController {
 		exchange.setDate(new SimpleDateFormat("dd-MM-yyyy").format(currentDate));
 		
 		Book bookP = bookRepo.getById(data.bookP.getId());
-		bookP.setReserved(null);
+		bookP.setReserved(-1);
 		bookRepo.save(bookP);
 		Book bookO = bookRepo.getById(data.bookO);
-		bookO.setReserved(null);
+		bookO.setReserved(-1);
 		bookRepo.save(bookO);
 		
 		exchangeRepo.save(exchange);
@@ -143,10 +143,10 @@ public class ExchangeController {
 		exchangeRepo.deleteById(exchange.getId());
 		
 		Book bookP = bookRepo.getById(data.bookP.getId());
-		bookP.setReserved(-1);
+		bookP.setReserved(null);
 		bookRepo.save(bookP);
 		Book bookO = bookRepo.getById(data.bookO);
-		bookO.setReserved(-1);
+		bookO.setReserved(null);
 		bookRepo.save(bookO);
 			
 		dto.put("estado", "correcto");

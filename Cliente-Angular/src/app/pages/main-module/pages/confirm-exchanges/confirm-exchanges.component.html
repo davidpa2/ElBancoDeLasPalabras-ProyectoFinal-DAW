@@ -1,6 +1,9 @@
 <div *ngIf="soldBook" class="mt-4 container text-center alert alert-warning">
     Se ha completado la venta del libro {{soldBook}}.
 </div>
+<div *ngIf="cancelledPurchaseBook" class="mt-4 container text-center alert alert-warning">
+    Se ha cancelado la venta del libro {{cancelledPurchaseBook}}.
+</div>
 <div *ngIf="petitionerExchanged" class="mt-4 container text-center alert alert-warning">
     ¡Has realizado un intercambio con {{petitionerExchanged}}!
 </div>
@@ -51,7 +54,8 @@
             </p>
 
             <div class="d-flex justify-content-end cancelBuy">
-                <button class="btn outlineSecondary my-2">Rechazar compra <i class="bi bi-bookmark-x"></i></button>
+                <button (click)="showCancelBuyModal = true" class="btn outlineSecondary my-2">Rechazar compra <i
+                        class="bi bi-bookmark-x"></i></button>
             </div>
         </div>
         <div class="col-3 d-flex flex-column align-items-center">
@@ -173,8 +177,8 @@
                                 <i class="bi bi-bookmark-check"></i></button>
                         </div>
                         <div class="col-12 col-sm-6 mt-3 mt-sm-0 d-flex justify-content-center">
-                            <button (click)="showCancelExchangeModal = true" class="btn outlineSecondary">Rechazar intercambio <i
-                                    class="bi bi-bookmark-x"></i></button>
+                            <button (click)="showCancelExchangeModal = true" class="btn outlineSecondary">Rechazar
+                                intercambio <i class="bi bi-bookmark-x"></i></button>
                         </div>
                     </div>
                 </div>
@@ -223,6 +227,40 @@
                 <button
                     (click)="confirmPurchase(bookBuyReservedList[bookSelected].id, bookBuyReservedList[bookSelected].title)"
                     class="btn bgSecundario">Finalizar compra <i class="bi bi-bookmark-check"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showCancelBuyModal" id="myModal" class="modal"
+    [style]="showCancelBuyModal ? 'display: block;' : 'display: none'">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="row mb-4 d-flex justify-content-center">
+            <div class="col-11">
+                <h2 class="text-center mt-3 ms-5">Rechazar la oferta del libro
+                    {{ bookBuyReservedList[bookSelected].title }}?
+                </h2>
+            </div>
+            <div class="col-1">
+                <i class="bi bi-x close" (click)="showCancelBuyModal = false"></i>
+            </div>
+            <div class="col-10">
+                <p class="text-center">Al hacer click en <span class="bold">"Cancelar compra"</span> rechazarás la
+                    oferta de {{userBuyReservedList[bookSelected].name}} y tu libro dejará de estar reservado.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 d-flex justify-content-end">
+                <button class="btn outlineSecondary" (click)="showCancelBuyModal = false">Volver <i
+                        class="bi bi-arrow-counterclockwise"></i></button>
+            </div>
+            <div class="col-6 d-flex justify-content-start">
+                <button
+                    (click)="cancelPurchase(bookBuyReservedList[bookSelected].id, bookBuyReservedList[bookSelected].title)"
+                    class="btn bgSecundario">Cancelar compra <i class="bi bi-bookmark-check"></i></button>
             </div>
         </div>
     </div>

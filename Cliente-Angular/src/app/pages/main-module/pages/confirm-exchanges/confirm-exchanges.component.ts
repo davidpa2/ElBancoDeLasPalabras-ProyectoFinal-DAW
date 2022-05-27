@@ -24,11 +24,13 @@ export class ConfirmExchangesComponent implements OnInit {
   bookOExchangeReservedList: Book[] = []; //Está emparejada con la de los libros ofrecidos y la de los usuarios
 
   showConfirmBuyModal = false;
+  showCancelBuyModal = false;
   showConfirmExchangeModal = false;
   showCancelExchangeModal = false;
   bookSelected = 0;
   exchangeSelected = 0;
   soldBook!: String;
+  cancelledPurchaseBook!: String;
   petitionerExchanged!: String;
   cancelExchangePertioner!: String;
 
@@ -63,8 +65,20 @@ export class ConfirmExchangesComponent implements OnInit {
     this.showConfirmBuyModal = false;
     this.bookService.sellBook(id).subscribe(data => {
       if (data['estado'] = 'correcto') {
-        this.petitionerExchanged = '';
+        this.petitionerExchanged = ''; this.cancelExchangePertioner = ''; this.cancelledPurchaseBook = '';
         this.soldBook = title;
+        this.getBuyReservedBooks();
+        this.scrollUp();
+      }
+    })
+  }
+
+  cancelPurchase(id: number, title: String) {
+    this.showCancelBuyModal = false;
+    this.bookService.cancelPurchase(id).subscribe(data => {
+      if (data['estado'] == 'correcto') {
+        this.soldBook = ''; this.cancelExchangePertioner = ''; this.petitionerExchanged = '';
+        this.cancelledPurchaseBook = title;
         this.getBuyReservedBooks();
         this.scrollUp();
       }
@@ -75,7 +89,7 @@ export class ConfirmExchangesComponent implements OnInit {
     this.showConfirmExchangeModal = false;
     this.bookService.exchangeBooks(idBookP, idPetitioner, idBookO, this.authUser.id).subscribe(data => {
       if (data['estado'] == 'correcto') {
-        this.soldBook = '';
+        this.soldBook = ''; this.cancelExchangePertioner = ''; this.cancelledPurchaseBook = '';
         this.petitionerExchanged = this.petitionerExchangeReservedList[this.exchangeSelected].name;
         this.getExchangeReservedBooks();
         this.scrollUp();
@@ -87,7 +101,7 @@ export class ConfirmExchangesComponent implements OnInit {
     this.showCancelExchangeModal = false;
     this.bookService.cancelExchangeBooks(idBookP, idPetitioner, idBookO, this.authUser.id).subscribe(data => {
       if (data['estado'] == 'correcto') {
-        this.soldBook = '';
+        this.soldBook = ''; this.petitionerExchanged = ''; this.cancelledPurchaseBook = '';
         this.cancelExchangePertioner = this.petitionerExchangeReservedList[this.exchangeSelected].name;
         this.getExchangeReservedBooks();
         this.scrollUp();

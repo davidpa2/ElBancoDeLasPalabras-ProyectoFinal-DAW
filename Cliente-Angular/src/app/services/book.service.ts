@@ -55,10 +55,6 @@ export class BookService {
     return this.http.get<any>('/findByUserId/' + id + '/' + authenticated);
   }
 
-  sellBook(id: number): Observable<any> {
-    return this.http.get<any>('/sellBook/' + id);
-  }
-
   getBuyReservedBooks(id: any): Observable<any> {
     return this.http.get<any>('/getBuyReservedBooks/' + id);
   }
@@ -71,8 +67,17 @@ export class BookService {
     return this.http.get<any>('/getBookById/' + id)
   }
 
+  sellBook(id: number): Observable<any> {
+    return this.http.get<any>('/sellBook/' + id);
+  }
+
+
   reserveBuyBook(idBook: number, idBuyer: number): Observable<any> {
     return this.http.get<any>('/reserveBuyBook/' + idBook + '/' + idBuyer);
+  }
+
+  cancelPurchase(id: number): Observable<any> {
+    return this.http.get<any>('/cancelPurchase/' + id);
   }
 
   /**

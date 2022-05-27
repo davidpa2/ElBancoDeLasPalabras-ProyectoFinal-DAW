@@ -28,6 +28,7 @@ export class ConfirmExchangesComponent implements OnInit {
   bookSelected = 0;
   exchangeSelected = 0;
   soldBook!: String;
+  petitionerExchanged!: String;
 
   constructor(private bookService: BookService, private _location: Location) { }
 
@@ -60,7 +61,7 @@ export class ConfirmExchangesComponent implements OnInit {
     this.showConfirmBuyModal = false;
     this.bookService.sellBook(id).subscribe(data => {
       if (data['estado'] = 'correcto') {
-        console.log(' SE HA VENDIDO EL LIBRO ');
+        this.petitionerExchanged = '';
         this.soldBook = title;
         this.getBuyReservedBooks();
         this.scrollUp();
@@ -68,8 +69,16 @@ export class ConfirmExchangesComponent implements OnInit {
     })
   }
 
-  confirmExchange() {
-    
+  confirmExchange(idBookP: any, idPetitioner: any, idBookO: any) {
+    this.showConfirmExchangeModal = false;
+    this.bookService.exchangeBooks(idBookP, idPetitioner, idBookO, this.authUser.id).subscribe(data => {
+      if (data['estado'] == 'correcto') {
+        this.soldBook = '';
+        this.petitionerExchanged = this.petitionerExchangeReservedList[this.exchangeSelected].name;
+        this.getExchangeReservedBooks();
+        this.scrollUp();
+      }
+    })
   }
 
   recuperarUsuarioLog() {

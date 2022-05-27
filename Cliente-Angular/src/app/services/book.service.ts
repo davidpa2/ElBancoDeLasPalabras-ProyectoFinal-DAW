@@ -92,4 +92,14 @@ export class BookService {
     };
     return this.http.post<any>('/reserveExchangeBook', jsonObject);
   }
+
+  exchangeBooks(idBookP: Book, idPetitioner: User, idBookO: number, idOwner: number): Observable<any> {
+    var jsonObject = {
+      bookP: idBookP,
+      petitioner: idPetitioner,
+      bookO: idBookO,
+      owner: idOwner,
+    };
+    return this.http.post<any>('/exchangeBooks', jsonObject);
+  }
 }

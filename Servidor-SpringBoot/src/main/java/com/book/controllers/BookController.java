@@ -329,7 +329,7 @@ public class BookController {
 	@GetMapping("/cancelPurchase/{id}")
 	public DTO cancelPurchase(@PathVariable(value="id") int id) {
 		DTO dto = new DTO();
-		dto.put("estado", "correcto");
+		dto.put("estado", "error");
 		
 		Book book = bookRepo.getById(id);
 		
@@ -339,6 +339,26 @@ public class BookController {
 		
 		bookRepo.save(book);
 		
+		dto.put("estado", "correcto");
+		
+		return dto;
+	}
+	
+	@GetMapping("/getSelledBooks/{id}")
+	public DTO getSelledBooks(@PathVariable(value="id") int id) {
+		DTO dto = new DTO();
+		dto.put("estado", "error");
+		
+		List<Book> bookList = bookRepo.getSelledBooks(id);
+		List<User> userBuyerList = new ArrayList<User>();
+		
+		//Recorrer la lista de libros para obtener una lista de usuarios simétrica que han comprado los libros
+		for (Book book : bookList) {
+			userBuyerList.add(userRepo.getById(book.getBuyer_id()));
+		}
+		
+		dto.put("buyers", userBuyerList);
+		dto.put("selledBooks", bookList);
 		dto.put("estado", "correcto");
 		
 		return dto;

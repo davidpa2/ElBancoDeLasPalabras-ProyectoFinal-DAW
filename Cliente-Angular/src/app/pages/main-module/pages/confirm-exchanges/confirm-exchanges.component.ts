@@ -85,9 +85,9 @@ export class ConfirmExchangesComponent implements OnInit {
     })
   }
 
-  confirmExchange(idBookP: any, idPetitioner: any, idBookO: any) {
+  confirmExchange(bookP: Book, petitioner: User, bookO: Book) {
     this.showConfirmExchangeModal = false;
-    this.bookService.exchangeBooks(idBookP, idPetitioner, idBookO, this.authUser.id).subscribe(data => {
+    this.bookService.exchangeBooks(bookP, petitioner, bookO, this.authUser).subscribe(data => {
       if (data['estado'] == 'correcto') {
         this.soldBook = ''; this.cancelExchangePertioner = ''; this.cancelledPurchaseBook = '';
         this.petitionerExchanged = this.petitionerExchangeReservedList[this.exchangeSelected].name;
@@ -97,9 +97,9 @@ export class ConfirmExchangesComponent implements OnInit {
     })
   }
 
-  cancelExchange(idBookP: any, idPetitioner: any, idBookO: any) {
+  cancelExchange(bookP: Book, petitioner: User, bookO: Book) {
     this.showCancelExchangeModal = false;
-    this.bookService.cancelExchangeBooks(idBookP, idPetitioner, idBookO, this.authUser.id).subscribe(data => {
+    this.bookService.cancelExchangeBooks(bookP, petitioner, bookO, this.authUser).subscribe(data => {
       if (data['estado'] == 'correcto') {
         this.soldBook = ''; this.petitionerExchanged = ''; this.cancelledPurchaseBook = '';
         this.cancelExchangePertioner = this.petitionerExchangeReservedList[this.exchangeSelected].name;

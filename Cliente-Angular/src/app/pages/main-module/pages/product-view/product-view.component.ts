@@ -72,7 +72,7 @@ export class ProductViewComponent implements OnInit {
   confirmPurchase() {
     this.showPurchaseModal = false;
 
-    this.bookService.reserveBuyBook(this.book.id, this.authUser.id).subscribe(data => {
+    this.bookService.reserveBuyBook(this.book, this.userOwner, this.authUser).subscribe(data => {
       if (data['estado'] == 'correcto') {
         this.reserved = true;
       } else {
@@ -82,10 +82,10 @@ export class ProductViewComponent implements OnInit {
     })
   }
 
-  confirmExchange(idBookP: Book, idUserOwner: number) {
+  confirmExchange(idBookP: Book, owner: User) {
     this.showModal = false;
     // Vamos a proceder a reservar ambos libros
-    this.bookService.reserveExchangeBook(idBookP, this.authUser, this.book.id, idUserOwner).subscribe(data => {
+    this.bookService.reserveExchangeBook(idBookP, this.authUser, this.book, owner).subscribe(data => {
       if (data['estado'] == 'correcto') {
         this.reserved = true;
         this.scrollUp();

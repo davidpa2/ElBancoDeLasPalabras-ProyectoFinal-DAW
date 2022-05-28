@@ -72,8 +72,13 @@ export class BookService {
   }
 
 
-  reserveBuyBook(idBook: number, idBuyer: number): Observable<any> {
-    return this.http.get<any>('/reserveBuyBook/' + idBook + '/' + idBuyer);
+  reserveBuyBook(book: Book, owner: User, buyer: User): Observable<any> {
+    var jsonObject = {
+      book: book,
+      owner: owner,
+      buyer: buyer,
+    };
+    return this.http.post<any>('/reserveBuyBook', jsonObject);
   }
 
   cancelPurchase(id: number): Observable<any> {
@@ -88,32 +93,32 @@ export class BookService {
    * @param idOwner id del dueño del libro que se está solicitando
    * @returns 
    */
-  reserveExchangeBook(idBookP: Book, idPetitioner: User, idBookO: number, idOwner: number): Observable<any> {
+  reserveExchangeBook(bookP: Book, petitioner: User, bookO: Book, owner: User): Observable<any> {
     var jsonObject = {
-      bookP: idBookP,
-      petitioner: idPetitioner,
-      bookO: idBookO,
-      owner: idOwner,
+      bookP: bookP,
+      petitioner: petitioner,
+      bookO: bookO,
+      owner: owner,
     };
     return this.http.post<any>('/reserveExchangeBook', jsonObject);
   }
 
-  exchangeBooks(idBookP: Book, idPetitioner: User, idBookO: number, idOwner: number): Observable<any> {
+  exchangeBooks(bookP: Book, petitioner: User, bookO: Book, owner: User): Observable<any> {
     var jsonObject = {
-      bookP: idBookP,
-      petitioner: idPetitioner,
-      bookO: idBookO,
-      owner: idOwner,
+      bookP: bookP,
+      petitioner: petitioner,
+      bookO: bookO,
+      owner: owner,
     };
     return this.http.post<any>('/exchangeBooks', jsonObject);
   }
 
-  cancelExchangeBooks(idBookP: Book, idPetitioner: User, idBookO: number, idOwner: number): Observable<any> {
+  cancelExchangeBooks(bookP: Book, petitioner: User, bookO: Book, owner: User): Observable<any> {
     var jsonObject = {
-      bookP: idBookP,
-      petitioner: idPetitioner,
-      bookO: idBookO,
-      owner: idOwner,
+      bookP: bookP,
+      petitioner: petitioner,
+      bookO: bookO,
+      owner: owner,
     };
     return this.http.post<any>('/cancelExchangeBooks', jsonObject);
   }

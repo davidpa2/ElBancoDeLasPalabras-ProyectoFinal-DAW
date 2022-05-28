@@ -43,9 +43,6 @@ public class ExchangeController {
 		exchange.setIdBookO(data.bookO);
 		exchange.setIdUserO(data.owner);
 		
-//		Date currentDate = new Date();
-//		exchange.setDate(new SimpleDateFormat("dd-MM-yyyy").format(currentDate));
-		
 		Book bookP = bookRepo.getById(data.bookP.getId());
 		bookP.setReserved(1);
 		bookRepo.save(bookP);
@@ -149,6 +146,37 @@ public class ExchangeController {
 		bookO.setReserved(null);
 		bookRepo.save(bookO);
 			
+		dto.put("estado", "correcto");
+		
+		return dto;
+	}
+	
+	@GetMapping("/getExchangedBooks/{id}")
+	public DTO getExchangedBooks(@PathVariable(value="id") int id) {
+		DTO dto = new DTO();
+		dto.put("estado", "error");
+		
+		List <Exchange> exchangeList = new ArrayList<Exchange>();
+
+		exchangeList = exchangeRepo.getExchangedBooks(id);
+		
+		//Guardar en una lista los dueños de cada libro en el mismo orden
+		List <User> userPList = new ArrayList<User>();
+		List <Book> bookPList = new ArrayList<Book>();
+		List <User> userOList = new ArrayList<User>();
+		List <Book> bookOList = new ArrayList<Book>();
+		
+		for (Exchange e : exchangeList) {
+			userPList.add(userRepo.getById(e.getUserP().getId()));
+			bookPList.add(bookRepo.getById(e.getBookP().getId()));
+			userOList.add(userRepo.getById(e.getIdUserO()));
+			bookOList.add(bookRepo.getById(e.getIdBookO()));
+		}
+		
+		dto.put("usersP",userPList);
+		dto.put("booksP", bookPList);
+		dto.put("usersO",userOList);
+		dto.put("booksO", bookOList);
 		dto.put("estado", "correcto");
 		
 		return dto;

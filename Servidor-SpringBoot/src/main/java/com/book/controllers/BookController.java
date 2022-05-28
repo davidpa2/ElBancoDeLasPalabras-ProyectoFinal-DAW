@@ -17,6 +17,7 @@ import com.book.model.entities.Book;
 import com.book.model.entities.User;
 import com.book.repository.BookRepository;
 import com.book.repository.UserRepository;
+import com.book.service.SendMailService;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @CrossOrigin
@@ -27,6 +28,8 @@ public class BookController {
 	BookRepository bookRepo;
 	@Autowired
 	UserRepository userRepo;
+	@Autowired
+	SendMailService sendMailService;
 	
 	/**
 	 * 
@@ -259,26 +262,48 @@ public class BookController {
 		return dto;
 	}
 	
-	@RequestMapping(value="/reserveBuyBook/{idBook}/{idBuyer}", method = RequestMethod.GET)
-	public DTO reserveBook(@PathVariable(value="idBook") int idBook, @PathVariable(value="idBuyer") int idBuyer) {
+	@PostMapping("/reserveBuyBook")
+	public DTO reserveBook(@RequestBody DataSellBook data) {
 		
 		DTO dto = new DTO();
 		// asumimos que va a salir mal
 		dto.put("estado", "error");
 
 		// localizar el libro por su id
-		Book book = this.bookRepo.getById(idBook);
+		Book book = this.bookRepo.getById(data.book.getId());
 		
 		book.setReserved(1);
-		book.setBuyer_id(idBuyer);
+		book.setBuyer_id(data.buyer.getId());
 
 		//Guardar los cambios realizados en el libro
 		bookRepo.save(book);
+		
+		String subject = "¡Han solicitado la compra de un libro!";
+		String message = "¡" + data.owner.getName() + ", un usuario ha solicitado la compra de tu libro: " + data.book.getTitle() + "!";
+		sendMailService.sendMail(data.owner.getEmail(), subject, message);
+		
 
 		//Si todo hay ido bien asignamos el estado como correcto y devolvemos el dto con la lista de libros
 		dto.put("estado", "correcto");
 		return dto;
 	}
+	
+	static class DataSellBook {		
+		@JsonProperty("book")
+		Book book;
+		@JsonProperty("owner")
+		User owner;
+		@JsonProperty("buyer")
+		User buyer;
+
+		public DataSellBook(Book book, User owner, User buyer) {
+			super();
+			this.book = book;
+			this.owner = owner;
+			this.buyer = buyer;
+		}
+	}
+	
 	
 	@RequestMapping("/getBuyReservedBooks/{id}")
 	public DTO getBuyReservedBooks(@PathVariable(value="id") int id) {

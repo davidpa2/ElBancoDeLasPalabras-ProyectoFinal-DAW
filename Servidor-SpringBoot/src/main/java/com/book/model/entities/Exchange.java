@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NamedQuery(name="Exchange.exchangeBooks",
 	query="SELECT e FROM Exchange e where userP_id = ?1 and bookP_id = ?2 and idUserO = ?3 and idBookO = ?4 and date = null")
 @NamedQuery(name="Exchange.getExchangedBooks",
-	query="SELECT e FROM Exchange e where (idUserO = ?1 or userP_id = ?1) and date != null")
+	query="SELECT e FROM Exchange e where (idUserO = ?1 or userP_id = ?1) and date != null order by id desc")
 public class Exchange implements Serializable {
 	private static final long serialVersionUID = 1L;
 

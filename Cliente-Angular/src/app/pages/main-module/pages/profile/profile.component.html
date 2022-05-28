@@ -48,7 +48,8 @@
             <div (click)="tabSelected = 2" [class]="(tabSelected == 2) ? 'tabSelect col-4' : 'tab col-4'">
                 Mis intercambios
             </div>
-            <div (click)="tabSelected = 3" [class]="(tabSelected == 3) ? 'tabSelect col-4' : 'tab col-4'">
+            <div (click)="tabSelected = 3; getSelledBooks(user.id)"
+                [class]="(tabSelected == 3) ? 'tabSelect col-4' : 'tab col-4'">
                 Mis ventas
             </div>
         </div>
@@ -58,7 +59,8 @@
                 <h3>¿Todavía no has subido ningún libro?</h3>
                 <h4>¡Vamos a desempolvar la estantería!</h4>
             </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-3" *ngFor="let book of uploadedBooksList">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-3 d-flex align-items-stretch"
+                *ngFor="let book of uploadedBooksList">
                 <div *ngIf="book.reserved > 0" routerLink="/confirmExchanges"
                     class="reservedMark d-flex align-items-center">
                     <i class="bi bi-bookmark-star-fill"></i>
@@ -81,21 +83,69 @@
                     </div>
                 </div>
             </div>
-
-            <a class="uploadLink" *ngIf="!userId" routerLink="/uploadBook">
-                <div class="upload d-flex align-items-center">
-                    <p class="text mt-2">Subir un libro</p>&nbsp;
-                    <i class="bi bi-plus-circle-fill"></i>
-                </div>
-            </a>
         </div>
         <div *ngIf="tabSelected == 2" class="row board">
-            pues hola2
+
         </div>
-        <div *ngIf="tabSelected == 3" class="row board">
-            hola 3 sin más
+        <div *ngIf="tabSelected == 3" class="row board d-flex justify-content-center">
+            <div *ngIf="!selledBookList.length" class="text-white my-4 text-center">
+                <h3>¿Todavía no has vendido ningún libro?</h3>
+                <h4>¡Vamos a revisar la estantería y subir algunos!</h4>
+            </div>
+
+            <div *ngFor="let selledBook of selledBookList; let i = index"
+                class="col mx-1 d-flex align-items-stretch justify-content-center mt-4">
+                <div class="row bg-white p-3 border">
+                    <div class="col-6 d-flex align-items-center justify-content-center">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center">
+                                <img class="thumbnail" src="data:image/jpg;base64,{{selledBook.img}}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <h4 class="titleCard text-center mt-1">{{selledBook.title}}</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 mt-1">
+                                <p class="text-center mb-1">{{selledBook.author}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <h4 class="text-center">Comprado por:</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 mt-1 d-flex justify-content-center">
+                                <img class="miniImgProfile" src="data:image/jpg;base64,{{buyersList[i].img}}" alt="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">{{buyersList[i].name}} {{buyersList[i].surnames}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center">
+                                <button routerLink="/profile" [queryParams]="{'idUser': buyersList[i].id}"
+                                    class="btn bgSecundario mt-3">Visitar perfil <i
+                                        class="bi bi-person-lines-fill"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <a class="uploadLink" *ngIf="!userId" routerLink="/uploadBook">
+        <div class="upload d-flex align-items-center">
+            <p class="text mt-2">Subir un libro</p>&nbsp;
+            <i class="bi bi-plus-circle-fill"></i>
+        </div>
+    </a>
 
     <ng-template #justUploaded>
         <div class="row board d-flex justify-content-center justUploaded">

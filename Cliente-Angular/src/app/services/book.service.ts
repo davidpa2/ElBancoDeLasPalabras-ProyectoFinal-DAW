@@ -117,4 +117,13 @@ export class BookService {
     };
     return this.http.post<any>('/cancelExchangeBooks', jsonObject);
   }
+  
+  /**
+   * Obtener los libros vendidos por un usuario
+   * @param id Id del usuario que haya iniciado sesión
+   * @returns 
+   */
+  getSelledBooks(id: number): Observable<any> {
+    return this.http.get<any>('/getSelledBooks/' + id)
+  }
 }

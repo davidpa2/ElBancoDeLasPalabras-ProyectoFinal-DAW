@@ -17,6 +17,9 @@ export class ProfileComponent implements OnInit {
   user!: User;
   tabSelected: any = 1;
   uploadedBooksList: Book[] = [];
+
+  selledBookList: Book[] = [];
+  buyersList: User[] = [];
   userId = null;
 
   constructor(private userService: UserService, private bookService: BookService, private route: ActivatedRoute, private router: Router,
@@ -24,12 +27,12 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.scrollUp();
-    
+
     this.route.queryParams.subscribe(params => {
       this.userId = params['idUser'] || null;
 
       this.recuperarUsuarioLog();
-      
+
       // Comprobación previa por si estamos visitando por url el perfil del usuario autenticado
       if (this.user.id == this.userId) {
         this.userId = null; // En ese caso cancelamos la acción del query param "userId"
@@ -64,7 +67,7 @@ export class ProfileComponent implements OnInit {
       if (result['estado'] != "error") {
         result.bookList.forEach((b: Book) => {
           console.log(b.reserved);
-          
+
           this.uploadedBooksList.push(b)
         });
       }
@@ -77,6 +80,20 @@ export class ProfileComponent implements OnInit {
         this.user = data['user'];
       }
     })
+  }
+
+  getSelledBooks(id: number) {
+    if (!this.selledBookList.length) { // Evitar mandar múltiples peticiones al ir cambiando entre ventanas
+      this.bookService.getSelledBooks(id).subscribe(data => {
+        if (data['estado'] == 'correcto') {
+          console.log(data['selledBooks']);
+
+          this.selledBookList = data['selledBooks'];
+          this.buyersList = data['buyers'];
+        }
+      })
+    }
+
   }
 
   recuperarUsuarioLog() {

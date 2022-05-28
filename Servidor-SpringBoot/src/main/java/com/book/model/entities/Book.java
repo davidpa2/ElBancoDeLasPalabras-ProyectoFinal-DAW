@@ -15,8 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "book")
 @NamedQuery(name="Book.findAll", query="SELECT b FROM Book b")
-@NamedQuery(name="Book.findByUserId", query="SELECT b FROM Book b where user_id = ?1 and state > 0")
-@NamedQuery(name="Book.findByUserIdAutenticated", query="SELECT b FROM Book b where user_id = ?1 and state > 0 and (reserved = null or reserved > 0)")
+@NamedQuery(name="Book.findByUserId", query="SELECT b FROM Book b where user_id = ?1 and state > 0 and (reserved = null or reserved > 0)")
 @NamedQuery(name="Book.getAllBooksForSale", query="SELECT b FROM Book b where user_id != ?1 and state > 0 and reserved = null")
 @NamedQuery(name="Book.getAllBooks", query="SELECT b FROM Book b where state > 0 and reserved = null")
 @NamedQuery(name="Book.getBuyReservedBooks", query="SELECT b FROM Book b where reserved = 1 and buyer_id != null and user_id = ?1")

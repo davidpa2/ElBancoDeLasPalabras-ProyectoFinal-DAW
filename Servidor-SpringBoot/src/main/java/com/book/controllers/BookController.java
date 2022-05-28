@@ -183,8 +183,8 @@ public class BookController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value="/findByUserId/{id}/{authenticated}")
-	public DTO findByUserId(@PathVariable(value="id") int id, @PathVariable(value="authenticated") boolean authenticated) {
+	@RequestMapping(value="/findByUserId/{id}")
+	public DTO findByUserId(@PathVariable(value="id") int id) {
 		DTO dto = new DTO();
 		// asumimos que va a salir mal
 		dto.put("estado", "error");
@@ -193,13 +193,7 @@ public class BookController {
 		
 		List<Book> bookList = new ArrayList<Book>();
 		
-		if (authenticated) {			
-			// buscamos todos los libros según el id del usuario
-			bookList = this.bookRepo.findByUserIdAutenticated(id);
-		} else {
-			// buscamos todos los libros segú
-			bookList = this.bookRepo.findByUserId(id);
-		}
+		bookList = this.bookRepo.findByUserId(id);
 
 		for (Book b : bookList) {
 			DTO books = new DTO();

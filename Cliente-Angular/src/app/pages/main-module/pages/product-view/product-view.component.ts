@@ -59,7 +59,7 @@ export class ProductViewComponent implements OnInit {
     this.showModal = true;
 
     if (!this.bookList.length) {
-      this.bookService.findBooksByUserId(this.authUser.id, true).subscribe(data => {
+      this.bookService.findBooksByUserId(this.authUser.id).subscribe(data => {
         if (data['estado'] == 'correcto') {
           data.bookList.forEach((b: Book) => {
             this.bookList.push(b);

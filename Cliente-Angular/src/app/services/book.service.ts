@@ -50,9 +50,9 @@ export class BookService {
     return this.http.get<any>('/deleteBook/' + id);
   }
 
-  findBooksByUserId(id: any, authenticated: boolean): Observable<any> {
+  findBooksByUserId(id: any): Observable<any> {
     //http.get() manda una solicitud http y devuelve un objeto Observable que emite los datos solicitados
-    return this.http.get<any>('/findByUserId/' + id + '/' + authenticated);
+    return this.http.get<any>('/findByUserId/' + id);
   }
 
   getBuyReservedBooks(id: any): Observable<any> {

@@ -17,25 +17,23 @@
             <p class="mt-4">Correo electrónico: {{user.email}}</p>
             <p class="mt-4">Fecha de nacimiento: {{user.birthday}}</p>
             <p class="mt-4 mb-4">Localidad: {{user.location}}</p>
-            <div class="row">
-                <div class="col-3">
+            <div class="row d-flex justify-content-center">
+                <div class="col-5">
+                    <p class="valoracion text-center">Valoración del usuario:</p>
+                </div>
+                <div class="col-5">
+                    <app-rate-stars [isUser]="true" [stars]="round(user.rating)"></app-rate-stars>
+                </div>
+            </div>
+            <div class="row mt-4 d-flex justify-content-center">
+                <div class="col">
+                    <button (click)="goBack()" class="btn outlineSecondary">Volver <i
+                            class="bi bi-arrow-counterclockwise"></i></button>
+                </div>
+                <div class="col">
                     <button *ngIf="!userId" routerLink="/editProfile" class="btn bgSecundario">Editar perfil <i
                             class="bi bi-person-bounding-box"></i></button>
                 </div>
-                <div class="col-9">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-5">
-                            <p class="valoracion text-center">Valoración del usuario:</p>
-                        </div>
-                        <div class="col-5">
-                            <app-rate-stars [isUser]="true" [stars]="round(user.rating)"></app-rate-stars>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-center mt-4">
-                <button (click)="goBack()" class="btn outlineSecondary">Volver <i
-                        class="bi bi-arrow-counterclockwise"></i></button>
             </div>
         </div>
     </div>
@@ -97,7 +95,8 @@
                     <div class="col">
                         <div class="row d-flex justify-content-center mt-3">
                             <div class="col-6">
-                                <div class="row pointer" routerLink="/profile" [queryParams]="{'idUser': userPExchangedList[i].id}">
+                                <div class="row pointer" routerLink="/profile"
+                                    [queryParams]="{'idUser': userPExchangedList[i].id}">
                                     <div class="col-6 d-flex justify-content-center">
                                         <div class="d-flex align-items-center">
                                             <img src="data:image/jpg;base64,{{userPExchangedList[i].img}}" alt=""
@@ -117,7 +116,8 @@
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="row pointer" routerLink="/profile" [queryParams]="{'idUser': userOExchangedList[i].id}">
+                                <div class="row pointer" routerLink="/profile"
+                                    [queryParams]="{'idUser': userOExchangedList[i].id}">
                                     <div class="col-6 d-flex justify-content-end">
                                         <div class="row">
                                             <div class="col-12">

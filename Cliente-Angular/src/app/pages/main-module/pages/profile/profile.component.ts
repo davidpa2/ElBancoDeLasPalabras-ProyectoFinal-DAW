@@ -28,9 +28,14 @@ export class ProfileComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.userId = params['idUser'] || null;
 
+      this.recuperarUsuarioLog();
+      
+      // Comprobación previa por si estamos visitando por url el perfil del usuario autenticado
+      if (this.user.id == this.userId) {
+        this.userId = null; // En ese caso cancelamos la acción del query param "userId"
+      }
       // Visitar perfil de usuario autenticado
       if (!this.userId) {
-        this.recuperarUsuarioLog();
         this.getBooks(this.user.id, true); // Llamada a getBooks por separado para evitar problemas al reusar la vista profile
       } else { // Visitando otro perfil
         this.getUserById(this.userId);

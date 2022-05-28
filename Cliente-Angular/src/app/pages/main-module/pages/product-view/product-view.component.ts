@@ -26,9 +26,7 @@ export class ProductViewComponent implements OnInit {
   reserved = false;
   reserveError = false;
 
-  constructor(private bookService: BookService, private userService: UserService, private route: ActivatedRoute, private _location: Location) {
-
-  }
+  constructor(private bookService: BookService, private userService: UserService, private route: ActivatedRoute, private _location: Location) {}
 
   ngOnInit(): void {
     this.getBookAndUserById();
@@ -80,6 +78,7 @@ export class ProductViewComponent implements OnInit {
       } else {
         this.reserveError = true;
       }
+      this.scrollUp();
     })
   }
 
@@ -89,13 +88,17 @@ export class ProductViewComponent implements OnInit {
     this.bookService.reserveExchangeBook(idBookP, this.authUser, this.book.id, idUserOwner).subscribe(data => {
       if (data['estado'] == 'correcto') {
         this.reserved = true;
+        this.scrollUp();
       }
     })
   }
 
-
   recuperarUsuarioLog() {
     this.authUser = JSON.parse(localStorage.getItem("authenticatedUser") || '{}')
+  }
+
+  scrollUp() {
+    window.scrollTo(0, 0)
   }
 
   goBack() {

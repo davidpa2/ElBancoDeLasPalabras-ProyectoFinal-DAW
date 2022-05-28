@@ -19,7 +19,8 @@
             <p class="mt-4 mb-4">Localidad: {{user.location}}</p>
             <div class="row">
                 <div class="col-3">
-                    <button *ngIf="!userId" routerLink="/editProfile" class="btn bgSecundario">Editar perfil <i class="bi bi-person-bounding-box"></i></button>
+                    <button *ngIf="!userId" routerLink="/editProfile" class="btn bgSecundario">Editar perfil <i
+                            class="bi bi-person-bounding-box"></i></button>
                 </div>
                 <div class="col-9">
                     <div class="row d-flex justify-content-center">
@@ -33,7 +34,8 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center mt-4">
-                <button *ngIf="userId" (click)="goBack()" class="btn outlineSecondary">Volver <i class="bi bi-arrow-counterclockwise"></i></button>
+                <button (click)="goBack()" class="btn outlineSecondary">Volver <i
+                        class="bi bi-arrow-counterclockwise"></i></button>
             </div>
         </div>
     </div>
@@ -50,18 +52,19 @@
                 Mis ventas
             </div>
         </div>
-    
+
         <div *ngIf="tabSelected == 1" class="row board d-flex justify-content-center">
             <div *ngIf="!uploadedBooksList.length" class="text-white my-4 text-center">
                 <h3>¿Todavía no has subido ningún libro?</h3>
                 <h4>¡Vamos a desempolvar la estantería!</h4>
             </div>
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-3" *ngFor="let book of uploadedBooksList">
-                <div *ngIf="book.reserved > 0" routerLink="/confirmExchanges" class="reservedMark d-flex align-items-center">
+                <div *ngIf="book.reserved > 0" routerLink="/confirmExchanges"
+                    class="reservedMark d-flex align-items-center">
                     <i class="bi bi-bookmark-star-fill"></i>
                     <span>Reservado</span>
                 </div>
-                
+
                 <div class="row bg-white">
                     <div class="col-12 d-flex justify-content-center mt-3">
                         <img class="thumbnail" src="data:image/jpg;base64,{{book.img}}" alt="">
@@ -71,12 +74,14 @@
                         <p class="text-center mb-1">{{book.author}}</p>
                     </div>
                     <div class="col-12 d-flex justify-content-center mb-3">
-                        <button *ngIf="!userId" [routerLink]="'/modifyBook/' + book.id" class="btn bgSecundario">Editar producto <i class="bi bi-pencil-square"></i></button>
-                        <button *ngIf="userId" [routerLink]="'/productView/' + book.id + '/' + userId" class="btn bgSecundario mb-4">Ver libro <i class="bi bi-book"></i></button>
+                        <button *ngIf="!userId" [routerLink]="'/modifyBook/' + book.id" class="btn bgSecundario">Editar
+                            producto <i class="bi bi-pencil-square"></i></button>
+                        <button *ngIf="userId" [routerLink]="'/productView/' + book.id + '/' + userId"
+                            class="btn bgSecundario mb-4">Ver libro <i class="bi bi-book"></i></button>
                     </div>
                 </div>
             </div>
-    
+
             <a class="uploadLink" *ngIf="!userId" routerLink="/uploadBook">
                 <div class="upload d-flex align-items-center">
                     <p class="text mt-2">Subir un libro</p>&nbsp;
@@ -91,13 +96,17 @@
             hola 3 sin más
         </div>
     </div>
-    
+
     <ng-template #justUploaded>
         <div class="row board d-flex justify-content-center justUploaded">
             <div class="text-center text-white my-2">
                 <h3>Libros subidos</h3>
             </div>
             <div class="col-6 col-sm-4 col-md-3" *ngFor="let book of uploadedBooksList">
+                <div *ngIf="book.reserved > 0" class="reservedMark d-flex align-items-center">
+                    <i class="bi bi-bookmark-star-fill"></i>
+                    <span>Reservado</span>
+                </div>
                 <div class="row bg-white">
                     <div class="col-12 d-flex justify-content-center">
                         <img class="thumbnail" src="data:image/jpg;base64,{{book.img}}" alt="">
@@ -107,8 +116,10 @@
                         <p class="text-center mb-1">{{book.author}}</p>
                     </div>
                     <div class="col-12 d-flex justify-content-center mb-3">
-                        <button *ngIf="!userId" [routerLink]="'/modifyBook/' + book.id" class="btn bgSecundario">Editar producto</button>
-                        <button *ngIf="userId" [routerLink]="'/productView/' + book.id + '/' + userId" class="btn bgSecundario mb-4">Ver libro <i class="bi bi-book"></i></button>
+                        <button *ngIf="!userId" [routerLink]="'/modifyBook/' + book.id" class="btn bgSecundario">Editar
+                            producto</button>
+                        <button *ngIf="userId" [routerLink]="'/productView/' + book.id + '/' + userId"
+                            class="btn bgSecundario mb-4">Ver libro <i class="bi bi-book"></i></button>
                     </div>
                 </div>
             </div>

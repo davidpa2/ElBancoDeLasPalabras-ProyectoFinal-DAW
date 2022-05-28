@@ -39,11 +39,11 @@
                     <button (click)="goBack()" class="btn outlineSecondary">Volver
                         <i class="bi bi-arrow-counterclockwise"></i></button>
                 </div>
-                <div class="col d-flex justify-content-center">
+                <div *ngIf="authUser.id != userOwner.id" class="col d-flex justify-content-center">
                     <button [disabled]="reserved ? true : false" (click)="chooseBook()"
                         class="btn bgSecundario">Intercambiar <i class="bi bi-arrow-left-right"></i></button>
                 </div>
-                <div class="col d-flex justify-content-center">
+                <div *ngIf="authUser.id != userOwner.id" class="col d-flex justify-content-center">
                     <button [disabled]="reserved ? true : false" (click)="showPurchaseModal = true"
                         class="btn bgSecundario">Comprar <i class="bi bi-cart-check-fill"></i></button>
                     <!-- routerLink="/purchase/1" -->
@@ -132,7 +132,7 @@
                 <!-- <span (click)="showModal = false" class="close">&times;</span> -->
             </div>
         </div>
-        <div class="row mb-4 d-flex justify-content-center">
+        <div *ngIf="bookList.length" class="row mb-4 d-flex justify-content-center">
             <div class="col-10">
                 <p class="text-center">Al hacer click en <span class="bold">"Seleccionar"</span> en un libro, se le informará al
                     dueño de "{{book.title}}" de tu solicitud de intercambio con tu propuesta de libro. Será él quien decida
@@ -160,12 +160,12 @@
                 </div>
             </div>
         </div>
-        <div class="row d-flex justify-content-center">
-            <div class="col-6 d-flex justify-content-center">
+        <div class="row">
+            <div class="col-6 d-flex justify-content-end">
                 <button class="btn outlineSecondary" (click)="showModal = false">Cancelar <i
                         class="bi bi-arrow-counterclockwise"></i></button>
             </div>
-            <div *ngIf="!bookList.length" class="col-6 d-flex justify-content-center">
+            <div *ngIf="!bookList.length" class="col-6 d-flex justify-content-start">
                 <button routerLink="/uploadBook" class="btn bgSecundario">Subir un libro <i
                         class="bi bi-arrow-up-circle"></i></button>
             </div>

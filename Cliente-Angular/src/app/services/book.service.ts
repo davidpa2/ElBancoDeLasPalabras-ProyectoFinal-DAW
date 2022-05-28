@@ -126,4 +126,8 @@ export class BookService {
   getSelledBooks(id: number): Observable<any> {
     return this.http.get<any>('/getSelledBooks/' + id)
   }
+
+  getExchangedBooks(id: number): Observable<any> {
+    return this.http.get<any>('/getExchangedBooks/' + id);
+  }
 }

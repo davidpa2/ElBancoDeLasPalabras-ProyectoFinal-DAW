@@ -20,6 +20,14 @@ export class ProfileComponent implements OnInit {
 
   selledBookList: Book[] = [];
   buyersList: User[] = [];
+
+  //Lista en la que se guardarán los libros que ofrecieron los usuarios intercambiar
+  bookPExchangedList: Book[] = [];
+  //Lista en la que se guardarán los usuarios que solicitaron intercambio de tus libros
+  userPExchangedList: User[] = []; //Está emparejada con la de los libros
+  //Lista en la que se guardarán los libros solicitados por otros usuarios
+  bookOExchangedList: Book[] = []; //Está emparejada con la de los libros ofrecidos y la de los usuarios
+  userOExchangedList: User[] = [];
   userId = null;
 
   constructor(private userService: UserService, private bookService: BookService, private route: ActivatedRoute, private router: Router,
@@ -86,14 +94,26 @@ export class ProfileComponent implements OnInit {
     if (!this.selledBookList.length) { // Evitar mandar múltiples peticiones al ir cambiando entre ventanas
       this.bookService.getSelledBooks(id).subscribe(data => {
         if (data['estado'] == 'correcto') {
-          console.log(data['selledBooks']);
-
           this.selledBookList = data['selledBooks'];
           this.buyersList = data['buyers'];
         }
       })
     }
+  }
 
+  getExchangedBooks(id: number) {
+    if (!this.bookPExchangedList.length) {
+      this.bookService.getExchangedBooks(id).subscribe(data => {
+        if (data['estado'] == 'correcto') {
+          this.bookOExchangedList = data['booksO'];
+          this.userOExchangedList = data['usersO']
+          this.bookPExchangedList = data['booksP'];
+          this.userPExchangedList = data['usersP'];
+          console.log(data['booksO']);
+          
+        }
+      })
+    }
   }
 
   recuperarUsuarioLog() {

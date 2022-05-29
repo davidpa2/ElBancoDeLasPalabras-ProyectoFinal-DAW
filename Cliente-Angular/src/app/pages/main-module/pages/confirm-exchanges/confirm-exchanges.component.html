@@ -392,3 +392,75 @@
         </div>
     </div>
 </div>
+
+<div *ngIf="showValueUserModal && (soldBook || petitionerExchanged)" id="myModal" class="modal"
+    [style]="showValueUserModal ? 'display: block;' : 'display: none'">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="row mb-4 d-flex justify-content-center">
+            <div class="col-12">
+                <h2 *ngIf="soldBook" class="text-center mt-3 ms-5">Por favor, valora al usuario tras la venta de tu
+                    libro.
+                </h2>
+                <h2 *ngIf="petitionerExchanged" class="text-center mt-3 ms-5">Por favor, valora al usuario tras el
+                    intercambio de libros.
+                </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <div class="d-flex flex-column align-items-center">
+                    <img src="data:image/jpg;base64,{{ratingUser.img}}" alt=""
+                        class="imgMiniCover">
+                </div>
+                <h5 class="bold my-4 text-center">{{ ratingUser.name }}</h5>
+            </div>
+
+            <div class="col-8 mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="text-center">¿Qué te ha parecido el trato con este usuario?</h4>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12 col-lg-6">
+                        <div class="valorador row bg-white">
+                            <div class="col-6 d-flex justify-content-end">
+                                <p *ngIf="!stars">Valorar usuario</p>
+                                <p *ngIf="stars == 1">Muy mal trato</p>
+                                <p *ngIf="stars == 2">Mal trato</p>
+                                <p *ngIf="stars == 3">Buena trato</p>
+                                <p *ngIf="stars == 4">Muy buen trato</p>
+                                <p *ngIf="stars == 5">Trato excepcional</p>
+                            </div>
+                            <div class="col-6">
+                                <i (click)="stars = 1"
+                                    [class]="stars >= 1? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+                                <i (click)="stars = 2"
+                                    [class]="stars >= 2? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+                                <i (click)="stars = 3"
+                                    [class]="stars >= 3? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+                                <i (click)="stars = 4"
+                                    [class]="stars >= 4? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+                                <i (click)="stars = 5"
+                                    [class]="stars >= 5? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 d-flex justify-content-center mt-3 mt-lg-0">
+                        <button
+                            (click)="rateUser(ratingUser.id)"
+                            class="btn bgSecundario">Enviar valoración <i class="bi bi-arrow-up-circle"></i></button>
+                    </div>
+                </div>
+                <div *ngIf="sendedRate && !stars" class="row mt-3">
+                    <div class="col-10">
+                        <p class="errorForm text-center">*Debe de seleccionar una de las estrellas según su nivel de
+                            conformidad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

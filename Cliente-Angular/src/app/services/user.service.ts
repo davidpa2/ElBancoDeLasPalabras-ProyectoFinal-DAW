@@ -113,4 +113,8 @@ export class UserService {
   getUserByMail(mail: any) {
     return this.http.get<any>('/getUserByMail/' + mail)
   }
+
+  rateUser(id: number, stars: number) {
+    return this.http.get<any>('/rateUser/' + id + '/' + stars);
+  }
 }

@@ -259,4 +259,20 @@ public class UserController {
 			this.pass = pass;
 		}
 	}
+	
+	@GetMapping("/rateUser/{id}/{rating}")
+	public DTO rateUser(@PathVariable(value="id") int id, @PathVariable(value="rating") int rating) {
+
+		DTO dto = new DTO();
+		dto.put("estado", "error");
+
+		User user = userRepo.getById(id);
+
+		user.setRating((user.getRating() + rating) / 2);
+		
+		userRepo.save(user);
+		
+		dto.put("estado", "correcto");
+		return dto;
+	}
 }

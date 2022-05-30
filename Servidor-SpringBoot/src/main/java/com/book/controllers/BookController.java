@@ -234,21 +234,6 @@ public class BookController {
 			bookList = bookRepo.lookForABook(search, id);
 		}
 
-		for (Book b : bookList) {
-			System.out.println("VA VAAAAAA");
-			DTO books = new DTO();
-			// creamos dto de objeto
-			books.put("id", b.getId());
-			books.put("title", b.getTitle());
-			books.put("author", b.getAuthor());
-			books.put("description", b.getDescription());
-			books.put("state", b.getState());
-			books.put("price", b.getPrice());
-			books.put("img", b.getImg());
-			books.put("reserved", b.getReserved());
-			// metemos cada dto en la lista dtos
-			dtoBooks.add(books);
-		}
 		//Guardar en una lista los dueños de cada libro en el mismo orden
 		List <User> userList = new ArrayList<User>();
 		//Recorrer la lista de libros buscando por el id del usuario que lo haya subido
@@ -258,7 +243,7 @@ public class BookController {
 		//Si todo hay ido bien asignamos el estado como correcto y devolvemos el dto con la lista de libros
 		dto.put("estado", "correcto");
 		dto.put("userList", userList);
-		dto.put("bookList", dtoBooks);
+		dto.put("bookList", bookList);
 		return dto;
 	}
 	

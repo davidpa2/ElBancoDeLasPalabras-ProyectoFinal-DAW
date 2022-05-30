@@ -3,6 +3,7 @@ import { Book, User } from 'src/app/interfaces/interfaces';
 import { BookService } from 'src/app/services/book.service';
 import { Location } from '@angular/common';
 import { UserService } from 'src/app/services/user.service';
+import { SendMailService } from 'src/app/services/send-mail.service';
 
 @Component({
   selector: 'app-confirm-exchanges',
@@ -16,7 +17,7 @@ export class ConfirmExchangesComponent implements OnInit {
   bookBuyReservedList: Book[] = [];
   //Lista en la que se guardarán los usuarios que han solicitado la compra de tus libros
   userBuyReservedList: User[] = []; //Está emparejada con la de los libros
-  
+
   //Lista en la que se guardarán los libros que ofrecen los usuarios intercambiar
   bookPExchangeReservedList: Book[] = [];
   //Lista en la que se guardarán los usuarios que han solicitado intercambio de tus libros
@@ -75,6 +76,7 @@ export class ConfirmExchangesComponent implements OnInit {
     this.showConfirmBuyModal = false;
     this.bookService.sellBook(id).subscribe(data => {
       if (data['estado'] = 'correcto') {
+        //Rellenamos el objeto ratingUser para poder valorar al usuario
         this.ratingUser = {
           id: this.userBuyReservedList[this.bookSelected].id,
           name: this.userBuyReservedList[this.bookSelected].name,
@@ -106,6 +108,7 @@ export class ConfirmExchangesComponent implements OnInit {
     this.showConfirmExchangeModal = false;
     this.bookService.exchangeBooks(bookP, petitioner, bookO, this.authUser).subscribe(data => {
       if (data['estado'] == 'correcto') {
+
         this.ratingUser = {
           id: this.petitionerExchangeReservedList[this.exchangeSelected].id,
           name: this.petitionerExchangeReservedList[this.exchangeSelected].name,
@@ -135,7 +138,7 @@ export class ConfirmExchangesComponent implements OnInit {
 
   rateUser(id: number) {
     this.sendedRate = true;
-  
+
     if (this.stars) {
       this.userService.rateUser(id, this.stars).subscribe(data => {
         if (data['estado'] == 'correcto') {

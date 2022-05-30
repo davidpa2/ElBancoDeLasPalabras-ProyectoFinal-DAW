@@ -4,6 +4,7 @@ import { BookService } from 'src/app/services/book.service';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { SendMailService } from 'src/app/services/send-mail.service';
 
 @Component({
   selector: 'app-product-view',
@@ -28,7 +29,8 @@ export class ProductViewComponent implements OnInit {
   bookReserved = false; // Si visitamos este libro y está ya reservado
   reserveError = false;
 
-  constructor(private bookService: BookService, private userService: UserService, private route: ActivatedRoute, private _location: Location) {}
+  constructor(private bookService: BookService, private userService: UserService, private route: ActivatedRoute,
+    private _location: Location, private mailService: SendMailService) { }
 
   ngOnInit(): void {
     this.getBookAndUserById();
@@ -75,11 +77,14 @@ export class ProductViewComponent implements OnInit {
 
     this.bookService.reserveBuyBook(this.book, this.userOwner, this.authUser).subscribe(data => {
       if (data['estado'] == 'correcto') {
+        this.scrollUp();
         this.reserved = true;
+        // Si se ha hecho bien la petición, mandar un correo al usuario dueño del libro
+        this.mailService.buyMail(this.userOwner, this.book).subscribe(data => { });
       } else {
         this.reserveError = true;
+        this.scrollUp();
       }
-      this.scrollUp();
     })
   }
 
@@ -90,6 +95,8 @@ export class ProductViewComponent implements OnInit {
       if (data['estado'] == 'correcto') {
         this.reserved = true;
         this.scrollUp();
+        // Si se ha hecho bien la petición, mandar un correo al usuario dueño del libro
+        this.mailService.exchangeMail(this.userOwner, this.book).subscribe(data => { });
       }
     })
   }

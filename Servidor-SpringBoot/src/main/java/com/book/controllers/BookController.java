@@ -223,8 +223,7 @@ public class BookController {
 		DTO dto = new DTO();
 		// asumimos que va a salir mal
 		dto.put("estado", "error");
-		// lista de dto que meteremos en dto que devolveremos
-		List<DTO> dtoBooks = new ArrayList<DTO>();
+
 		List<Book> bookList = new ArrayList<Book>();
 		//Si se ha accedido sin iniciar sesión buscamos todos los libros subidos según la búsqueda
 		if (id == -1) {
@@ -261,12 +260,7 @@ public class BookController {
 		book.setBuyer_id(data.buyer.getId());
 
 		//Guardar los cambios realizados en el libro
-		bookRepo.save(book);
-		
-		String subject = "¡Han solicitado la compra de un libro!";
-		String message = "¡" + data.owner.getName() + ", un usuario ha solicitado la compra de tu libro: " + data.book.getTitle() + "!";
-		sendMailService.sendMail(data.owner.getEmail(), subject, message);
-		
+		bookRepo.save(book);		
 
 		//Si todo hay ido bien asignamos el estado como correcto y devolvemos el dto con la lista de libros
 		dto.put("estado", "correcto");

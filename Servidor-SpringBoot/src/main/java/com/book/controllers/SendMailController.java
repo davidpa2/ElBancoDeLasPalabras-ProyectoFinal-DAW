@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.book.model.entities.Book;
 import com.book.model.entities.User;
 import com.book.repository.UserRepository;
 import com.book.service.SendMailService;
@@ -54,4 +55,50 @@ public class SendMailController {
 			this.idUser = idUser;
 		}
 	}
+	
+	@PostMapping("/sendBuyMail")
+	public DTO sendBuyMail(@RequestBody DataReserveBookMail data) {
+		DTO dto = new DTO();
+
+		String subject = "¡Han solicitado la compra de un libro!";
+		String message = "¡" + data.user.getName() + ", un usuario ha solicitado la compra de tu libro: " + data.book.getTitle() + "!";
+		
+		sendMailService.sendMail(data.user.getEmail(), subject, message);
+		
+		dto.put("estado", "correcto");	
+		return dto;
+	}
+	
+	@PostMapping("/sendExchangeMail")
+	public DTO sendExchangeMail(@RequestBody DataReserveBookMail data) {
+		DTO dto = new DTO();
+		
+		String subject = "¡Han solicitado el intercambio de un libro!";
+		String message = "¡" + data.user.getName() + ", un usuario ha solicitado el intercambio de tu libro: "
+				+ data.book.getTitle() + "!";
+		sendMailService.sendMail(data.user.getEmail(), subject, message);
+		
+		dto.put("estado", "correcto");	
+		return dto;
+	}
+	
+	/**
+	 * Clase que contiene los datos para mandar el correo
+	 */
+	static class DataReserveBookMail {
+		@JsonProperty("user")
+		User user;
+		@JsonProperty("book")
+		Book book;
+
+		public DataReserveBookMail() { }
+		
+		public DataReserveBookMail(User user, Book book) {
+			super();
+			this.user = user;
+			this.book = book;
+		}
+	}
+	
+	
 }

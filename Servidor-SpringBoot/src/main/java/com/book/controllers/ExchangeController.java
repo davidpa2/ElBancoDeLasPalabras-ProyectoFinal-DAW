@@ -55,11 +55,6 @@ public class ExchangeController {
 
 		exchangeRepo.save(exchange);
 
-		String subject = "¡Han solicitado el intercambio de un libro!";
-		String message = "¡" + data.owner.getName() + ", un usuario ha solicitado el intercambio de tu libro: "
-				+ data.bookO.getTitle() + "!";
-		sendMailService.sendMail(data.owner.getEmail(), subject, message);
-
 		dto.put("estado", "correcto");
 
 		return dto;

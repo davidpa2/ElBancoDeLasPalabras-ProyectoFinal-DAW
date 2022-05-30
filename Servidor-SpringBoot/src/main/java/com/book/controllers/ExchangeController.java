@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import com.book.model.entities.User;
 import com.book.repository.BookRepository;
 import com.book.repository.ExchangeRepository;
 import com.book.repository.UserRepository;
+import com.book.security.AutenticadorJWT;
 import com.book.service.SendMailService;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -186,4 +189,20 @@ public class ExchangeController {
 
 		return dto;
 	}
+	
+	@GetMapping("/countPendingExchanges")
+	public DTO countPendingExchanges(HttpServletRequest request) {
+		DTO dto = new DTO();
+		// asumimos que va a salir mal
+		dto.put("estado", "error");
+		
+		int idUsuarioAutenticado = AutenticadorJWT.getIdUsuarioDesdeJwtIncrustadoEnRequest(request);
+		
+		int buyReserved = bookRepo.countBuyReservedBooks(idUsuarioAutenticado);
+		int exchangeReserved = exchangeRepo.countExchangeReservedBooks(idUsuarioAutenticado);
+
+		dto.put("pendingExchanges", buyReserved + exchangeReserved);
+		return dto;
+	}
+	
 }

@@ -18,6 +18,7 @@ public interface BookRepository extends JpaRepository<Book, Serializable>{
 	public abstract List<Book> getBuyReservedBooks(int idUser);
 	public abstract List<Book> getSelledBooks(int idUser);
 	public abstract int countBooks(int idUser);
+	public abstract int countBuyReservedBooks(int idUser);
 	@Query("SELECT b FROM Book b where user_id != :userId and state > 0 and (title like %:search% or author like %:search%) and (reserved = null)")
 	List<Book> lookForABook(@Param("search")String search, @Param("userId")int userId);
 	@Query("SELECT b FROM Book b where state > 0 and (title like %:search% or author like %:search%) and (reserved = null)")

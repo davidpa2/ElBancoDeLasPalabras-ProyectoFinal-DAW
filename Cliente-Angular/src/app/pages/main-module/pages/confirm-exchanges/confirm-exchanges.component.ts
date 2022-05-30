@@ -3,7 +3,6 @@ import { Book, User } from 'src/app/interfaces/interfaces';
 import { BookService } from 'src/app/services/book.service';
 import { Location } from '@angular/common';
 import { UserService } from 'src/app/services/user.service';
-import { SendMailService } from 'src/app/services/send-mail.service';
 
 @Component({
   selector: 'app-confirm-exchanges',
@@ -51,6 +50,7 @@ export class ConfirmExchangesComponent implements OnInit {
     this.recuperarUsuarioLog();
     this.getBuyReservedBooks();
     this.getExchangeReservedBooks();
+    this.bookService.emitPendingExchanges();
   }
 
   getBuyReservedBooks() {
@@ -88,6 +88,7 @@ export class ConfirmExchangesComponent implements OnInit {
         this.showValueUserModal = true;
         this.scrollUp();
         this.getBuyReservedBooks();
+        this.bookService.emitPendingExchanges();
       }
     })
   }
@@ -100,6 +101,7 @@ export class ConfirmExchangesComponent implements OnInit {
         this.cancelledPurchaseBook = title;
         this.getBuyReservedBooks();
         this.scrollUp();
+        this.bookService.emitPendingExchanges();
       }
     })
   }
@@ -120,6 +122,7 @@ export class ConfirmExchangesComponent implements OnInit {
         this.getExchangeReservedBooks();
         this.scrollUp();
         this.showValueUserModal = true;
+        this.bookService.emitPendingExchanges();
       }
     })
   }
@@ -132,6 +135,7 @@ export class ConfirmExchangesComponent implements OnInit {
         this.cancelExchangePertioner = this.petitionerExchangeReservedList[this.exchangeSelected].name;
         this.getExchangeReservedBooks();
         this.scrollUp();
+        this.bookService.emitPendingExchanges();
       }
     })
   }

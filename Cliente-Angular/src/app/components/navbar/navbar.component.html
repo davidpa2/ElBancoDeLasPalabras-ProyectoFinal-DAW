@@ -26,18 +26,31 @@
         data-bs-toggle="dropdown" aria-expanded="false">
         Mi perfil
         <i class="bi bi-person-fill"></i>
-        <span class="badge bg-danger">5</span>
+        <span *ngIf="pendingExchanges"
+          class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger">{{ pendingExchanges
+          }}</span>
       </button>
       <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
         <a class="dropdown-item" routerLink="/profile">Mi perfil</a>
-        <a class="dropdown-item" routerLink="/confirmExchanges"><span class="badge bg-danger">5</span>Intercambios<br>pendientes</a>
-        <div class="d-flex justify-content-center mt-2">
+        <a class="dropdown-item exchanges" routerLink="/confirmExchanges">
+          <div class="row">
+            <div class="col-10">
+              <p>Intercambios<br>pendientes</p>
+            </div>
+            <div class="col-2 d-flex flex-column justify-content-center align-items-end">
+              <span *ngIf="pendingExchanges" class="badge bg-danger rounded-pill mb-3">
+                {{ pendingExchanges }}</span>
+            </div>
+          </div>
+        </a>
+        <div class="d-flex justify-content-center">
           <button class="btn bgSecundario" (click)="logOut()">Cerrar sesión <i class="bi bi-power"></i></button>
         </div>
       </div>
     </div>
 
-    <button *ngIf="!user.name" class="btn bgTerciario" routerLink="/auth/login">Iniciar sesión <i class="bi bi-person-check-fill"></i></button>
+    <button *ngIf="!user.name" class="btn bgTerciario" routerLink="/auth/login">Iniciar sesión <i
+        class="bi bi-person-check-fill"></i></button>
 
   </div>
 </nav>

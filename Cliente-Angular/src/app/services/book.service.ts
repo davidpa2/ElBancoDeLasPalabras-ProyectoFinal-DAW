@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Book, User } from '../interfaces/interfaces';
 import { Observable } from 'rxjs';
@@ -9,6 +9,21 @@ import { Observable } from 'rxjs';
 export class BookService {
 
   constructor(private http: HttpClient) { }
+
+  exchanges!: number;
+  @Output() pendingExchanges = new EventEmitter<any>();
+
+  public getPendingExchanges(): Observable<any> {
+    return this.http.get<any>('/countPendingExchanges');
+  }
+
+  emitPendingExchanges() {
+    this.getPendingExchanges().subscribe(exchanges => {
+      this.exchanges = exchanges['pendingExchanges'];
+      localStorage.setItem("pendingExchanges", exchanges);
+      this.pendingExchanges.emit(exchanges);
+    })
+  }
 
   uploadBook(title: string, author: string, description: string, state: number, price: string, img: string, user: User): Observable<Book> {
     var jsonObject = {
@@ -135,4 +150,6 @@ export class BookService {
   getExchangedBooks(id: number): Observable<any> {
     return this.http.get<any>('/getExchangedBooks/' + id);
   }
+
+
 }

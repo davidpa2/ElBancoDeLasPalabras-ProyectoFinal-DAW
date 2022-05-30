@@ -1,5 +1,6 @@
 import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/interfaces';
+import { BookService } from 'src/app/services/book.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class IndexComponent implements OnInit{
 
   user!: User;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private bookService: BookService) { }
 
   ngOnInit(): void {
     this.recuperarUsuarioLog();
@@ -21,6 +22,8 @@ export class IndexComponent implements OnInit{
     this.userService.cambiosEnUserAutenticado.subscribe(data => {
       this.user = data;
     });
+
+    this.bookService.emitPendingExchanges();
   }
   
   recuperarUsuarioLog() {

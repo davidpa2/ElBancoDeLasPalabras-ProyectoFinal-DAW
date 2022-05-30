@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/interfaces';
+import { BookService } from 'src/app/services/book.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,23 +12,12 @@ import { UserService } from 'src/app/services/user.service';
 export class NavbarComponent implements OnInit {
 
   user!: User;
+  pendingExchanges!: number;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private bookService: BookService, private router: Router) { }
 
   ngOnInit(): void {
     this.recuperarUsuarioLog();
-
-    //Protección de rutas
-    /* if (this.user != null) {
-      this.router.navigate(['/index']);
-    }
-    if (this.user == null) {
-      this.router.navigate(['/auth/login']);
-    } 
-    
-    if (!this.user.tlf) {
-      this.router.navigate(['/editProfile'])
-    }*/
 
     this.userService.cambiosEnUserAutenticado.subscribe(data => {
       console.log('Hay un cambio en el usuario autenticado', data);
@@ -35,6 +25,10 @@ export class NavbarComponent implements OnInit {
       //this.user = this.userService.authenticatedUser;
       this.user = data;
     });
+
+    this.bookService.pendingExchanges.subscribe(data => {
+      this.pendingExchanges = data['pendingExchanges'];
+    })
   }
 
   recuperarUsuarioLog() {

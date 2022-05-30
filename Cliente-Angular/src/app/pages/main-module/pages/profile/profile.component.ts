@@ -67,6 +67,8 @@ export class ProfileComponent implements OnInit {
       //this.user = this.userService.authenticatedUser;
       this.user = data;
     });
+
+    this.bookService.emitPendingExchanges();
   }
 
   getBooks(id: any) {

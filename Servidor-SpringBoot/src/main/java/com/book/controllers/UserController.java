@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.book.model.entities.User;
+import com.book.repository.BookRepository;
 import com.book.repository.UserRepository;
 import com.book.security.AutenticadorJWT;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,6 +24,8 @@ public class UserController {
 
 	@Autowired
 	UserRepository userRepo;
+	@Autowired
+	BookRepository bookRepo;
 
 	@GetMapping("/getAllUsers")
 	public DTO doGet() {
@@ -46,10 +49,13 @@ public class UserController {
 		dto.put("estado", "error");
 		
 		User user = this.userRepo.getById(id);
+		
+		int countBooks = bookRepo.countBooks(id);
 
 		//Si todo hay ido bien asignamos el estado como correcto y devolvemos el dto con la lista de libros
 		dto.put("estado", "correcto");
 		dto.put("user", user);
+		dto.put("countBooks", countBooks);
 		return dto;
 	}
 	

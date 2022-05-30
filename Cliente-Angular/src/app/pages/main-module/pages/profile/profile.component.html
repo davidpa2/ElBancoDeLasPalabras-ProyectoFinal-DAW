@@ -54,7 +54,7 @@
         </div>
 
         <div *ngIf="tabSelected == 1" class="row board d-flex justify-content-center">
-            <div *ngIf="!uploadedBooksList.length" class="text-white my-4 text-center">
+            <div *ngIf="!uploadedBooksList.length" class="text-white mt-4 text-center">
                 <h3>¿Todavía no has subido ningún libro?</h3>
                 <h4>¡Vamos a desempolvar la estantería!</h4>
             </div>
@@ -85,12 +85,12 @@
         </div>
 
         <div *ngIf="tabSelected == 2" class="row board d-flex justify-content-center">
-            <div *ngIf="!bookOExchangedList.length" class="text-white my-4 text-center">
+            <div *ngIf="!bookOExchangedList.length" class="text-white mt-4 text-center">
                 <h3>¿Todavía no has intercambiado ningún libro?</h3>
                 <h4>¡Vamos a echar un vistazo al catálogo y proponer un intercambio!</h4>
             </div>
 
-            <div *ngFor="let exchangedBook of bookPExchangedList; let i = index" class="col-10 mt-5">
+            <div *ngFor="let exchangedBook of bookPExchangedList; let i = index" class="col-10 mt-4">
                 <div class="row bg-white p-3 border d-flex justify-content-center">
                     <div class="col">
                         <div class="row d-flex justify-content-center mt-3">
@@ -167,7 +167,7 @@
             </div>
         </div>
         <div *ngIf="tabSelected == 3" class="row board d-flex justify-content-center">
-            <div *ngIf="!selledBookList.length" class="text-white my-4 text-center">
+            <div *ngIf="!selledBookList.length" class="text-white mt-4 text-center">
                 <h3>¿Todavía no has vendido ningún libro?</h3>
                 <h4>¡Vamos a revisar la estantería y subir algunos!</h4>
             </div>
@@ -219,13 +219,6 @@
         </div>
     </div>
 
-    <a class="uploadLink" *ngIf="!userId" routerLink="/uploadBook">
-        <div class="upload d-flex align-items-center">
-            <p class="text mt-2">Subir un libro</p>&nbsp;
-            <i class="bi bi-plus-circle-fill"></i>
-        </div>
-    </a>
-
     <ng-template #justUploaded>
         <div class="row board d-flex justify-content-center justUploaded">
             <div class="text-center text-white my-2">
@@ -252,4 +245,11 @@
             </div>
         </div>
     </ng-template>
+
+    <a class="uploadLink" *ngIf="!userId" routerLink="/uploadBook">
+        <div class="upload d-flex align-items-center">
+            <p class="text mt-2">Subir un libro</p>&nbsp;
+            <i class="bi bi-plus-circle-fill"></i>
+        </div>
+    </a>
 </div>

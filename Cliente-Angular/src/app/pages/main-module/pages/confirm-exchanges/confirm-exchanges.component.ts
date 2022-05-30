@@ -142,6 +142,12 @@ export class ConfirmExchangesComponent implements OnInit {
           this.showValueUserModal = false;
           this.stars = 0;
           this.sendedRate = false;
+          this.ratingUser = {
+            id: 0,
+            name: '',
+            surnames: '',
+            img: ''
+          }
         }
       })
     }

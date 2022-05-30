@@ -74,7 +74,7 @@
                         <h3 class="titleCard text-center mt-1">{{book.title}}</h3>
                         <p class="text-center mb-1">{{book.author}}</p>
                     </div>
-                    <div class="col-12 d-flex justify-content-center mb-3">
+                    <div class="col-12 d-flex justify-content-center align-self-center mb-3">
                         <button *ngIf="!userId" [routerLink]="'/modifyBook/' + book.id" class="btn bgSecundario">Editar
                             producto <i class="bi bi-pencil-square"></i></button>
                         <button *ngIf="userId" [routerLink]="'/productView/' + book.id + '/' + userId"
@@ -237,9 +237,9 @@
                         <h3 class="titleCard text-center mt-1">{{book.title}}</h3>
                         <p class="text-center mb-1">{{book.author}}</p>
                     </div>
-                    <div class="col-12 d-flex justify-content-center">
+                    <div class="col-12 d-flex justify-content-center align-self-center mb-3">
                         <button [routerLink]="'/productView/' + book.id + '/' + userId"
-                            class="btn bgSecundario mb-4">Ver libro <i class="bi bi-book"></i></button>
+                            class="btn bgSecundario">Ver libro <i class="bi bi-book"></i></button>
                     </div>
                 </div>
             </div>

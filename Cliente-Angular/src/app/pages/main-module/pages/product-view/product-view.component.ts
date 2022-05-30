@@ -20,10 +20,12 @@ export class ProductViewComponent implements OnInit {
   userOwner!: User;
   book!: Book;
   bookList: Book[] = [];
+  countBooks: number = 0;
 
   showModal = false;
   showPurchaseModal = false;
-  reserved = false;
+  reserved = false; // Una vez se reserva un libro sabemos que se ha reservado
+  bookReserved = false; // Si visitamos este libro y está ya reservado
   reserveError = false;
 
   constructor(private bookService: BookService, private userService: UserService, private route: ActivatedRoute, private _location: Location) {}
@@ -31,8 +33,6 @@ export class ProductViewComponent implements OnInit {
   ngOnInit(): void {
     this.getBookAndUserById();
     this.recuperarUsuarioLog();
-    console.log(this.userOwner);
-    
   }
 
   /**
@@ -44,13 +44,14 @@ export class ProductViewComponent implements OnInit {
         this.book = data['book'];
         //Comprobamos si el libro que se ha solicitado está reservado
         if (data['book'].reserved == '1') {
-          this.reserved = true;
+          this.bookReserved = true;
         }
       }
     });
     this.userService.getUserById(this.route.snapshot.params['userId']).subscribe(data => {
       if (data['estado'] == "correcto") {
         this.userOwner = data['user'];
+        this.countBooks = data['countBooks'];
       }
     });
   }
@@ -103,5 +104,9 @@ export class ProductViewComponent implements OnInit {
 
   goBack() {
     this._location.back();
+  }
+
+  round(number: number) {
+    return Math.round(number);
   }
 }

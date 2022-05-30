@@ -23,8 +23,9 @@
 }
 
 .imgProfile {
-    width: 15rem;
-    height: 15rem;
+    width: 16rem;
+    height: 16rem;
+    border-radius: 10px;
 }
 
 .map {
@@ -34,8 +35,9 @@
 }
 
 .profile {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    /* border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px; */
+    border-radius: 15px;
 }
 
 .share .bi {
@@ -98,4 +100,8 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.location {
+    font-size: 20px;
 }

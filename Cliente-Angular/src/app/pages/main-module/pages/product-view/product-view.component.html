@@ -90,7 +90,7 @@
             </div >
         </div> -->
         <!-- <div class="col-7 bg-white profile"> -->
-        <div class="col-12 bg-white profile py-4">
+        <div class="col-12 bg-white profile py-4" *ngIf="userOwner">
             <div class="row">
                 <div class="col-7">
                     <h3 class="text-center bold mt-2">{{userOwner.name}} {{userOwner.surnames}}</h3>

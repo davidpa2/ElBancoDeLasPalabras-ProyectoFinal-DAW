@@ -273,8 +273,13 @@ public class UserController {
 		dto.put("estado", "error");
 
 		User user = userRepo.getById(id);
-
-		user.setRating((user.getRating() + rating) / 2);
+		
+		// Si nunca se ha valorado al usuario, poner la primera valoración sin hacer la media
+		if (user.getRating() == 0) {
+			user.setRating(rating);
+		} else {	
+			user.setRating((user.getRating() + rating) / 2);
+		}
 		
 		userRepo.save(user);
 		

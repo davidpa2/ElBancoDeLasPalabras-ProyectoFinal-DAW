@@ -4,6 +4,7 @@
 
 .imgProfile {
     width: 25vw;
+    height: 25vw;
 }
 
 .miniImgProfile {
@@ -12,7 +13,8 @@
 }
 
 .thumbnail {
-    height: 300px;
+    /* height: 300px; */
+    height: 25vw;
 }
 
 .border {
@@ -110,13 +112,19 @@ button i {
     -webkit-text-stroke: 1px white;
 
     span {
-        font-size: 20px !important;
+        font-size: 1.5vw;
         background-color: rgba(255, 255, 255, 0.6);
         -webkit-text-stroke: 1px black !important;
     }
 
     i {
-        font-size: 3rem;
+        font-size: 4vw;
+    }
+}
+
+@media (max-width: 1000px) {
+    span {
+        font-size: 15px !important;
     }
 }
 
@@ -128,7 +136,15 @@ button i {
 
 @media (max-width: 575px) {
     .reservedMark {
-        margin-left: 15vw;
+        margin-left: 5vw;
+
+        span {
+            display: none;
+        }
+
+        i {
+            font-size: 30px !important;
+        }
     }
 }
 

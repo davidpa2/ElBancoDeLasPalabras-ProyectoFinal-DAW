@@ -1,13 +1,13 @@
-<div *ngIf="changedInfo" class="mt-1 container text-center alert alert-warning">
+<div *ngIf="changedInfo" class="mt-3 container text-center alert alert-warning">
     Se ha actualizado la información de su perfil.
 </div>
-<div *ngIf="deletedBook" class="mt-1 container text-center alert alert-warning">
+<div *ngIf="deletedBook" class="mt-3 container text-center alert alert-warning">
     Se ha eliminado un libro.
 </div>
 
 <div class="profile container bg-white mt-4">
     <div class="row">
-        <div class="col-5 d-flex justify-content-center my-5">
+        <div class="col-5 d-flex justify-content-center align-items-center my-5">
             <img *ngIf="user.img" src="data:image/jpg;base64,{{user.img}}" class="imgProfile" alt="">
             <img *ngIf="!user.img" src="/assets/images/defaultProfile.png" class="imgProfile" alt="">
         </div>
@@ -25,12 +25,12 @@
                     <app-rate-stars [isUser]="true" [stars]="round(user.rating)"></app-rate-stars>
                 </div>
             </div>
-            <div class="row mt-4 d-flex justify-content-center">
-                <div class="col">
+            <div class="row mt-4 mb-4 d-flex justify-content-center">
+                <div class="col-5">
                     <button (click)="goBack()" class="btn outlineSecondary">Volver <i
                             class="bi bi-arrow-counterclockwise"></i></button>
                 </div>
-                <div class="col">
+                <div class="col-7">
                     <button *ngIf="!userId" routerLink="/editProfile" class="btn bgSecundario">Editar perfil <i
                             class="bi bi-person-bounding-box"></i></button>
                 </div>

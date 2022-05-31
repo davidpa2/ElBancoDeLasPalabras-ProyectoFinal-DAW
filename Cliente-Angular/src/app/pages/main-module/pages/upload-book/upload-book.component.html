@@ -1,29 +1,29 @@
-<div *ngIf="submitted && uploadBookForm.valid" class="mt-1 container text-center alert alert-warning">
+<div *ngIf="submitted && modifying" class="mt-3 container text-center alert alert-warning">
     Se han actualizado los datos del libro
 </div>
 
 <div class="container bg-white my-3">
     <div class="row">
-        <div class="col my-3">
+        <div class="col mb-1 mb-md-3 mt-4">
             <h2 *ngIf="!idBook" class="text-center">Subir libro</h2>
             <h2 *ngIf="idBook" class="text-center">Modificar libro</h2>
         </div>
     </div>
 
     <form [formGroup]="uploadBookForm" class="row d-flex justify-content-center">
-        <div class="col-4 m-1">
-            <div class="row bgPrimario">
+        <div class="col-10 col-md-4 mt-1">
+            <div class="row bgPrimario my-3 m-1 m-md-0">
                 <div class="col py-2 d-flex justify-content-center">
                     <img *ngIf="!bookImg" src="/assets/images/DefaultBook.png" alt="">
                     <img *ngIf="bookImg" src="data:image/jpg;base64,{{bookImg}}" alt="">
                 </div>
             </div>
-            <div class="row bgPrimario my-3">
+            <div class="row bgPrimario my-3 my-md-3 m-1 m-md-0">
                 <div class="col my-1">
                     <input type="file" (change)="saveImage()" id="inputImg">
                 </div>
             </div>
-            <div class="row bgPrimario my-3">
+            <div class="row bgPrimario my-3 my-md-3 m-1 m-md-0">
                 <div class="col-12 my-2">
                     <label [style]="(submitted && myForm['price'].errors) ? 'color:red;' : ''"
                         for="titulo">Precio:</label>
@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="col-6">
+        <div class="col-10 col-md-6">
             <div class="row bgPrimario m-1">
                 <div class="col-12 my-2">
                     <label [style]="(submitted && myForm['title'].errors) ? 'color:red;' : ''"
@@ -78,11 +78,8 @@
                             <p *ngIf="stars == 5">Como nuevo</p>
                         </div>
                         <div class="col-6">
-                            <i (click)="stars = 1" [class]="stars >= 1? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
-                            <i (click)="stars = 2" [class]="stars >= 2? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
-                            <i (click)="stars = 3" [class]="stars >= 3? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
-                            <i (click)="stars = 4" [class]="stars >= 4? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
-                            <i (click)="stars = 5" [class]="stars >= 5? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+                            <i *ngFor="let i of [1,2,3,4,5]" (click)="stars = i"
+                                    [class]="stars >= i? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
                         </div>
                     </div>
                 </div>
@@ -90,7 +87,7 @@
         </div>
     </form>
 
-    <div class="errorForm row d-flex justify-content-center mb-3" *ngIf="submitted && !uploadBookForm.valid">
+    <div class="errorForm row d-flex justify-content-center mt-1 mb-4" *ngIf="submitted && (!uploadBookForm.valid || !stars || !bookImg)">
         <div class="col-12 d-flex justify-content-center">
             <h5>Ha habido un error en los siguientes campos:</h5>
         </div>
@@ -132,7 +129,7 @@
         </div>
     </div>
 
-    <div *ngIf="!idBook" class="row d-flex justify-content-around">
+    <div *ngIf="!idBook" class="row d-flex justify-content-around mt-3">
         <div class="col-5 d-flex justify-content-end">
             <button class="btn bgSecundario mb-4" (click)="registerBook()">
                 Subir libro <i class="bi bi-arrow-up-circle"></i>
@@ -144,7 +141,7 @@
             </button>
         </div>
     </div>
-    <div *ngIf="idBook" class="row d-flex justify-content-around">
+    <div *ngIf="idBook" class="row d-flex justify-content-around mt-1">
         <div class="col-4 d-flex justify-content-end mb-4">
             <button (click)="deleteBook()" class="btn outlineSecondary">Eliminar libro <i class="bi bi-trash"></i></button>
         </div>

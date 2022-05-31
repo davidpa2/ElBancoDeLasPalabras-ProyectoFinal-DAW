@@ -3,11 +3,10 @@
     <a class="navbar-brand ms-2" routerLink="/index">
       <img src="/assets/Logo.png" class="logo" alt="">
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <i class="bi bi-list navButton"></i>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li *ngIf="user.name" class="nav-item ms-4">
           <a class="nav-link" routerLink="/profile">Mis libros</a>
@@ -18,7 +17,7 @@
         <li class="nav-item ms-4">
           <a class="nav-link" routerLink="/products">Catálogo</a>
         </li>
-      </ul>
+      </ul>      
     </div>
 
     <div *ngIf="user.name" class="dropdown">

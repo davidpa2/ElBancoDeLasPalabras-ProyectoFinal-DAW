@@ -6,6 +6,12 @@
     margin-bottom: 8vh;
 }
 
+@media (max-width: 691px) {
+    .register {
+        width: 90%;
+    }
+}
+
 a {
     text-decoration: none;
 }

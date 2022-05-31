@@ -98,7 +98,7 @@
         </div>
 
         <!-- VALIDACIÓN DEL FORMULARIO -->
-        <div class="errorForm row d-flex justify-content-center" *ngIf="submitted && !editUserForm.valid">
+        <div class="errorForm row d-flex justify-content-center mt-4" *ngIf="submitted && !editUserForm.valid">
             <div class="col-12 d-flex justify-content-center">
                 <h5>Ha habido un error en los siguientes campos:</h5>
             </div>
@@ -134,10 +134,15 @@
                     *Debes escribir un número de teléfono
                 </div>
             </div>
+            <div class="col-12 col-sm-6 d-flex justify-content-center" *ngIf="submitted && myForm['location'].errors">
+                <div *ngIf="myForm['location'].errors['required']">
+                    *Debes escribir una localidad
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row d-flex justify-content-around">
+    <div class="row d-flex justify-content-around mt-2">
         <div class="col d-flex justify-content-center">
             <button (click)="saveChanges()" class="btn bgSecundario mt-2 mb-4">Actualizar perfil <i
                     class="bi bi-arrow-up-circle"></i></button>

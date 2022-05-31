@@ -21,6 +21,7 @@ export class UploadBookComponent implements OnInit {
   book: Book = {
     id: 0, title: '', author: '', description: '', state: '', price: '', img: '', idBuyer: null, user_id: null, reserved: 0
   };
+  modifying = false;
 
   constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router, private _location: Location) { }
 
@@ -53,7 +54,7 @@ export class UploadBookComponent implements OnInit {
   registerBook() {
     this.submitted = true;
 
-    if (this.uploadBookForm.valid && this.stars) {
+    if (this.uploadBookForm.valid && this.stars && this.bookImg) {
       this.bookService.uploadBook(this.uploadBookForm.value.title, this.uploadBookForm.value.author, this.uploadBookForm.value.description,
         this.stars, this.uploadBookForm.value.price, this.bookImg, this.user).subscribe(data => {
           if (data) {
@@ -72,7 +73,7 @@ export class UploadBookComponent implements OnInit {
         this.uploadBookForm.value.description, this.stars, this.uploadBookForm.value.price, this.bookImg)
         .subscribe(data => {
           if (data) {
-            console.log(data);
+            this.modifying = true;
             this.scrollUp();
           }
         })

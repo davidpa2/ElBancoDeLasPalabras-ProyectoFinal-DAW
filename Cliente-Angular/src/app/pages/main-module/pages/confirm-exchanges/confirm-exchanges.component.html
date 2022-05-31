@@ -35,8 +35,8 @@
                 {{userBuyReservedList[i].telegram || 'No especificado'}}
             </p>
 
-            <button (click)="showConfirmBuyModal = true; bookSelected = i;" class="btn bgSecundario endBuy">Finalizar
-                compra
+            <button (click)="showConfirmBuyModal = true; bookSelected = i;"
+                class="btn bgSecundario endBuy mb-3">Finalizar compra
                 <i class="bi bi-bookmark-check"></i></button>
         </div>
         <div class="col-3">
@@ -53,7 +53,7 @@
                 <app-price class="d-flex justify-content-end" [price]="book.price"></app-price>
             </p>
 
-            <div class="d-flex justify-content-end cancelBuy">
+            <div class="d-flex justify-content-end cancelBuy mb-3">
                 <button (click)="showCancelBuyModal = true" class="btn outlineSecondary my-2">Rechazar compra <i
                         class="bi bi-bookmark-x"></i></button>
             </div>
@@ -411,8 +411,7 @@
         <div class="row">
             <div class="col-4">
                 <div class="d-flex flex-column align-items-center">
-                    <img src="data:image/jpg;base64,{{ratingUser.img}}" alt=""
-                        class="imgMiniCover">
+                    <img src="data:image/jpg;base64,{{ratingUser.img}}" alt="" class="imgMiniCover">
                 </div>
                 <h5 class="bold my-4 text-center">{{ ratingUser.name }}</h5>
             </div>
@@ -430,28 +429,19 @@
                                 <p *ngIf="!stars">Valorar usuario</p>
                                 <p *ngIf="stars == 1">Muy mal trato</p>
                                 <p *ngIf="stars == 2">Mal trato</p>
-                                <p *ngIf="stars == 3">Buena trato</p>
+                                <p *ngIf="stars == 3">Buen trato</p>
                                 <p *ngIf="stars == 4">Muy buen trato</p>
                                 <p *ngIf="stars == 5">Trato excepcional</p>
                             </div>
                             <div class="col-6">
-                                <i (click)="stars = 1"
-                                    [class]="stars >= 1? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
-                                <i (click)="stars = 2"
-                                    [class]="stars >= 2? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
-                                <i (click)="stars = 3"
-                                    [class]="stars >= 3? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
-                                <i (click)="stars = 4"
-                                    [class]="stars >= 4? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
-                                <i (click)="stars = 5"
-                                    [class]="stars >= 5? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
+                                <i *ngFor="let i of [1,2,3,4,5]" (click)="stars = i"
+                                    [class]="stars >= i? 'mx-1 bi bi-star-fill' : 'mx-1 bi bi-star'"></i>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6 d-flex justify-content-center mt-3 mt-lg-0">
-                        <button
-                            (click)="rateUser(ratingUser.id)"
-                            class="btn bgSecundario">Enviar valoración <i class="bi bi-arrow-up-circle"></i></button>
+                        <button (click)="rateUser(ratingUser.id)" class="btn bgSecundario">Enviar valoración <i
+                                class="bi bi-arrow-up-circle"></i></button>
                     </div>
                 </div>
                 <div *ngIf="sendedRate && !stars" class="row mt-3">

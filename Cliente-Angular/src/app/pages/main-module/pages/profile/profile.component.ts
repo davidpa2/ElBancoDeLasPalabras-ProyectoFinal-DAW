@@ -29,6 +29,7 @@ export class ProfileComponent implements OnInit {
   bookOExchangedList: Book[] = []; //Está emparejada con la de los libros ofrecidos y la de los usuarios
   userOExchangedList: User[] = [];
   userId = null;
+  auth = false;
 
   constructor(private userService: UserService, private bookService: BookService, private route: ActivatedRoute, private router: Router,
     private _location: Location) { }
@@ -68,7 +69,9 @@ export class ProfileComponent implements OnInit {
       this.user = data;
     });
 
-    this.bookService.emitPendingExchanges();
+    if (localStorage.getItem("authenticatedUser")) {
+      this.bookService.emitPendingExchanges();
+    }
   }
 
   getBooks(id: any) {
@@ -111,7 +114,7 @@ export class ProfileComponent implements OnInit {
           this.bookPExchangedList = data['booksP'];
           this.userPExchangedList = data['usersP'];
           console.log(data['booksO']);
-          
+
         }
       })
     }
@@ -119,6 +122,7 @@ export class ProfileComponent implements OnInit {
 
   recuperarUsuarioLog() {
     this.user = JSON.parse(localStorage.getItem("authenticatedUser") || '{}')
+    this.auth = true;
     //console.log(localStorage.getItem("authenticatedUser"));
   }
 

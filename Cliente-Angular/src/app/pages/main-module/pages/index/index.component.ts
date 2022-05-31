@@ -8,7 +8,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss']
 })
-export class IndexComponent implements OnInit{
+export class IndexComponent implements OnInit {
 
   user!: User;
 
@@ -18,17 +18,19 @@ export class IndexComponent implements OnInit{
     this.recuperarUsuarioLog();
     console.log(this.user);
     console.log('HOLAAA');
-    
+
     this.userService.cambiosEnUserAutenticado.subscribe(data => {
       this.user = data;
     });
 
-    this.bookService.emitPendingExchanges();
+    if (localStorage.getItem("authenticatedUser")) {
+      this.bookService.emitPendingExchanges();
+    }
   }
-  
+
   recuperarUsuarioLog() {
     this.user = JSON.parse(localStorage.getItem("authenticatedUser") || '{}')
     console.log(localStorage.getItem("authenticatedUser"));
-    
+
   }
 }

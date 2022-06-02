@@ -16,13 +16,12 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.recuperarUsuarioLog();
-    console.log(this.user);
-    console.log('HOLAAA');
 
     this.userService.cambiosEnUserAutenticado.subscribe(data => {
       this.user = data;
+      this.bookService.emitPendingExchanges();
     });
-
+    
     if (localStorage.getItem("authenticatedUser")) {
       this.bookService.emitPendingExchanges();
     }
@@ -30,7 +29,5 @@ export class IndexComponent implements OnInit {
 
   recuperarUsuarioLog() {
     this.user = JSON.parse(localStorage.getItem("authenticatedUser") || '{}')
-    console.log(localStorage.getItem("authenticatedUser"));
-
   }
 }

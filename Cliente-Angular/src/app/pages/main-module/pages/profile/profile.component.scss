@@ -154,6 +154,13 @@ button i {
     color: rgba(99, 61, 16, 1);
 }
 
+@media (max-width: 768px) {
+    .exchangeIcon {
+        font-size: 40px;
+        margin-bottom: 50px;
+    }
+}
+
 .roundImgProfile {
     width: 75px;
     height: 75px;

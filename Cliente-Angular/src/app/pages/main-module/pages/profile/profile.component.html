@@ -41,15 +41,17 @@
     <div *ngIf="!userId; else justUploaded">
         <div class="row">
             <div (click)="tabSelected = 1" [class]="(tabSelected == 1) ? 'tabSelect col-4' : 'tab col-4'">
-                Mis libros subidos
+            <span class="text-center">Mis libros subidos</span>
             </div>
             <div (click)="tabSelected = 2; getExchangedBooks(user.id)"
-                [class]="(tabSelected == 2) ? 'tabSelect col-4' : 'tab col-4'">
-                Mis intercambios
+                [class]="(tabSelected == 2) ? 'tabSelect col-4' : 'tab col-4'"
+                class="d-flex align-items-center">
+                <span class="text-center">Mis intercambios</span>
             </div>
             <div (click)="tabSelected = 3; getSelledBooks(user.id)"
-                [class]="(tabSelected == 3) ? 'tabSelect col-4' : 'tab col-4'">
-                Mis ventas
+                [class]="(tabSelected == 3) ? 'tabSelect col-4' : 'tab col-4'"
+                class="d-flex align-items-center">
+                <span class="text-center">Mis ventas</span>
             </div>
         </div>
 
@@ -97,19 +99,19 @@
                             <div class="col-6">
                                 <div class="row pointer" routerLink="/profile"
                                     [queryParams]="{'idUser': userPExchangedList[i].id}">
-                                    <div class="col-6 d-flex justify-content-center">
+                                    <div class="col-12 col-md-6 d-flex justify-content-center">
                                         <div class="d-flex align-items-center">
                                             <img src="data:image/jpg;base64,{{userPExchangedList[i].img}}" alt=""
                                                 class="roundImgProfile">
                                         </div>
                                     </div>
-                                    <div class="col-6 d-flex justify-content-start">
+                                    <div class="col-12 col-md-6 d-flex justify-content-start">
                                         <div class="row">
                                             <div class="col-12">
-                                                <h5 class="bold text-start">{{userPExchangedList[i].name}}</h5>
+                                                <h5 class="bold text-center">{{userPExchangedList[i].name}}</h5>
                                             </div>
                                             <div class="col-12">
-                                                <h5 class="bold text-start">{{userPExchangedList[i].surnames}}</h5>
+                                                <h5 class="bold text-center">{{userPExchangedList[i].surnames}}</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -118,17 +120,17 @@
                             <div class="col-6">
                                 <div class="row pointer" routerLink="/profile"
                                     [queryParams]="{'idUser': userOExchangedList[i].id}">
-                                    <div class="col-6 d-flex justify-content-end">
+                                    <div class="col-12 col-md-6 order-1 order-md-0 d-flex justify-content-end">
                                         <div class="row">
                                             <div class="col-12">
-                                                <h5 class="bold text-end">{{userOExchangedList[i].name}}</h5>
+                                                <h5 class="bold text-center">{{userOExchangedList[i].name}}</h5>
                                             </div>
                                             <div class="col-12">
-                                                <h5 class="bold text-end">{{userOExchangedList[i].surnames}}</h5>
+                                                <h5 class="bold text-center">{{userOExchangedList[i].surnames}}</h5>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6 d-flex justify-content-center">
+                                    <div class="col-12 col-md-6 order-0 order-md-1 d-flex justify-content-center">
                                         <div class=" d-flex align-items-center">
                                             <img src="data:image/jpg;base64,{{userOExchangedList[i].img}}" alt=""
                                                 class="roundImgProfile">

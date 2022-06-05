@@ -11,11 +11,11 @@
 <div *ngIf="book" class="container mt-4">
     <div class="row book">
         <div class="col-4 bgPrimario colImg">
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center mt-4 mt-md-0">
                 <img *ngIf="!book.img" src="/assets/images/DefaultBook.png" class="mt-3 cover" alt="">
                 <img *ngIf="book.img" src="data:image/jpg;base64,{{book.img}}" class="mt-3 cover" alt="">
             </div>
-            <p class="text-center mt-3">Comparte el libro con tus amigos</p>
+            <p class="text-center mt-4 mt-md-3">Comparte el libro con tus amigos</p>
             <div class="d-flex justify-content-around mb-3 share">
                 <i class="bi bi-twitter"></i>
                 <i class="bi bi-facebook"></i>
@@ -30,23 +30,25 @@
                 <p>{{book.description}}</p>
             </div>
             <div class="row mt-4">
-                <div class="col-8">
+                <div class="col-12 col-md-8">
                     <h6 class="bold">Estado:</h6>
                     <app-rate-stars [stars]="book.state"></app-rate-stars>
                 </div>
-                <app-price [price]="book.price" class="col-4"></app-price>
+                <div class="col-12 col-md-4 d-flex">
+                    <app-price [price]="book.price" class="col-4"></app-price>
+                </div>
             </div>
 
-            <div *ngIf="authUser.id" class="row mt-4">
-                <div class="col d-flex justify-content-center">
+            <div *ngIf="authUser.id" class="row mt-4 mb-3">
+                <div class="col mt-3 mt-sm-0 d-flex justify-content-center">
                     <button (click)="goBack()" class="btn outlineSecondary">Volver
                         <i class="bi bi-arrow-counterclockwise"></i></button>
                 </div>
-                <div *ngIf="authUser.id != userOwner.id" class="col d-flex justify-content-center">
+                <div *ngIf="authUser.id != userOwner.id" class="col mt-3 mt-sm-0 d-flex justify-content-center">
                     <button [disabled]="(reserved || bookReserved) ? true : false" (click)="chooseBook()"
                         class="btn bgSecundario">Intercambiar <i class="bi bi-arrow-left-right"></i></button>
                 </div>
-                <div *ngIf="authUser.id != userOwner.id" class="col d-flex justify-content-center">
+                <div *ngIf="authUser.id != userOwner.id" class="col mt-3 mt-md-0 d-flex justify-content-center">
                     <button [disabled]="(reserved || bookReserved) ? true : false" (click)="showPurchaseModal = true"
                         class="btn bgSecundario">Comprar <i class="bi bi-cart-check-fill"></i></button>
                     <!-- routerLink="/purchase/1" -->
@@ -92,9 +94,12 @@
         <!-- <div class="col-7 bg-white profile"> -->
         <div class="col-12 bg-white profile py-4" *ngIf="userOwner">
             <div class="row">
-                <div class="col-7">
+                <div class="col-12 col-md-7">
                     <h3 class="text-center bold mt-2">{{userOwner.name}} {{userOwner.surnames}}</h3>
-                    <p class="text-center mt-3">{{ countBooks }} productos <i class="bi bi-cart"></i></p>
+                    <p class="text-center mt-3">{{ countBooks }} 
+                        <span *ngIf="countBooks > 1"> productos </span>
+                        <span *ngIf="countBooks == 1"> producto </span> 
+                        <i class="bi bi-cart"></i></p>
                     <div class="row d-flex justify-content-end mt-2">
                         <div class="col-3">
                             <p class="valoracion text-center">Valoración del usuario:</p>
@@ -120,7 +125,7 @@
                     </google-map> -->
                 </div>
                 <!--  -->
-                <div class="col-5">
+                <div class="col-12 col-md-5 mt-3 mt-md-0 d-flex justify-content-center">
                     <div class="row">
                         <div class="col-12 d-flex align-self-center">
                             <img class="imgProfile" src="data:image/jpg;base64,{{userOwner.img}}" alt="">

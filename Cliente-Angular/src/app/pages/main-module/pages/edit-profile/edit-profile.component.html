@@ -11,20 +11,20 @@
     </div>
 
     <div class="row d-flex justify-content-center">
-        <div class="col-4 m-1">
-            <div class="row bgPrimario">
+        <div class="col-12 col-md-4 m-1">
+            <div class="row bgPrimario mx-1">
                 <div class="col py-2 d-flex justify-content-center">
                     <!-- <img [src]=" user.img ? 'data:image/jpg;base64,{{user.img}}' : '/assets/images/defaultProfile.png'" alt=""> -->
                     <img *ngIf="user.img" src="data:image/jpg;base64,{{user.img}}" alt="">
                     <img *ngIf="!user.img" src="/assets/images/defaultProfile.png" alt="">
                 </div>
             </div>
-            <div class="row bgPrimario my-3 py-1">
+            <div class="row bgPrimario mb-3 my-md-3 py-1 mx-1">
                 <div class="col">
                     <input type="file" (change)="saveImage();" value="Actualizar foto" id="fotoCocheInput" />
                 </div>
             </div>
-            <div class="row bgPrimario my-3">
+            <div class="row bgPrimario my-3 mx-1">
                 <div class="col-12 my-2">
                     <label [style]="(submitted && myForm['birthday'].errors) ? 'color:red;' : ''" for="date">Fecha de
                         nacimiento:</label>
@@ -33,7 +33,7 @@
                     <input formControlName="birthday" type="text" placeholder="00/00/0000">
                 </div>
             </div>
-            <div class="row bgPrimario my-3">
+            <div class="row bgPrimario my-3 mx-1">
                 <div class="col-12 my-2">
                     <label [style]="(submitted && myForm['tlf'].errors) ? 'color:red;' : ''" for="tlf">Teléfono:</label>
                 </div>
@@ -41,7 +41,7 @@
                     <input formControlName="tlf" type="text" placeholder="000 000 000">
                 </div>
             </div>
-            <div class="row bgPrimario my-3">
+            <div class="row bgPrimario my-3 mx-1">
                 <div class="col-12 my-2">
                     <label for="telegram">Telegram:</label>
                 </div>
@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <div class="col-6">
+        <div class="col-12 col-md-6">
             <div class="row bgPrimario m-1">
                 <div class="col-12 my-2">
                     <label [style]="(submitted && myForm['name'].errors) ? 'color:red;' : ''"
@@ -100,7 +100,7 @@
         <!-- VALIDACIÓN DEL FORMULARIO -->
         <div class="errorForm row d-flex justify-content-center mt-4" *ngIf="submitted && !editUserForm.valid">
             <div class="col-12 d-flex justify-content-center">
-                <h5>Ha habido un error en los siguientes campos:</h5>
+                <h5 class="text-center">Ha habido un error en los siguientes campos:</h5>
             </div>
 
             <div class="col-12 col-sm-6 d-flex justify-content-center" *ngIf="submitted && myForm['name'].errors">

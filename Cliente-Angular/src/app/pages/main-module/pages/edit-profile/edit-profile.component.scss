@@ -14,8 +14,14 @@ img {
 
 textarea {
     width: 100%;
-    height: 14vw;
+    height: 12vw;
     border: none;
     resize: none;
     padding: 10px;
+}
+
+@media (max-width: 768px) {
+    textarea {
+        height: 200px;
+    }
 }

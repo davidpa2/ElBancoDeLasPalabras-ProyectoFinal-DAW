@@ -17,11 +17,11 @@
     <div class="row board mb-4" *ngFor="let book of bookBuyReservedList; let i = index">
         <h4 class="text-center my-4">{{userBuyReservedList[i].name}} ha solicitado la compra de tu libro:</h4>
 
-        <div class="col-3 d-flex flex-column align-items-center">
-            <img src="data:image/jpg;base64,{{userBuyReservedList[i].img}}" alt="" class="imgProfile">
+        <div class="col-6 col-md-3 order-1 order-md-0 mt-3 mt-md-0 d-flex flex-column align-items-center">
+            <img src="data:image/jpg;base64,{{userBuyReservedList[i].img}}" alt="" class="imgProfile mt-md-4">
             <h5 class="bold my-4 text-center">{{userBuyReservedList[i].name}} {{userBuyReservedList[i].surnames}}</h5>
         </div>
-        <div class="col-3">
+        <div class="col-6 col-md-3 order-1 order-md-0 mt-3 mt-md-0">
             <h5 class="bold">Sus datos de contacto:</h5>
             <p>Correo electrónico: <br>
                 {{userBuyReservedList[i].email}}
@@ -35,11 +35,11 @@
                 {{userBuyReservedList[i].telegram || 'No especificado'}}
             </p>
 
-            <button (click)="showConfirmBuyModal = true; bookSelected = i;"
+            <!--             <button (click)="showConfirmBuyModal = true; bookSelected = i;"
                 class="btn bgSecundario endBuy mb-3">Finalizar compra
-                <i class="bi bi-bookmark-check"></i></button>
+                <i class="bi bi-bookmark-check"></i></button> -->
         </div>
-        <div class="col-3">
+        <div class="col-6 col-md-3 order-0 order-md-1">
             <h5 class="bold text-end">Sobre el libro:</h5>
             <p class="text-end">Autor: <br>
                 {{book.author}}
@@ -50,17 +50,30 @@
             </p>
 
             <p class="text-end">Precio:
-                <app-price class="d-flex justify-content-end" [price]="book.price"></app-price>
+                <app-price class="d-flex justify-content-end pPrice" [price]="book.price"></app-price>
             </p>
 
-            <div class="d-flex justify-content-end cancelBuy mb-3">
+            <!--             <div class="d-flex justify-content-end cancelBuy mb-3">
                 <button (click)="showCancelBuyModal = true" class="btn outlineSecondary my-2">Rechazar compra <i
                         class="bi bi-bookmark-x"></i></button>
-            </div>
+            </div> -->
         </div>
-        <div class="col-3 d-flex flex-column align-items-center">
+        <div class="col-6 col-md-3 order-0 order-md-1 d-flex flex-column align-items-center">
             <img src="data:image/jpg;base64,{{book.img}}" alt="" class="imgCover">
-            <h5 class="bold my-4">{{book.title}}</h5>
+            <h5 class="bold mt-2 mt-md-4">{{book.title}}</h5>
+        </div>
+        <div class="col-12 order-2">
+            <div class="row">
+                <div class="col-6 d-flex justify-content-center  mb-3">
+                    <button (click)="showCancelBuyModal = true" class="btn outlineSecondary">Rechazar compra <i
+                            class="bi bi-bookmark-x"></i></button>
+                </div>
+                <div class="col-6 d-flex justify-content-center  mb-3">
+                    <button (click)="showConfirmBuyModal = true; bookSelected = i;"
+                        class="btn bgSecundario">Finalizar compra
+                        <i class="bi bi-bookmark-check"></i></button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -307,10 +320,9 @@
 
             <div class="col-10">
                 <p class="text-center">Al hacer click en <span class="bold">"Finalizar intercambio"</span> confirmas que
-                    te
-                    has puesto en contacto con el usuario que solicitó el intercambio y habéis llegado a un acuerdo en
-                    el
-                    intercambio de vuestros libros.
+                    te has puesto en contacto con el usuario que solicitó el intercambio y habéis llegado a un acuerdo
+                    en
+                    el intercambio de vuestros libros.
                 </p>
             </div>
         </div>

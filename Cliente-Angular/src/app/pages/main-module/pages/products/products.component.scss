@@ -18,10 +18,22 @@ input {
     height: 300px;
 }
 
+@media (max-width: 768px) {
+    .cover {
+        height: 150px;
+    }
+}
+
 .imgProfile {
     width: 60px;
     height: 60px;
     border-radius: 150px;
+}
+
+@media (max-width: 480px) {
+    .imgProfile {
+        margin-left: -15px;
+    }
 }
 
 .up {
@@ -49,6 +61,13 @@ input {
 .up:hover {
     transform: scale(1.2);
     transition: all 300ms ease;
+}
+
+@media (max-width: 768px) {
+    .up {
+        margin-right: -70px;
+        margin-top: 200px;
+    }
 }
 
 .noResult {

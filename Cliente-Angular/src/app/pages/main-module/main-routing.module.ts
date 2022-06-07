@@ -7,7 +7,6 @@ import { IndexComponent } from './pages/index/index.component';
 import { ProductViewComponent } from './pages/product-view/product-view.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { PurchaseComponent } from './pages/purchase/purchase.component';
 import { UploadBookComponent } from './pages/upload-book/upload-book.component';
 
 const routes: Routes = [
@@ -18,10 +17,10 @@ const routes: Routes = [
   { path: 'editProfile', component: EditProfileComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'productView/:bookId/:userId', component: ProductViewComponent },
-  { path: 'purchase/:idBook', component: PurchaseComponent },
   { path: 'exchange/:idS/:idP', component: ExchangeComponent },
   { path: 'confirmExchanges', component: ConfirmExchangesComponent },
-  { path: '', redirectTo: 'index', pathMatch: 'full' }
+  { path: '', redirectTo: 'index', pathMatch: 'full' },
+  { path: '**', component: IndexComponent },
 ];
 
 @NgModule({

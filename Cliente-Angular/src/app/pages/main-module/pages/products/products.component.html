@@ -40,7 +40,8 @@
                             <p class="text-center">{{userList[i].name}} {{userList[i].surnames}}</p>
                         </div>
                         <div class="col-4 d-flex justify-content-start">
-                            <img src="data:image/jpg;base64,{{userList[i].img}}" class="imgProfile" alt="">
+                            <img *ngIf="userList[i].img" src="data:image/jpg;base64,{{userList[i].img}}" class="imgProfile" alt="">
+                            <img *ngIf="!userList[i].img" src="/assets/images/defaultProfile.png" class="imgProfile" alt="">
                         </div>
                     </div>
                 </div>
@@ -66,7 +67,8 @@
                             <p class="text-center">{{searchUsersList[i].name}} {{searchUsersList[i].surnames}}</p>
                         </div>
                         <div class="col-4 d-flex justify-content-start">
-                            <img src="data:image/jpg;base64,{{searchUsersList[i].img}}" class="imgProfile" alt="">
+                            <img *ngIf="searchUsersList[i].img" src="data:image/jpg;base64,{{searchUsersList[i].img}}" class="imgProfile" alt="">
+                            <img *ngIf="!searchUsersList[i].img" src="/assets/images/defaultProfile.png" class="imgProfile" alt="">
                         </div>
                     </div>
                 </div>

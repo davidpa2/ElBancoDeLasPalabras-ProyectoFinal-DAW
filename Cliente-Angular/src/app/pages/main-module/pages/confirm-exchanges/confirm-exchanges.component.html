@@ -18,7 +18,9 @@
         <h4 class="text-center my-4">{{userBuyReservedList[i].name}} ha solicitado la compra de tu libro:</h4>
 
         <div class="col-6 col-md-3 order-1 order-md-0 mt-3 mt-md-0 d-flex flex-column align-items-center">
-            <img src="data:image/jpg;base64,{{userBuyReservedList[i].img}}" alt="" class="imgProfile mt-md-4">
+            <img *ngIf="userBuyReservedList[i].img" src="data:image/jpg;base64,{{userBuyReservedList[i].img}}" alt=""
+                class="imgProfile mt-md-4">
+            <img *ngIf="!userBuyReservedList[i].img" src="/assets/images/defaultProfile.png" class="imgProfile" alt="">
             <h5 class="bold my-4 text-center">{{userBuyReservedList[i].name}} {{userBuyReservedList[i].surnames}}</h5>
         </div>
         <div class="col-6 col-md-3 order-1 order-md-0 mt-3 mt-md-0">
@@ -69,8 +71,8 @@
                             class="bi bi-bookmark-x"></i></button>
                 </div>
                 <div class="col-6 d-flex justify-content-center  mb-3">
-                    <button (click)="showConfirmBuyModal = true; bookSelected = i;"
-                        class="btn bgSecundario">Finalizar compra
+                    <button (click)="showConfirmBuyModal = true; bookSelected = i;" class="btn bgSecundario">Finalizar
+                        compra
                         <i class="bi bi-bookmark-check"></i></button>
                 </div>
             </div>
@@ -145,8 +147,10 @@
             <div class="row mt-3">
                 <div class="col-6 col-md-3">
                     <div class="d-flex flex-column align-items-center">
-                        <img class="roundImgProfile"
+                        <img *ngIf="petitionerExchangeReservedList[i].img" class="roundImgProfile"
                             src="data:image/jpg;base64,{{petitionerExchangeReservedList[i].img}}" alt="">
+                        <img *ngIf="!petitionerExchangeReservedList[i].img" class="imgProfile"
+                            src="/assets/images/defaultProfile.png" alt="">
                     </div>
                     <h5 class="bold my-4 text-center">{{petitionerExchangeReservedList[i].name}}
                         {{petitionerExchangeReservedList[i].surnames}}</h5>

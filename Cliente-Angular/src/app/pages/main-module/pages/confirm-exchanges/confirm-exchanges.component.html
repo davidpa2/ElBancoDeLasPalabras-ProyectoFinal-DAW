@@ -147,7 +147,7 @@
             <div class="row mt-3">
                 <div class="col-6 col-md-3">
                     <div class="d-flex flex-column align-items-center">
-                        <img *ngIf="petitionerExchangeReservedList[i].img" class="roundImgProfile"
+                        <img *ngIf="petitionerExchangeReservedList[i].img" class="imgProfile"
                             src="data:image/jpg;base64,{{petitionerExchangeReservedList[i].img}}" alt="">
                         <img *ngIf="!petitionerExchangeReservedList[i].img" class="imgProfile"
                             src="/assets/images/defaultProfile.png" alt="">
@@ -427,7 +427,8 @@
         <div class="row">
             <div class="col-4">
                 <div class="d-flex flex-column align-items-center">
-                    <img src="data:image/jpg;base64,{{ratingUser.img}}" alt="" class="imgMiniCover">
+                    <img *ngIf="!ratingUser.img" src="/assets/images/defaultProfile.png" class="imgMiniCover" alt="">
+                    <img *ngIf="ratingUser.img" src="data:image/jpg;base64,{{ratingUser.img}}" alt="" class="imgMiniCover">
                 </div>
                 <h5 class="bold my-4 text-center">{{ ratingUser.name }}</h5>
             </div>

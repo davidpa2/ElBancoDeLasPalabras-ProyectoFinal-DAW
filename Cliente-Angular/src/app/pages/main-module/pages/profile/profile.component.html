@@ -41,16 +41,14 @@
     <div *ngIf="!userId; else justUploaded">
         <div class="row">
             <div (click)="tabSelected = 1" [class]="(tabSelected == 1) ? 'tabSelect col-4' : 'tab col-4'">
-            <span class="text-center">Mis libros subidos</span>
+                <span class="text-center">Mis libros subidos</span>
             </div>
             <div (click)="tabSelected = 2; getExchangedBooks(user.id)"
-                [class]="(tabSelected == 2) ? 'tabSelect col-4' : 'tab col-4'"
-                class="d-flex align-items-center">
+                [class]="(tabSelected == 2) ? 'tabSelect col-4' : 'tab col-4'" class="d-flex align-items-center">
                 <span class="text-center">Mis intercambios</span>
             </div>
             <div (click)="tabSelected = 3; getSelledBooks(user.id)"
-                [class]="(tabSelected == 3) ? 'tabSelect col-4' : 'tab col-4'"
-                class="d-flex align-items-center">
+                [class]="(tabSelected == 3) ? 'tabSelect col-4' : 'tab col-4'" class="d-flex align-items-center">
                 <span class="text-center">Mis ventas</span>
             </div>
         </div>
@@ -101,8 +99,11 @@
                                     [queryParams]="{'idUser': userPExchangedList[i].id}">
                                     <div class="col-12 col-md-6 d-flex justify-content-center">
                                         <div class="d-flex align-items-center">
-                                            <img src="data:image/jpg;base64,{{userPExchangedList[i].img}}" alt=""
+                                            <img *ngIf="userPExchangedList[i].img"
+                                                src="data:image/jpg;base64,{{userPExchangedList[i].img}}" alt=""
                                                 class="roundImgProfile">
+                                            <img *ngIf="!userPExchangedList[i].img"
+                                                src="/assets/images/defaultProfile.png" alt="" class="roundImgProfile">
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 d-flex justify-content-start">
@@ -132,8 +133,10 @@
                                     </div>
                                     <div class="col-12 col-md-6 order-0 order-md-1 d-flex justify-content-center">
                                         <div class=" d-flex align-items-center">
-                                            <img src="data:image/jpg;base64,{{userOExchangedList[i].img}}" alt=""
-                                                class="roundImgProfile">
+                                            <img *ngIf="userOExchangedList[i].img" class="roundImgProfile"
+                                                src="data:image/jpg;base64,{{userOExchangedList[i].img}}" alt="">
+                                            <img *ngIf="!userOExchangedList[i].img"
+                                                src="/assets/images/defaultProfile.png" alt="" class="roundImgProfile">
                                         </div>
                                     </div>
                                 </div>
@@ -202,7 +205,10 @@
                         </div>
                         <div class="row">
                             <div class="col-12 mt-1 d-flex justify-content-center">
-                                <img class="miniImgProfile" src="data:image/jpg;base64,{{buyersList[i].img}}" alt="">
+                                <img *ngIf="buyersList[i].img" class="miniImgProfile"
+                                    src="data:image/jpg;base64,{{buyersList[i].img}}" alt="">
+                                <img *ngIf="!buyersList[i].img" src="/assets/images/defaultProfile.png" alt=""
+                                    class="roundImgProfile">
                             </div>
                         </div>
                         <div class="row">
@@ -240,8 +246,8 @@
                         <p class="text-center mb-1">{{book.author}}</p>
                     </div>
                     <div class="col-12 d-flex justify-content-center align-self-center mb-3">
-                        <button [routerLink]="'/productView/' + book.id + '/' + userId"
-                            class="btn bgSecundario">Ver libro <i class="bi bi-book"></i></button>
+                        <button [routerLink]="'/productView/' + book.id + '/' + userId" class="btn bgSecundario">Ver
+                            libro <i class="bi bi-book"></i></button>
                     </div>
                 </div>
             </div>

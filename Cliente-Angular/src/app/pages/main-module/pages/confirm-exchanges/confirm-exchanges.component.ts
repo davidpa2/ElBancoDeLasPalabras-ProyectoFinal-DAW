@@ -47,6 +47,7 @@ export class ConfirmExchangesComponent implements OnInit {
   constructor(private bookService: BookService, private userService: UserService, private _location: Location) { }
 
   ngOnInit(): void {
+    this.scrollUp();
     this.recuperarUsuarioLog();
     this.getBuyReservedBooks();
     this.getExchangeReservedBooks();

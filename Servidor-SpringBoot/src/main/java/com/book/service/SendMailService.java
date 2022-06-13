@@ -14,6 +14,7 @@ public class SendMailService {
 	public void sendMail(String to, String subject, String body) {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 
+		mailMessage.setFrom("noreply@elbancodelaspalabras.cf");
 		mailMessage.setTo(to);
 		mailMessage.setSubject(subject);
 		mailMessage.setText(body);

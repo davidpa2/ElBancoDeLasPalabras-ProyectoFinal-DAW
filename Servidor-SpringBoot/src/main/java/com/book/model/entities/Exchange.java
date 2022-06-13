@@ -8,6 +8,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name = "exchange")
 @NamedQuery(name="Exchange.findAll", query="SELECT e FROM Exchange e")
 @NamedQuery(name="Exchange.getExchangeReservedBooks", query="SELECT e FROM Exchange e where idUserO = ?1 and date = null")
 @NamedQuery(name="Exchange.exchangeBooks",

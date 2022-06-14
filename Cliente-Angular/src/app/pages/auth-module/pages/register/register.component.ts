@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
 
   submitted = false;
   passEquals = true;
+  showPass = false;
   existsUserEmail = false;
   registerForm!: FormGroup;
 

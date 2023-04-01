@@ -13,3 +13,16 @@ Let's take a look to the app!
 ## You can see your books on your profile
 <img src="/images/Profile.png">
 <img src="/images/Profile my books.png">
+
+## You can exchange or buy books from other users
+<img src="/images/BookView.png">
+
+## If you want to exchange a book, you'll have to choose one of your uploaded books
+<img src="/images/Choose exchange.png">
+
+<h3>The other user will be informed via email that you want</h3>
+
+## The other user must decide if he/she wants to approve your offer, your data will be displayed so that he can contact you if you approve it
+<img src="/images/Requested Exchange.png">
+<img src="/images/Requested Exchange2.png">
+

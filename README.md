@@ -9,3 +9,7 @@ Let's take a look to the app!
 
 ## Once you have registered, you can upload your books
 <img src="/images/UploadBook.png">
+
+## You can see your books on your profile
+<img src="/images/Profile.png">
+<img src="/images/Profile my books.png">

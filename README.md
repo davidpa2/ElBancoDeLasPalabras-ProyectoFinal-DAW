@@ -38,6 +38,6 @@ Let's take a look at the app!
 ## Just like an exchange, the other user will be informed
 <img src="/images/Pending sell.png">
 
-## Once the exchange occurs, it will be displayed on your profile
+## Once the sale occurs, it will be displayed on your profile
 <img src="/images/My sales.png">
 

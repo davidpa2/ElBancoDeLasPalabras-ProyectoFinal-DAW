@@ -26,8 +26,11 @@ Let's take a look to the app!
 <img src="/images/Requested Exchange.png">
 <img src="/images/Requested Exchange2.png">
 
+<h3>Both books will be marked as "reservated"</h3>
+<img src="/images/Reservated.png">
+
 ## Once the exchange occurs, it will be displayed on your profile
-<img src="/images/ProfileExchanges.png">
+<img src="/images/Profile exchanges.png">
 
 ## You can also buy a book
 <img src="/images/Confirmbuy.png">

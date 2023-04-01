@@ -4,5 +4,8 @@ El Banco de las Palabras is an online bookstore with which to give a second chan
 
 Let's take a look to the app!
 
--- You can access to the catalog to see all the books with no login
-<img src="/images/catalog.png" width="600" height="400">
+## You can access to the catalog to see all the books with no login
+<img src="/images/catalog.png">
+
+## Once you have registered, you can upload your books
+<img src="/images/UploadBook.png">

@@ -20,9 +20,21 @@ Let's take a look to the app!
 ## If you want to exchange a book, you'll have to choose one of your uploaded books
 <img src="/images/Choose exchange.png">
 
-<h3>The other user will be informed via email that you want</h3>
+<h3>The other user will be informed via email that you want to make an exchange or a buy</h3>
 
 ## The other user must decide if he/she wants to approve your offer, your data will be displayed so that he can contact you if you approve it
 <img src="/images/Requested Exchange.png">
 <img src="/images/Requested Exchange2.png">
+
+## Once the exchange occurs, it will be displayed on your profile
+<img src="/images/ProfileExchanges.png">
+
+## You can also buy a book
+<img src="/images/Confirmbuy.png">
+
+## Just like an exchange, the other user will be informed
+<img src="/images/Pending sell.png">
+
+## Once the exchange occurs, it will be displayed on your profile
+<img src="/images/My sales.png">
 
